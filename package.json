@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest",
+    "sb": "start-storybook -p 6006",
+    "build:sb": "build-storybook -o build/storybook"
   },
   "dependencies": {
     "next": "latest",
@@ -12,13 +15,21 @@
     "react-dom": "^16.13.0",
     "react-hook-form": "^6.10.0",
     "recoil": "^0.1.2",
-    "styled-components": "^5.0.0",
+    "styled-components": "^5.0.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^6.0.28",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-docs": "^6.0.28",
+    "@storybook/addon-knobs": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/addon-storyshots": "^6.0.28",
+    "@storybook/addons": "^6.0.28",
+    "@storybook/react": "^6.0.28",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15"
-  },
-  "devDependencies": {
+    "@types/jest": "^26.0.15",
     "@types/node": "12.0.12",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
@@ -28,6 +39,7 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
     "prettier": "^2.1.2",
+    "ts-jest": "^26.4.4",
     "typescript": "4.0"
   },
   "license": "MIT",
