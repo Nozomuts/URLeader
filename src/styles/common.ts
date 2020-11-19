@@ -1,1 +1,1 @@
-export const common = {};
+import styled from 'styled-components';

@@ -5,6 +5,7 @@ import {
   SimpleInterpolation,
 } from 'styled-components';
 
+/** スマホサイズ */
 export const sp = (
   first: CSSObject | TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]
@@ -14,6 +15,7 @@ export const sp = (
   }
 `;
 
+/** タブレットサイズ */
 export const tab = (
   first: CSSObject | TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]
@@ -22,6 +24,8 @@ export const tab = (
     ${css(first, ...interpolations)}
   }
 `;
+
+/** パソコンサイズ */
 export const pc = (
   first: CSSObject | TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]

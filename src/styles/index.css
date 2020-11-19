@@ -1,0 +1,10 @@
+/* CSS初期化用 */
+
+/* 1rem＝10pxに設定 */
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6em;
+}
