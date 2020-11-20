@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { BlueToggleButton } from '../components/Button';
+import { Button } from '../components/Button';
 
 export default function Home() {
-  return <BlueToggleButton>PUSH</BlueToggleButton>;
+  return <Button>PUSH</Button>;
 }

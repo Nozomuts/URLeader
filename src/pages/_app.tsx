@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import { AppProps } from 'next/app';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/theme';
 import { Reset } from 'styled-reset';
 import '../styles/index.css';
+// csspropを使うために型をインポート
+import type {} from 'styled-components/cssprop';
 
 /**
  * クライアント側のレンダリングカスタマイズ
@@ -21,10 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <Reset />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <Reset />
+      <Component {...pageProps} />
     </RecoilRoot>
   );
 }

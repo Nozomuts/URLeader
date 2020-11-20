@@ -1,12 +1,17 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+import { BORDER, COLOR, SHADOW, TEXT_COLOR } from '../styles/util';
+import { Spinner } from '../styles/common';
 
-export const Button: FC = ({ children }) => {
-  return <BaseButton>{children}</BaseButton>;
+type Props = {
+  loading?: boolean;
 };
 
-const BaseButton = styled.button`
+export const Button: FC<Props> = ({ children, loading }) => {
+  return <BaseButton>{loading ? <Spinner /> : children}</BaseButton>;
+};
+
+export const BaseButton = styled.button`
   font-weight: 500;
   padding: 5px 15px;
   border-radius: 5px;
@@ -15,22 +20,24 @@ const BaseButton = styled.button`
   border: none;
 `;
 
-export const BlueToggleButton = styled(BaseButton)`
-  color: ${({ theme }) => theme.text.white};
-  background-color: ${({ theme }) => theme.background.blue};
-  border: ${({ theme }) => theme.border.blue};
+export const ToggleButton = styled(BaseButton)<{ primary?: boolean }>`
+  color: ${TEXT_COLOR.WHITE};
+  background-color: ${({ primary }) => (primary ? COLOR.BLUE : COLOR.BLACK)};
+  border: ${({ primary }) => (primary ? BORDER.BLUE : BORDER.BLACK)};
   &:hover {
-    color: ${({ theme }) => theme.text.blue};
-    background-color: ${({ theme }) => theme.background.white};
+    background-color: ${COLOR.WHITE};
+    color: ${({ primary }) => (primary ? TEXT_COLOR.BLUE : TEXT_COLOR.BLACK)};
   }
 `;
 
-export const BlueBlurButton = styled(BaseButton)`
-  color: ${({ theme }) => theme.text.white};
-  background-color: ${({ theme }) => theme.background.blue};
-  box-shadow: ${({ theme }) => theme.box_shadow.blue};
+export const BlurButton = styled(BaseButton)<{ primary?: boolean }>`
+  color: ${({ primary }) => (primary ? TEXT_COLOR.WHITE : TEXT_COLOR.BLACK)};
+  background-color: ${({ primary }) => (primary ? COLOR.BLUE : COLOR.WHITE)};
+  box-shadow: ${({ primary }) => (primary ? SHADOW.BLUE : SHADOW.WHITE)};
   &:hover {
-    background-color: ${({ theme }) => theme.background.blue_hover};
-    box-shadow: ${({ theme }) => theme.box_shadow.blue_hover};
+    background-color: ${({ primary }) =>
+      primary ? COLOR.BLUE_HOVER : COLOR.WHITE_HOVER};
+    box-shadow: ${({ primary }) =>
+      primary ? SHADOW.BLUE_HOVER : SHADOW.WHITE_HOVER};
   }
 `;
