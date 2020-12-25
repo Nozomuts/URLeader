@@ -1,73 +1,22 @@
 {
-  "name": "with-typescript-styled-components",
+  "name": "with-typescript",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test": "jest --env=jsdom",
-    "test:cv": "jest --collect-coverage",
-    "sb": "start-storybook -p 6006",
-    "build:sb": "build-storybook -o build/storybook"
+    "type-check": "tsc"
   },
   "dependencies": {
-    "@hookform/error-message": "^0.0.4",
     "next": "latest",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-hook-form": "^6.11.3",
-    "recoil": "^0.1.2",
-    "styled-components": "^5.2.1",
-    "styled-reset": "^4.3.1"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^6.1.0",
-    "@storybook/addon-actions": "^6.1.0",
-    "@storybook/addon-docs": "^6.1.0",
-    "@storybook/addon-knobs": "^6.1.0",
-    "@storybook/addon-links": "^6.1.0",
-    "@storybook/addon-storyshots": "^6.1.0",
-    "@storybook/addons": "^6.1.0",
-    "@storybook/react": "^6.1.0",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.0",
-    "@testing-library/user-event": "^12.2.2",
-    "@types/jest": "^26.0.15",
-    "@types/node": "14.14.8",
-    "@types/react": "16.9.56",
-    "@types/react-dom": "16.9.9",
-    "@types/recoil": "^0.0.1",
-    "@types/styled-components": "5.1.4",
-    "babel-loader": "^8.2.1",
-    "babel-plugin-styled-components": "^1.11.1",
-    "husky": "^4.3.0",
-    "jest": "^26.6.3",
-    "jest-dom": "^4.0.0",
-    "lint-staged": "^10.5.1",
-    "prettier": "^2.1.2",
-    "ts-jest": "^26.4.4",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "typescript": "4.0"
   },
-  "license": "MIT",
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "tabWidth": 2,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "semi": true,
-    "parser": "typescript",
-    "bracketSpacing": true,
-    "arrowParens": "always"
-  }
+  "license": "MIT"
 }
