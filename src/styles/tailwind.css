@@ -5,30 +5,15 @@
 @layer base {
   html,
   body {
-    @apply bg-custom-smoke h-full;
+    @apply bg-gray-100 h-full text-gray-500;
   }
 }
 
 @layer components {
-  .btn-blue {
-    @apply px-4 py-2 font-bold text-white bg-blue-500 rounded;
-  }
 }
 
 @layer utilities {
-  .bg-custom-black {
-    background-color: #282c34;
-  }
-
-  .bg-custom-smoke {
-    background-color: #f6f6f6;
-  }
-
-  .text-custom-smoke {
-    color: #f6f6f6;
-  }
-
-  .text-main {
-    color: #61dafb !important;
+  .mw-80 {
+    min-width: 20rem;
   }
 }

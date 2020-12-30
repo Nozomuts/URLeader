@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@formspree/react": "^2.2.3",
     "autoprefixer": "^10.1.0",
     "next": "latest",
     "postcss": "^8.2.1",
