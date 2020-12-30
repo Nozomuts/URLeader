@@ -14,7 +14,7 @@ export const Header = (): JSX.Element => {
 
   return (
     <div className="bg-custom-black flex justify-between items-center pl-12 pr-12 shadow-lg">
-      <Image height={100} width={280} src="/logo.png" alt="ロゴ" />
+      <Image height={100} width={200} src="/logo.png" alt="ロゴ" />
       <div>
         {linkList.map(({ name, url }) => (
           <Link href={url} key={name}>

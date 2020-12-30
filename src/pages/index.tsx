@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { SideMenu } from "../components/SideMenu";
 
 export default function index(): JSX.Element {
+  const [filter, setFilter] = useState({
+    name: "すべて",
+    tag: null,
+    date: null,
+  });
+
   return (
-    <h1 className="bg-black text-red-500 p-5 m-5 text-center">hello world</h1>
+    <div className="pt-10">
+      <SideMenu filterName={filter.name} />
+    </div>
   );
 }
