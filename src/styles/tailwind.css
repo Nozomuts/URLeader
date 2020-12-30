@@ -4,6 +4,21 @@
 @tailwind components;
 /* Write your own custom component styles here */
 
+.bg-custom-black {
+  background-color: #282c34;
+}
+
+.bg-custom-smoke {
+  background-color: #f6f6f6;
+}
+
+.text-custom-smoke {
+  color: #f6f6f6;
+}
+
+.text-main {
+  color: #61dafb !important;
+}
 
 .btn-blue {
   @apply px-4 py-2 font-bold text-white bg-blue-500 rounded;
@@ -11,3 +26,10 @@
 
 @tailwind utilities;
 /* Your own custom utilities */
+
+@layer base {
+  html,
+  body {
+    @apply bg-custom-smoke h-full;
+  }
+}

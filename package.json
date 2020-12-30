@@ -40,7 +40,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "yarn run lint",
-      "pre-push": "yarn test"
+      "pre-push": "yarn test --passWithNoTests"
     }
   }
 }
