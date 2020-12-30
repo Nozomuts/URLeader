@@ -19,7 +19,7 @@ export const Header = (): JSX.Element => {
         {linkList.map(({ name, url }) => (
           <Link href={url} key={name}>
             <a
-              className={`pl-12 text-custom-smoke underline hover:opacity-70 ${
+              className={`ml-12 text-custom-smoke underline hover:opacity-70 ${
                 pathname === url ? "text-main" : ""
               }`}
             >
