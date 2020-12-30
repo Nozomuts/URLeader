@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "react-datepicker/dist/react-datepicker.css";
+
 export default function index(): JSX.Element {
   const [filter, setFilter] = useState({
     name: "すべて",
@@ -12,12 +14,19 @@ export default function index(): JSX.Element {
     { name: "近日" },
   ]);
   const [schedules, setSchedules] = useState([
-    { id: 1, url: "http://localhost:3000", date: "2020/12/31 23:30" },
-    { id: 2, url: "http://localhost:3000", date: "2020/12/31 23:30" },
-    { id: 3, url: "http://localhost:3000", date: "2020/12/31 23:30" },
-    { id: 4, url: "http://localhost:3000", date: "2020/12/31 23:30" },
-    { id: 5, url: "http://localhost:3000", date: "2020/12/31 23:30" },
+    { id: 1, url: "https://github.com/", date: "2020/12/31 23:30" },
   ]);
+
+  schedules.forEach(({ url }) => {
+    // const date = new Date();
+    // const dateTime = date.getTime();
+    // const setTime = new Date().getTime();
+    // //読み込み時と出力時の差分のミリ秒を計算します。
+    // const tweetTime = setTime - dateTime + 5000;
+    // setTimeout(() => {
+    //   if (window) window.open(url, "_blank");
+    // }, tweetTime);
+  });
 
   return (
     <div className="flex pt-28 h-screen">
