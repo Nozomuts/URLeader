@@ -2,7 +2,7 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: [],
+  purge: ["/src/pages/**.tsx", "/src/components/**.tsx"],
   darkMode: false,
   theme: {
     colors: {
@@ -11,6 +11,7 @@ module.exports = {
       gray: colors.gray,
       white: "#fff",
       main: "#61dafb",
+      red: colors.red,
     },
     extend: {},
   },
