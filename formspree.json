@@ -1,0 +1,12 @@
+{
+  "forms": {
+    "contact": {
+      "name": "Contact Form",
+      "actions": [{ "type": "email", "to": "tuno.0806@icloud.com" }],
+      "fields": {
+        "email": { "type": "email", "required": true },
+        "message": { "type": "text", "required": true }
+      }
+    }
+  }
+}
