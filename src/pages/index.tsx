@@ -29,7 +29,7 @@ export default function index(): JSX.Element {
     {
       id: "https://github.com/2020/12/31 23:30",
       url: "https://github.com/",
-      date: dayjs().format("YYYY/MM/DD H:mm").toString(),
+      date: dayjs().add(1, "minute").format("YYYY/MM/DD H:mm").toString(),
       memo: "面接",
     },
   ]);
@@ -40,16 +40,17 @@ export default function index(): JSX.Element {
     isOpen: false,
   });
 
-  schedules.forEach(({ url }) => {
-    // const date = new Date();
-    // const dateTime = date.getTime();
-    // const setTime = new Date().getTime();
-    // //読み込み時と出力時の差分のミリ秒を計算します。
-    // const tweetTime = setTime - dateTime + 5000;
-    // setTimeout(() => {
-    //   if (window) window.open(url, "_blank");
-    // }, tweetTime);
-  });
+  // schedules.forEach(({ url, date }) => {
+  //   const dateTime = dayjs(date).get("second");
+  //   const setTime = dayjs().get("second");
+  //   //読み込み時と出力時の差分のミリ秒を計算します。
+  //   const tweetTime = setTime - dateTime + 1000;
+  //   setTimeout(() => {
+  //     if (process.browser) {
+  //       window.open(url, "_blank");
+  //     }
+  //   }, tweetTime);
+  // });
 
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
@@ -157,7 +158,7 @@ export default function index(): JSX.Element {
                 className="text-main underline hover:bg-gray-200 group"
               >
                 <span className="group-hover:hidden">{memo || url}</span>
-                <span className="hidden group-hover:block">{url}</span>
+                <span className="hidden group-hover:inline-block">{url}</span>
               </a>
               <div>{date}</div>
             </div>
