@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 
-import "react-datepicker/dist/react-datepicker.css";
-
 export default function index(): JSX.Element {
   const [filter, setFilter] = useState({
     name: "すべて",
-    tag: null,
-    date: null,
   });
   const [menu, setMenu] = useState([
     { name: "すべて" },
@@ -37,6 +33,7 @@ export default function index(): JSX.Element {
             className={`hover:bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 ${
               name === filter.name ? "bg-white" : ""
             }`}
+            onClick={() => setFilter({ name })}
           >
             {name}
           </div>
@@ -48,6 +45,9 @@ export default function index(): JSX.Element {
 
       <div className="bg-white w-full px-12 overflow-y-auto">
         <h1 className="text-3xl font-bold py-10">{filter.name}</h1>
+        <a className="text-main block pl-4 my-4 cursor-pointer rounded-md py-4 w-full hover:bg-gray-200 duration-300">
+          ＋ を追加
+        </a>
         <div>
           {schedules.map(({ id, url, date }) => (
             <div
