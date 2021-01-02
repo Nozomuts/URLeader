@@ -1,15 +1,12 @@
 import dayjs from "dayjs";
 import React, { useState } from "react";
-import { SetStateAction } from "react";
-import { Dispatch } from "react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { ISchedule } from "../util/types";
+import { putSchedule } from "../db/schedules";
 
 type IProps = {
   dir: "up" | "down";
   schedulesLength: number;
-  setSchedules: Dispatch<SetStateAction<ISchedule[]>>;
 };
 
 type IForm = {
@@ -21,7 +18,6 @@ type IForm = {
 export const AddScheduleForm: FC<IProps> = ({
   dir,
   schedulesLength,
-  setSchedules,
 }): JSX.Element => {
   const { register, handleSubmit } = useForm<IForm>();
   const [open, setOpen] = useState<{
@@ -32,10 +28,12 @@ export const AddScheduleForm: FC<IProps> = ({
   });
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
-    setSchedules((prev) => [
-      ...prev,
-      { id: url + format, url, date: format, memo },
-    ]);
+    putSchedule(
+      url,
+      dayjs().format("YYYY/MM/DD H:mm").toString(),
+      memo,
+      format
+    );
     setOpen({ isOpen: false });
   };
   const display = () => (dir === "down" ? schedulesLength >= 3 : true);

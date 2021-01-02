@@ -1,25 +1,22 @@
-import dayjs from "dayjs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
+import { getSchedules } from "../db/schedules";
 import { ISchedule } from "../util/types";
 
 export default function index(): JSX.Element {
   const [filter, setFilter] = useState({
     name: "すべて",
   });
-  const [menu, setMenu] = useState([
+  const [menu] = useState([
     { name: "すべて" },
     { name: "今日" },
     { name: "近日" },
   ]);
-  const [schedules, setSchedules] = useState<ISchedule[]>([
-    {
-      id: "https://github.com/2020/12/31 23:30",
-      url: "https://github.com/",
-      date: dayjs().add(1, "minute").format("YYYY/MM/DD H:mm").toString(),
-      memo: "面接",
-    },
-  ]);
+  const [schedules, setSchedules] = useState<ISchedule[]>([]);
+
+  useEffect(() => {
+    getSchedules().then(setSchedules); // () =>
+  }, []);
 
   // schedules.forEach(({ url, date }) => {
   //   const dateTime = dayjs(date).get("second");
@@ -54,11 +51,7 @@ export default function index(): JSX.Element {
 
       <div className="bg-white w-full px-12 overflow-y-auto">
         <h1 className="text-3xl font-bold pt-10">{filter.name}</h1>
-        <AddScheduleForm
-          dir="up"
-          schedulesLength={schedules.length}
-          setSchedules={setSchedules}
-        />
+        <AddScheduleForm dir="up" schedulesLength={schedules.length} />
         <div>
           {schedules.map(({ id, url, date, memo }) => (
             <div key={id} className="p-4 rounded-md mt-4 border max-w-2xl">
@@ -75,11 +68,7 @@ export default function index(): JSX.Element {
             </div>
           ))}
         </div>
-        <AddScheduleForm
-          dir="down"
-          schedulesLength={schedules.length}
-          setSchedules={setSchedules}
-        />
+        <AddScheduleForm dir="down" schedulesLength={schedules.length} />
       </div>
     </div>
   );
