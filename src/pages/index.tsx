@@ -24,13 +24,15 @@ export default function index(): JSX.Element {
       name: "今日",
       description: "今日の予定を表示します",
       filter: (date: string) =>
-        dayjs(date).valueOf() < dayjs().add(1, "day").valueOf(),
+        dayjs(date).startOf("date").valueOf() <
+        dayjs().startOf("date").add(1, "day").valueOf(),
     },
     {
       name: "近日",
       description: "5日以内の予定を表示します",
       filter: (date: string) =>
-        dayjs(date).valueOf() < dayjs().add(5, "day").valueOf(),
+        dayjs(date).startOf("date").valueOf() <
+        dayjs().startOf("date").add(5, "day").valueOf(),
     },
   ]);
   const [schedules, setSchedules] = useState<ISchedule[]>([]);
