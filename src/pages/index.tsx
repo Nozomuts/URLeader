@@ -50,8 +50,8 @@ export default function index(): JSX.Element {
   // });
 
   return (
-    <div className="flex pt-28 h-screen">
-      <div className="px-12 mw-80 text-left pt-10 overflow-y-auto">
+    <div className="flex h-screen">
+      <div className="px-12 mw-80 text-left pt-10">
         {menus.map((menu) => (
           <button
             key={menu.name}
@@ -68,8 +68,8 @@ export default function index(): JSX.Element {
         </button> */}
       </div>
 
-      <div className="bg-white w-full px-12 overflow-y-auto">
-        <h1 className="text-3xl font-bold pt-10">{filter.name}</h1>
+      <div className="bg-white w-full px-12">
+        <h1 className="text-3xl font-bold pt-10 bg-white">{filter.name}</h1>
         <AddScheduleForm
           setSchedules={setSchedules}
           dir="up"
@@ -79,24 +79,22 @@ export default function index(): JSX.Element {
             ).length
           }
         />
-        <div>
-          {schedules
-            .filter(({ date }) => (filter.filter ? filter.filter(date) : true))
-            .map(({ id, url, date, memo }) => (
-              <div key={id} className="p-4 rounded-md mt-4 border max-w-2xl">
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-main underline hover:bg-gray-200 group"
-                >
-                  <span className="group-hover:hidden">{memo || url}</span>
-                  <span className="hidden group-hover:inline-block">{url}</span>
-                </a>
-                <div>{date}</div>
-              </div>
-            ))}
-        </div>
+        {schedules
+          .filter(({ date }) => (filter.filter ? filter.filter(date) : true))
+          .map(({ id, url, date, memo }) => (
+            <div key={id} className="p-4 rounded-md mt-4 border max-w-2xl">
+              <a
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-main underline hover:bg-gray-200 group"
+              >
+                <span className="group-hover:hidden">{memo || url}</span>
+                <span className="hidden group-hover:inline-block">{url}</span>
+              </a>
+              <div>{date}</div>
+            </div>
+          ))}
         <AddScheduleForm
           setSchedules={setSchedules}
           dir="down"

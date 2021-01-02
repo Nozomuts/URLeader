@@ -40,7 +40,7 @@ export const AddScheduleForm: FC<IProps> = ({
   const display = () => (dir === "down" ? schedulesLength >= 3 : true);
 
   return (
-    <div>
+    <>
       {!open.isOpen && display() && (
         <button
           className="text-main block pl-4 mt-4 cursor-pointer rounded-md py-4 w-full max-w-2xl hover:bg-gray-200 duration-300 focus:outline-none text-left"
@@ -106,6 +106,6 @@ export const AddScheduleForm: FC<IProps> = ({
           </div>
         </form>
       )}
-    </div>
+    </>
   );
 };
