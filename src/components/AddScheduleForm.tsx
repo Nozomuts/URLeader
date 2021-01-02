@@ -43,7 +43,9 @@ export const AddScheduleForm: FC<IProps> = ({
     <>
       {!open.isOpen && display() && (
         <button
-          className="text-main block pl-4 mt-4 cursor-pointer rounded-md py-4 w-full max-w-2xl hover:bg-gray-200 duration-300 focus:outline-none text-left"
+          className={`text-main block pl-4 mb-4 cursor-pointer rounded-md py-4 w-full max-w-2xl hover:bg-gray-200 duration-300 focus:outline-none text-left ${
+            dir === "down" ? "mb-10" : ""
+          }`}
           onClick={() => setOpen({ isOpen: true, dir })}
         >
           ＋ 予定を追加
@@ -51,7 +53,9 @@ export const AddScheduleForm: FC<IProps> = ({
       )}
       {open.isOpen && open.dir === dir && (
         <form
-          className="flex flex-col mt-4 max-w-2xl"
+          className={`flex flex-col mb-4 max-w-2xl ${
+            dir === "down" ? "mb-10" : ""
+          }`}
           onSubmit={handleSubmit(submit)}
         >
           <label

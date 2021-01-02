@@ -16,4 +16,7 @@
   .mw-80 {
     min-width: 20rem;
   }
+  .h-content {
+    height: calc(100vh - 12.8rem);
+  }
 }

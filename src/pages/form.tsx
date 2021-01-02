@@ -10,7 +10,7 @@ export default function form(): JSX.Element {
       {state.succeeded ? (
         <p>ご協力ありがとうございます!</p>
       ) : (
-        <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
+        <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
           <label htmlFor="email" className="font-bold mb-2">
             メールアドレス
           </label>
@@ -27,7 +27,7 @@ export default function form(): JSX.Element {
               errors={state.errors}
             />
           </div>
-          <label htmlFor="message" className="font-bold mt-4 mb-2">
+          <label htmlFor="message" className="font-bold mb-4 mb-2">
             メッセージ
           </label>
           <textarea

@@ -38,7 +38,7 @@ export const EditScheduleForm: FC<IProps> = ({
   return (
     <>
       <form
-        className="flex flex-col mt-4 max-w-2xl"
+        className="flex flex-col mb-4 max-w-2xl"
         onSubmit={handleSubmit(submit)}
       >
         <label
@@ -46,7 +46,7 @@ export const EditScheduleForm: FC<IProps> = ({
           className="border border-gray-200 rounded-md flex-col flex p-2 focus-within:border-gray-500 mb-2"
         >
           <input
-            type="text"
+            type="url"
             id="label"
             className="p-2 focus:outline-none h-10 rounded-md"
             placeholder="URLを入力"
@@ -65,6 +65,7 @@ export const EditScheduleForm: FC<IProps> = ({
             <input
               type="datetime-local"
               name="date"
+              min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
               ref={register({ required: "日付を選択してください" })}
               defaultValue={dayjs(schedule.date)
                 .format("YYYY-MM-DDTHH:mm")
