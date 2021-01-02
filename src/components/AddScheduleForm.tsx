@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
-import React, { useState, SetStateAction, Dispatch, FC } from "react";
+import React, { useState, SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { createSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";
+import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {
   dir: "up" | "down";
@@ -22,6 +23,7 @@ export const AddScheduleForm: FC<IProps> = ({
   setSchedules,
 }): JSX.Element => {
   const { register, handleSubmit } = useForm<IForm>();
+  const ref = useRef<HTMLFormElement>();
   const [open, setOpen] = useState<{
     isOpen: boolean;
     dir?: "up" | "down";
@@ -38,6 +40,11 @@ export const AddScheduleForm: FC<IProps> = ({
     setOpen({ isOpen: false });
   };
   const display = () => (dir === "down" ? schedulesLength >= 3 : true);
+  useOutsideClick(ref, () => {
+    if (open.isOpen) {
+      setOpen({ isOpen: false });
+    }
+  });
 
   return (
     <>
@@ -56,6 +63,7 @@ export const AddScheduleForm: FC<IProps> = ({
           className={`flex flex-col mb-4 max-w-2xl ${
             dir === "down" ? "mb-10" : ""
           }`}
+          ref={ref as any}
           onSubmit={handleSubmit(submit)}
         >
           <label
@@ -63,7 +71,7 @@ export const AddScheduleForm: FC<IProps> = ({
             className="border border-gray-200 rounded-md flex-col flex p-2 focus-within:border-gray-500 mb-2"
           >
             <input
-              type="text"
+              type="url"
               id="label"
               className="p-2 focus:outline-none h-10 rounded-md"
               placeholder="URLを入力"
@@ -81,6 +89,7 @@ export const AddScheduleForm: FC<IProps> = ({
               <input
                 type="datetime-local"
                 name="date"
+                min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
                 ref={register({ required: "日付を選択してください" })}
                 className="border border-gray-200 m-2 p-2 focus:outline-none focus:bg-gray-100 focus:border-gray-500 rounded-md h-10 w-60 cursor-pointer"
               />

@@ -103,6 +103,7 @@ export default function index(): JSX.Element {
                   schedule={{ id, url, date, memo }}
                   setEdit={setEdit}
                   setSchedules={setSchedules}
+                  edit={edit}
                 />
               ) : (
                 <div
