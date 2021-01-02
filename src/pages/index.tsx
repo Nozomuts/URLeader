@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
-import { getSchedules } from "../db/schedules";
+import { getSchedules, removeSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";
+import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 
 export default function index(): JSX.Element {
   const [filter, setFilter] = useState<{
@@ -49,6 +50,13 @@ export default function index(): JSX.Element {
   //   }, tweetTime);
   // });
 
+  const deleteSchedule = (id: string) => {
+    if (confirm("本当に削除しますか？")) {
+      removeSchedule(id);
+      setSchedules((prev) => prev.filter((el) => el.id !== id));
+    }
+  };
+
   return (
     <div className="flex h-screen">
       <div className="px-12 mw-80 text-left pt-10">
@@ -68,7 +76,7 @@ export default function index(): JSX.Element {
         </button> */}
       </div>
 
-      <div className="bg-white w-full px-12">
+      <div className="bg-white w-full px-12 h-full">
         <h1 className="text-3xl font-bold pt-10 bg-white">{filter.name}</h1>
         <AddScheduleForm
           setSchedules={setSchedules}
@@ -82,17 +90,33 @@ export default function index(): JSX.Element {
         {schedules
           .filter(({ date }) => (filter.filter ? filter.filter(date) : true))
           .map(({ id, url, date, memo }) => (
-            <div key={id} className="p-4 rounded-md mt-4 border max-w-2xl">
-              <a
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-main underline hover:bg-gray-200 group"
-              >
-                <span className="group-hover:hidden">{memo || url}</span>
-                <span className="hidden group-hover:inline-block">{url}</span>
-              </a>
-              <div>{date}</div>
+            <div
+              key={id}
+              className="p-4 rounded-md mt-4 border max-w-2xl flex justify-between group"
+            >
+              <div>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-main underline hover:bg-gray-200"
+                >
+                  <span className="group-hover:hidden">{memo || url}</span>
+                  <span className="hidden group-hover:inline-block">{url}</span>
+                </a>
+                <div>{date}</div>
+              </div>
+              <div className="flex">
+                <RiEdit2Line
+                  className="mr-2 cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
+                  size={25}
+                />
+                <RiDeleteBinLine
+                  className="cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
+                  size={25}
+                  onClick={() => deleteSchedule(id)}
+                />
+              </div>
             </div>
           ))}
         <AddScheduleForm

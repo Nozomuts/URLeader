@@ -21,6 +21,10 @@ export const getSchedules = (): Promise<ISchedule[]> => {
 };
 
 /** データを削除 */
-export const deleteSchedule = (id: string): void => {
+export const removeSchedule = (id: string): void => {
   schedules.delete(id);
+};
+
+export const editSchedule = (id: string, schedule: ISchedule): void => {
+  schedules.update(id, schedule);
 };
