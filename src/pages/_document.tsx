@@ -60,7 +60,7 @@ class MyDocument extends Document {
             content="/icons/app-icon-144x144.png"
           />
           <meta name="msapplication-TileColor" content="#fff" />
-          <meta name="theme-color" content="#3f51b5" />
+          <meta name="theme-color" content="#282c34" />
         </Head>
         <Main />
         <NextScript />
