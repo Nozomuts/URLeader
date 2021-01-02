@@ -19,3 +19,8 @@ export const putSchedule = async (
 export const getSchedules = (): Promise<ISchedule[]> => {
   return schedules.toArray();
 };
+
+/** データを削除 */
+export const deleteSchedule = (id: string): void => {
+  schedules.delete(id);
+};
