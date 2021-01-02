@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React, { useState, SetStateAction, Dispatch, FC } from "react";
 import { useForm } from "react-hook-form";
-import { putSchedule } from "../db/schedules";
+import { createSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";
 
 type IProps = {
@@ -30,7 +30,7 @@ export const AddScheduleForm: FC<IProps> = ({
   });
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
-    putSchedule(url, dayjs().toString(), memo, format);
+    createSchedule(url, dayjs().toString(), memo, format);
     setSchedules((prev) => [
       ...prev,
       { url, id: dayjs().toString(), memo, date: format },

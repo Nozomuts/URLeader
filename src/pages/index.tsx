@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
-import { getSchedules, removeSchedule } from "../db/schedules";
+import { readSchedules, deleteSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import { EditScheduleForm } from "../components/EditSchedultForm";
 
 export default function index(): JSX.Element {
   const [filter, setFilter] = useState<{
@@ -33,9 +34,10 @@ export default function index(): JSX.Element {
     },
   ]);
   const [schedules, setSchedules] = useState<ISchedule[]>([]);
+  const [edit, setEdit] = useState("");
 
   useEffect(() => {
-    getSchedules().then(setSchedules); // () =>
+    readSchedules().then(setSchedules); // () =>
   }, []);
 
   // schedules.forEach(({ url, date }) => {
@@ -50,9 +52,9 @@ export default function index(): JSX.Element {
   //   }, tweetTime);
   // });
 
-  const deleteSchedule = (id: string) => {
+  const removeSchedule = (id: string) => {
     if (confirm("本当に削除しますか？")) {
-      removeSchedule(id);
+      deleteSchedule(id);
       setSchedules((prev) => prev.filter((el) => el.id !== id));
     }
   };
@@ -89,36 +91,48 @@ export default function index(): JSX.Element {
         />
         {schedules
           .filter(({ date }) => (filter.filter ? filter.filter(date) : true))
-          .map(({ id, url, date, memo }) => (
-            <div
-              key={id}
-              className="p-4 rounded-md mt-4 border max-w-2xl flex justify-between group"
-            >
-              <div>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-main underline hover:bg-gray-200"
-                >
-                  <span className="group-hover:hidden">{memo || url}</span>
-                  <span className="hidden group-hover:inline-block">{url}</span>
-                </a>
-                <div>{date}</div>
+          .map(({ id, url, date, memo }) =>
+            edit === id ? (
+              <EditScheduleForm
+                key={id}
+                schedule={{ id, url, date, memo }}
+                setEdit={setEdit}
+                setSchedules={setSchedules}
+              />
+            ) : (
+              <div
+                key={id}
+                className="p-4 rounded-md mt-4 border max-w-2xl flex justify-between group"
+              >
+                <div>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-main underline hover:bg-gray-200"
+                  >
+                    <span className="group-hover:hidden">{memo || url}</span>
+                    <span className="hidden group-hover:inline-block">
+                      {url}
+                    </span>
+                  </a>
+                  <div>{date}</div>
+                </div>
+                <div className="flex">
+                  <RiEdit2Line
+                    className="mr-2 cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
+                    size={25}
+                    onClick={() => setEdit(id)}
+                  />
+                  <RiDeleteBinLine
+                    className="cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
+                    size={25}
+                    onClick={() => removeSchedule(id)}
+                  />
+                </div>
               </div>
-              <div className="flex">
-                <RiEdit2Line
-                  className="mr-2 cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
-                  size={25}
-                />
-                <RiDeleteBinLine
-                  className="cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
-                  size={25}
-                  onClick={() => deleteSchedule(id)}
-                />
-              </div>
-            </div>
-          ))}
+            )
+          )}
         <AddScheduleForm
           setSchedules={setSchedules}
           dir="down"

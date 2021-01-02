@@ -6,7 +6,7 @@ database.version(1).stores({ schedules: "&id" }); // データベースのバー
 const schedules: Dexie.Table<ISchedule, string> = database.table("schedules"); // データの型、キーとなるデータの型 テーブル作成
 
 /** データを保存 */
-export const putSchedule = async (
+export const createSchedule = async (
   url: string,
   id: string,
   memo: string,
@@ -16,15 +16,18 @@ export const putSchedule = async (
 };
 
 /** データを取得 */
-export const getSchedules = (): Promise<ISchedule[]> => {
+export const readSchedules = (): Promise<ISchedule[]> => {
   return schedules.toArray();
 };
 
 /** データを削除 */
-export const removeSchedule = (id: string): void => {
+export const deleteSchedule = (id: string): void => {
   schedules.delete(id);
 };
 
-export const editSchedule = (id: string, schedule: ISchedule): void => {
+export const updateSchedule = (
+  id: string,
+  schedule: Partial<ISchedule>
+): void => {
   schedules.update(id, schedule);
 };
