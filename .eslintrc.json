@@ -31,5 +31,14 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-explicit-any": "off"
   },
-  "ignorePatterns": "/public/*.js"
+  "overrides": [
+    {
+      "files": ["**/*.{js,jsx}"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
+  ],
+  "ignorePatterns": "public/*.js"
 }
