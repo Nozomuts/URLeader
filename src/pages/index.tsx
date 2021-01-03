@@ -47,15 +47,21 @@ export default function index(): JSX.Element {
       const datetime = dayjs(date).valueOf();
       const now = dayjs().valueOf();
       //読み込み時と出力時の差分のミリ秒を計算。
-      const tweetTime = datetime - now + 1000;
-      console.log(tweetTime);
+      const setTime = datetime - now + 1000;
+      // 1分前
+      const setTimeBefore = datetime - now - 60000;
+      setTimeout(() => {
+        if ("Notification" in window) {
+          new Notification("間も無く遷移します");
+        }
+      }, setTimeBefore);
       setTimeout(() => {
         if (process.browser) {
           window.open(url, "_blank");
           deleteSchedule(id);
           setSchedules((prev) => prev.filter((el) => el.id !== id));
         }
-      }, tweetTime);
+      }, setTime);
     });
   }, [schedules]);
 
