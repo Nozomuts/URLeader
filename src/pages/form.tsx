@@ -14,12 +14,7 @@ export default function form(): JSX.Element {
           <label htmlFor="email" className="font-bold mb-2">
             メールアドレス
           </label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            className="appearance-none border border-gray-200 p-2 focus:outline-none focus:border-gray-500 rounded-md"
-          />
+          <input id="email" type="email" name="email" className="input" />
           <div className="text-red-500">
             <ValidationError
               prefix="Email"
@@ -30,11 +25,7 @@ export default function form(): JSX.Element {
           <label htmlFor="message" className="font-bold mt-4 mb-2">
             メッセージ
           </label>
-          <textarea
-            id="message"
-            name="message"
-            className="appearance-none w-full border border-gray-200 p-2 h-40 focus:outline-none focus:border-gray-500 rounded-md"
-          />
+          <textarea id="message" name="message" className="w-full h-40 input" />
           <div className="text-red-500">
             <ValidationError
               prefix="Message"

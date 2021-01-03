@@ -85,7 +85,7 @@ export default function index(): JSX.Element {
         </button> */}
       </div>
 
-      <div className="bg-white w-full pl-12">
+      <div className="bg-white w-full px-12">
         <h1 className="text-3xl font-bold pt-10 bg-white pb-4">
           {filter.name}
         </h1>

@@ -57,7 +57,7 @@ export const EditScheduleForm: FC<IProps> = ({
         <input
           type="url"
           id="label"
-          className="p-2 focus:outline-none h-10 rounded-md"
+          className="px-2  focus:outline-none h-10 rounded-md"
           placeholder="URLを入力"
           name="url"
           defaultValue={schedule.url}
@@ -79,13 +79,13 @@ export const EditScheduleForm: FC<IProps> = ({
             defaultValue={dayjs(schedule.date)
               .format("YYYY-MM-DDTHH:mm")
               .toString()}
-            className="border border-gray-200 m-2 p-2 focus:outline-none focus:bg-gray-100 focus:border-gray-500 rounded-md h-10 w-60 cursor-pointer"
+            className="input mr-3 h-10 w-60 cursor-pointer focus:bg-gray-100"
           />
           <input
             type="text"
             name="memo"
             defaultValue={schedule.memo}
-            className="border border-gray-200 p-2 focus:outline-none focus:border-gray-500 rounded-md h-10 mr-3"
+            className="input h-10"
             placeholder="メモ"
             ref={register}
           />

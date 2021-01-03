@@ -10,6 +10,9 @@
 }
 
 @layer components {
+  .input {
+    @apply border border-gray-200 p-2 focus:outline-none focus:border-gray-500 rounded-md
+  }
 }
 
 @layer utilities {
