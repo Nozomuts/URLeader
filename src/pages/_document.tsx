@@ -74,6 +74,10 @@ class MyDocument extends Document {
           />
           <meta name="msapplication-TileColor" content="#fff" />
           <meta name="theme-color" content="#282c34" />
+          <meta
+            name="description"
+            content="URLと時間を登録して、予定を管理するアプリ"
+          />
         </Head>
         <body>
           <Main />

@@ -1,4 +1,4 @@
-import { ISchedule } from "./../util/types";
+import { ISchedule } from "../util/types";
 import Dexie from "dexie";
 
 const database = new Dexie("u-reserve"); // データベース名 データベース接続
