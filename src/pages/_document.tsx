@@ -1,9 +1,22 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
 
 class MyDocument extends Document {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
+    return await Document.getInitialProps(ctx);
+  }
+
   render(): JSX.Element {
     return (
-      <Html lang="ja-JP">
+      <Html lang="ja-JP" dir="ltr">
         <title>UReserve</title>
         <Head>
           <link rel="manifest" href="/manifest.json" />
@@ -62,8 +75,10 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#fff" />
           <meta name="theme-color" content="#282c34" />
         </Head>
-        <Main />
-        <NextScript />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
       </Html>
     );
   }

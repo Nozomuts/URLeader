@@ -16,13 +16,15 @@ export const Header = (): JSX.Element => {
     <>
       <div className="bg-black flex justify-between items-center px-12 shadow-lg fixed w-full h-28">
         <Link href="/">
-          <Image
-            height={80}
-            width={160}
-            src="/logo.png"
-            alt="ロゴ"
-            className="cursor-pointer"
-          />
+          <a>
+            <Image
+              height={80}
+              width={175}
+              src="/logo.png"
+              alt="ロゴ"
+              className="cursor-pointer"
+            />
+          </a>
         </Link>
         <div>
           {linkList.map(({ name, url }) => (

@@ -5,7 +5,7 @@ export default function form(): JSX.Element {
   const [state, handleSubmit] = useForm("contact");
 
   return (
-    <div className=" h-auto w-1/2 mt-10 mx-auto bg-white p-8 rounded-md">
+    <div className="h-auto w-1/2 mt-10 mx-auto bg-white p-8 rounded-md">
       <h1 className="text-3xl font-bold mb-4">ご意見・ご要望など</h1>
       {state.succeeded ? (
         <p>ご協力ありがとうございます!</p>
