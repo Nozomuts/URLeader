@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 
@@ -16,14 +15,10 @@ export const Header = (): JSX.Element => {
     <>
       <div className="bg-black flex justify-between items-center px-12 shadow-lg fixed w-full h-28">
         <Link href="/">
-          <a>
-            <Image
-              height={80}
-              width={175}
-              src="/logo.png"
-              alt="ロゴ"
-              className="cursor-pointer"
-            />
+          <a className="flex items-center">
+            <h1 className="font-audio text-4xl text-white">
+              <span className="text-main">URL</span>eader
+            </h1>
           </a>
         </Link>
         <div>

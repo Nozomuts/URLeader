@@ -20,9 +20,14 @@ class MyDocument extends Document {
         <title>URLeader</title>
         <Head>
           <link rel="manifest" href="/manifest.json" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+            rel="stylesheet"
+          />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="apple-mobile-web-app-title" content="UReserve" />
+          <meta name="apple-mobile-web-app-title" content="URLeader" />
           <link rel="apple-touch-icon" href="/icons/57x57.png" sizes="57x57" />
           <link rel="apple-touch-icon" href="/icons/60x60.png" sizes="60x60" />
           <link rel="apple-touch-icon" href="/icons/72x72.png" sizes="72x72" />
