@@ -42,17 +42,22 @@ export default function index(): JSX.Element {
     readSchedules().then(setSchedules); // () =>
   }, []);
 
-  // schedules.forEach(({ url, date }) => {
-  //   const dateTime = dayjs(date).get("second");
-  //   const setTime = dayjs().get("second");
-  //   //読み込み時と出力時の差分のミリ秒を計算します。
-  //   const tweetTime = setTime - dateTime + 1000;
-  //   setTimeout(() => {
-  //     if (process.browser) {
-  //       window.open(url, "_blank");
-  //     }
-  //   }, tweetTime);
-  // });
+  useEffect(() => {
+    schedules.forEach(({ url, date, id }) => {
+      const datetime = dayjs(date).valueOf();
+      const now = dayjs().valueOf();
+      //読み込み時と出力時の差分のミリ秒を計算。
+      const tweetTime = datetime - now + 1000;
+      console.log(tweetTime);
+      setTimeout(() => {
+        if (process.browser) {
+          window.open(url, "_blank");
+          deleteSchedule(id);
+          setSchedules((prev) => prev.filter((el) => el.id !== id));
+        }
+      }, tweetTime);
+    });
+  }, [schedules]);
 
   const removeSchedule = (id: string) => {
     if (confirm("本当に削除しますか？")) {
