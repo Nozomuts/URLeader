@@ -56,7 +56,7 @@ export default function index() {
         }
       }, setTimeBefore);
       setTimeout(() => {
-        if (process.browser) {
+        if (window) {
           window.open(url, "_blank");
           deleteSchedule(id);
           setSchedules((prev) => prev.filter((el) => el.id !== id));

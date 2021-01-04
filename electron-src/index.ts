@@ -3,7 +3,7 @@ import { join } from "path";
 import { format } from "url";
 
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
+import { BrowserWindow, app, ipcMain, IpcMainEvent, shell } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
 
@@ -12,12 +12,18 @@ app.on("ready", async () => {
   await prepareNext(".");
 
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     webPreferences: {
       nodeIntegration: false,
       preload: join(__dirname, "preload.js"),
     },
+  });
+
+  // 外部ウィンドウで開く
+  mainWindow.webContents.on("new-window", (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url);
   });
 
   const url = isDev
