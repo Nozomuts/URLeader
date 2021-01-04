@@ -23,7 +23,7 @@ export const EditScheduleForm: FC<IProps> = ({
   setEdit,
   schedule,
   edit,
-}): JSX.Element => {
+}) => {
   const ref = useRef<HTMLFormElement>();
   const { register, handleSubmit } = useForm<IForm>();
   const submit = ({ date, url, memo }: IForm) => {

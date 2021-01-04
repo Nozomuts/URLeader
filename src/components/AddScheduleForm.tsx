@@ -21,7 +21,7 @@ export const AddScheduleForm: FC<IProps> = ({
   dir,
   schedulesLength,
   setSchedules,
-}): JSX.Element => {
+}) => {
   const { register, handleSubmit } = useForm<IForm>();
   const ref = useRef<HTMLFormElement>();
   const [open, setOpen] = useState<{

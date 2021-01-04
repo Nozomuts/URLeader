@@ -4,7 +4,7 @@ import { AppProps } from "next/app";
 import { Header } from "../components/Header";
 import { FormspreeProvider } from "@formspree/react";
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if ("Notification" in window) {
       const permission = Notification.permission;

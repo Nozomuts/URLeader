@@ -6,7 +6,7 @@ import { ISchedule } from "../util/types";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { EditScheduleForm } from "../components/EditSchedultForm";
 
-export default function index(): JSX.Element {
+export default function index() {
   const [filter, setFilter] = useState<{
     name: string;
     description: string;

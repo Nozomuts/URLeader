@@ -14,7 +14,7 @@ class MyDocument extends Document {
     return await Document.getInitialProps(ctx);
   }
 
-  render(): JSX.Element {
+  render() {
     return (
       <Html lang="ja-JP" dir="ltr">
         <title>URLeader</title>
