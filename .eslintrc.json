@@ -40,5 +40,5 @@
       }
     }
   ],
-  "ignorePatterns": ["public/*.js", "main/*.js", "src/public/*.js"]
+  "ignorePatterns": ["public/*.js", "main/*.js", "src/public/*.js", "out/*.js"]
 }
