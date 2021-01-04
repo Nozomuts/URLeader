@@ -36,3 +36,10 @@ yarn-error.log*
 # sw
 public/**.js
 public/**.js.map
+
+# electron
+src/out
+src/.next
+src/public
+main
+dist

@@ -1,19 +1,30 @@
 {
   "name": "urleader",
   "version": "1.0.0",
+  "productName": "URLeader",
+  "main": "main/index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix .",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf dist main out .next",
+    "dev-electron": "npm run tsc-electron && electron .",
+    "build-electron": "npm run export && npm run tsc-electron",
+    "export": "next build && next export",
+    "tsc-electron": "tsc -p electron-src",
+    "pack-app": "npm run build-electron && electron-builder --dir",
+    "dist": "npm run build-electron && electron-builder"
   },
   "dependencies": {
     "@formspree/react": "^2.2.3",
     "autoprefixer": "^10.1.0",
     "dayjs": "^1.9.8",
     "dexie": "^3.0.3",
+    "electron-is-dev": "^1.2.0",
+    "electron-next": "^3.1.5",
     "next": "latest",
     "next-pwa": "^5.0.2",
     "postcss": "^8.2.1",
@@ -33,6 +44,8 @@
     "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
@@ -41,6 +54,7 @@
     "husky": "^4.3.6",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.4.4",
     "typescript": "4.0"
   },
@@ -49,6 +63,22 @@
     "hooks": {
       "pre-commit": "yarn run lint",
       "pre-push": "yarn test --passWithNoTests"
+    }
+  },
+  "build": {
+    "files": [
+      "main",
+      "out"
+    ],
+    "mac": {
+      "icon": "./public/icons/icon.icns",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "icon": "./public/icons/icon.ico",
+      "target": "msi"
     }
   }
 }
