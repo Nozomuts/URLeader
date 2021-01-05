@@ -50,7 +50,7 @@ export const AddScheduleForm: FC<IProps> = ({
     <>
       {!open.isOpen && display() && (
         <button
-          className={`add-button bg-black ${dir === "down" ? "mb-10" : ""}`}
+          className={`add-button ${dir === "down" ? "mb-10" : ""}`}
           onClick={() => setOpen({ isOpen: true, dir })}
         >
           ＋ 予定を追加
