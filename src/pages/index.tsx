@@ -1,10 +1,16 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
 import { readSchedules, deleteSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";
-import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import {
+  RiArrowDownSLine,
+  RiArrowUpSLine,
+  RiDeleteBinLine,
+  RiEdit2Line,
+} from "react-icons/ri";
 import { EditScheduleForm } from "../components/EditSchedultForm";
+import useOutsideClick from "../util/useOutsideClick";
 
 export default function index() {
   const [filter, setFilter] = useState<{
@@ -37,6 +43,7 @@ export default function index() {
   ]);
   const [schedules, setSchedules] = useState<ISchedule[]>([]);
   const [edit, setEdit] = useState("");
+  const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
     readSchedules().then(setSchedules); // () =>
@@ -72,6 +79,14 @@ export default function index() {
     }
   };
 
+  const ref = useRef<HTMLDivElement>();
+
+  useOutsideClick(ref, () => {
+    if (dropdown) {
+      setDropdown(false);
+    }
+  });
+
   return (
     <div className="flex">
       <div className="hidden px-12 mw-80 text-left pt-10 md:block">
@@ -92,7 +107,40 @@ export default function index() {
       </div>
 
       <div className="bg-white w-full px-12">
-        <h1 className="title pt-10">{filter.name}</h1>
+        <h1 className="title pt-10 flex">
+          {filter.name}
+          <button
+            type="button"
+            className="text-gray-500 focus:outline-none md:hidden"
+          >
+            {dropdown ? (
+              <RiArrowUpSLine onClick={() => setDropdown(false)} />
+            ) : (
+              <RiArrowDownSLine onClick={() => setDropdown(true)} />
+            )}
+          </button>
+          <div className="relative text-left" ref={ref as any}>
+            {dropdown && (
+              <div className="absolute -left-6 top-6 mt-2 shadow-md rounded-md overflow-hidden border border-gray-200 bg-white">
+                {menus.map((menu) => (
+                  <button
+                    key={menu.name}
+                    className={`hover:bg-gray-200 p-4 text-sm duration-300 focus:outline-none w-40 text-left ${
+                      menu.name === filter.name ? "text-main" : ""
+                    }`}
+                    onClick={() => {
+                      setFilter(menu);
+                      setDropdown(false);
+                    }}
+                  >
+                    {menu.name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </h1>
+
         <div className="h-content overflow-y-auto">
           <AddScheduleForm
             setSchedules={setSchedules}
