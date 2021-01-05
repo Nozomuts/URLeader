@@ -33,6 +33,12 @@
       "purpose": "any maskable"
     },
     {
+      "src": "/icons/384x384.png",
+      "type": "image/png",
+      "sizes": "384x384",
+      "purpose": "any maskable"
+    },
+    {
       "src": "/icons/512x512.png",
       "type": "image/png",
       "sizes": "512x512",
@@ -40,7 +46,7 @@
     }
   ],
   "start_url": "/",
-  "scope": ".",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#fff",
