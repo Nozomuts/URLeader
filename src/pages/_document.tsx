@@ -64,6 +64,7 @@ class MyDocument extends Document {
             name="description"
             content="URLと時間を登録して、予定を管理するアプリ"
           />
+          <script async defer src="https://apis.google.com/js/api.js"></script>
         </Head>
         <body>
           <Main />
