@@ -12,7 +12,7 @@ export const Header = () => {
 
   return (
     <>
-      <div className="bg-black flex justify-between items-center px-12 shadow-lg fixed w-full h-28">
+      <div className="bg-black flex flex-col justify-evenly md:justify-between md:flex-row items-center md:px-12 shadow-lg fixed w-full h-28">
         <Link href="/">
           <a className="flex items-center">
             <h1 className="font-audio text-4xl text-white">
@@ -24,7 +24,7 @@ export const Header = () => {
           {linkList.map(({ name, url }) => (
             <Link href={url} key={name}>
               <a
-                className={`ml-12 text-gray-100 underline hover:opacity-70 ${
+                className={`ml-8 md:ml-12 text-gray-100 underline hover:opacity-70 ${
                   pathname === url ? "text-main" : ""
                 }`}
               >

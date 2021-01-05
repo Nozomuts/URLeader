@@ -74,12 +74,12 @@ export default function index() {
 
   return (
     <div className="flex">
-      <div className="px-12 mw-80 text-left pt-10">
+      <div className="hidden px-12 mw-80 text-left pt-10 md:block">
         {menus.map((menu) => (
           <button
             key={menu.name}
             className={`hover:bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 focus:outline-none block w-56 text-left ${
-              menu.name === filter.name ? "text-main" : ""
+              menu.name === filter.name ? "bg-white" : ""
             }`}
             onClick={() => setFilter(menu)}
           >
@@ -92,9 +92,7 @@ export default function index() {
       </div>
 
       <div className="bg-white w-full px-12">
-        <h1 className="text-3xl font-bold pt-10 bg-white pb-4">
-          {filter.name}
-        </h1>
+        <h1 className="title pt-10">{filter.name}</h1>
         <div className="h-content overflow-y-auto">
           <AddScheduleForm
             setSchedules={setSchedules}
