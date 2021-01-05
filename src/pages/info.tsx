@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function info() {
   return (
     <div className=" h-auto w-1/2 mt-10 mx-auto bg-white p-8 rounded-md">

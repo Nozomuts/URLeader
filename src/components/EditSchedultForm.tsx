@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { SetStateAction, Dispatch, FC, useRef } from "react";
+import { SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { updateSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
 import { readSchedules, deleteSchedule } from "../db/schedules";
 import { ISchedule } from "../util/types";

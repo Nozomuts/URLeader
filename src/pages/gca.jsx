@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function gca() {
   const CLIENT_ID =
     "840951746882-ksrhra0q5ikp5mt2se38aifbpmidmi2i.apps.googleusercontent.com";

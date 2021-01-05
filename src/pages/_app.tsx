@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "../styles/tailwind.css";
 import { AppProps } from "next/app";
 import { Header } from "../components/Header";
