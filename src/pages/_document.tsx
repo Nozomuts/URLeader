@@ -19,6 +19,7 @@ class MyDocument extends Document {
       <Html lang="ja-JP" dir="ltr">
         <title>URLeader</title>
         <Head>
+          {/** start_urlがlighthouseで検出されない https://github.com/shadowwalker/next-pwa/issues/107 */}
           <link rel="manifest" href="/manifest.json" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
