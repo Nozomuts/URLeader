@@ -6,7 +6,7 @@ module.exports = withPWA({
     runtimeCaching: [
       {
         urlPattern: "/",
-        handler: "NetworkFirst",
+        handler: "StaleWhileRevalidate",
         options: {
           // don't change cache name
           cacheName: "start-url",
@@ -29,7 +29,7 @@ module.exports = withPWA({
       },
       {
         urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
-        handler: "CacheFirst",
+        handler: "StaleWhileRevalidate",
         options: {
           cacheName: "static-font-assets",
           expiration: {
@@ -40,7 +40,7 @@ module.exports = withPWA({
       },
       {
         urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
-        handler: "CacheFirst",
+        handler: "StaleWhileRevalidate",
         options: {
           cacheName: "static-image-assets",
           expiration: {
@@ -51,7 +51,7 @@ module.exports = withPWA({
       },
       {
         urlPattern: /\.(?:js)$/i,
-        handler: "NetworkFirst",
+        handler: "StaleWhileRevalidate",
         options: {
           cacheName: "static-js-assets",
           expiration: {
@@ -62,7 +62,7 @@ module.exports = withPWA({
       },
       {
         urlPattern: /\.(?:css|less)$/i,
-        handler: "CacheFirst",
+        handler: "StaleWhileRevalidate",
         options: {
           cacheName: "static-style-assets",
           expiration: {
