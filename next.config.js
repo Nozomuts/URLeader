@@ -110,3 +110,7 @@ module.exports = withPWA({
     ],
   },
 });
+
+module.exports = {
+  reactStrictMode: true,
+};
