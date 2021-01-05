@@ -78,8 +78,8 @@ export default function index() {
         {menus.map((menu) => (
           <button
             key={menu.name}
-            className={`hover:bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 focus:outline-none block w-56 text-left ${
-              menu.name === filter.name ? "bg-white" : ""
+            className={`bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 focus:outline-none block w-56 text-left ${
+              menu.name === filter.name ? "text-main" : ""
             }`}
             onClick={() => setFilter(menu)}
           >
