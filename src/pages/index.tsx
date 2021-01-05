@@ -137,12 +137,12 @@ export default function index() {
                   </div>
                   <div className="flex">
                     <RiEdit2Line
-                      className="mr-2 cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
+                      className="mr-2 icon-button"
                       size={25}
                       onClick={() => setEdit(id)}
                     />
                     <RiDeleteBinLine
-                      className="cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md"
+                      className="icon-button"
                       size={25}
                       onClick={() => removeSchedule(id)}
                     />

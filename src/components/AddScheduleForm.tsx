@@ -50,9 +50,7 @@ export const AddScheduleForm: FC<IProps> = ({
     <>
       {!open.isOpen && display() && (
         <button
-          className={`text-main block pl-4 mb-4 cursor-pointer rounded-md py-4 w-full max-w-2xl hover:bg-gray-200 duration-300 focus:outline-none text-left ${
-            dir === "down" ? "mb-10" : ""
-          }`}
+          className={`add-button ${dir === "down" ? "mb-10" : ""}`}
           onClick={() => setOpen({ isOpen: true, dir })}
         >
           ＋ 予定を追加
@@ -103,14 +101,11 @@ export const AddScheduleForm: FC<IProps> = ({
             </div>
           </label>
           <div className="flex w-48 justify-between">
-            <button
-              className={`px-6 py-2 text-xs font-medium leading-6 text-center text-white duration-200 bg-black rounded shadow hover:opacity-70 focus:outline-none w-auto`}
-              type="submit"
-            >
+            <button className="button text-white bg-black" type="submit">
               追加
             </button>
             <button
-              className={`px-6 py-2 text-xs font-medium leading-6 text-center duration-200 rounded shadow hover:opacity-70 focus:outline-none w-auto`}
+              className="button"
               type="button"
               onClick={() => setOpen({ isOpen: false })}
             >

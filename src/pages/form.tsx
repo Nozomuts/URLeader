@@ -36,7 +36,7 @@ export default function form() {
           <button
             type="submit"
             disabled={state.submitting}
-            className={`mt-6 px-6 py-2 text-xs font-medium leading-6 text-center text-white duration-200 bg-black rounded shadow hover:opacity-70 focus:outline-none w-auto ${
+            className={`button text-white bg-black mt-6 ${
               state.submitting ? "opacity-70 cursor-not-allowed" : ""
             }`}
           >

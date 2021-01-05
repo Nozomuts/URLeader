@@ -92,17 +92,10 @@ export const EditScheduleForm: FC<IProps> = ({
         </div>
       </label>
       <div className="flex w-48 justify-between">
-        <button
-          className={`px-6 py-2 text-xs font-medium leading-6 text-center text-white duration-200 bg-black rounded shadow hover:opacity-70 focus:outline-none w-auto`}
-          type="submit"
-        >
+        <button className="button text-white bg-black" type="submit">
           変更
         </button>
-        <button
-          className={`px-6 py-2 text-xs font-medium leading-6 text-center duration-200 rounded shadow hover:opacity-70 focus:outline-none w-auto`}
-          type="button"
-          onClick={() => setEdit("")}
-        >
+        <button className="button" type="button" onClick={() => setEdit("")}>
           キャンセル
         </button>
       </div>
