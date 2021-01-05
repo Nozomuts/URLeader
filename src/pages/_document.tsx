@@ -41,7 +41,6 @@ class MyDocument extends Document {
             name="description"
             content="URLと時間を登録して、予定を管理するアプリ"
           />
-          {/* <link rel="preconnect" href="https://fonts.gstatic.com" /> */}
           <link rel="icon" sizes="192x192" href="/icons/192x192.png" />
           <link rel="icon" href="/icons/favicon.ico" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,10 +55,6 @@ class MyDocument extends Document {
             href="/icons/180x180.png"
           />
           <link rel="manifest" href="/manifest.json" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
-            rel="stylesheet"
-          />
           <script async defer src="https://apis.google.com/js/api.js"></script>
         </Head>
         <body>
