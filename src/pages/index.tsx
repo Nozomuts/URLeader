@@ -79,7 +79,7 @@ export default function index() {
           <button
             key={menu.name}
             className={`bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 focus:outline-none block w-56 text-left ${
-              menu.name === filter.name ? "text-main" : ""
+              menu.name === filter.name ? "bg-black text-main" : ""
             }`}
             onClick={() => setFilter(menu)}
           >
