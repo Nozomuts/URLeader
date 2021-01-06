@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
 import { readSchedule, deleteSchedule } from "../db/schedule";
 import { IFilter, ISchedule } from "../util/types";
-import { GoogleAuthButton } from "../components/GoogleAuthButton";
+import { GAPI } from "../components/GAPI";
 import { menus } from "../util";
 import { Dropdown } from "../components/Dropdown";
 import { ScheduleList } from "../components/ScheduleList";
@@ -62,7 +62,7 @@ export default function index() {
         <div className="flex justify-between pt-10">
           <h1 className="title flex">{filter.name}</h1>
           <Dropdown filter={filter} setFilter={setFilter} />
-          <GoogleAuthButton />
+          <GAPI setSchedule={setSchedule} />
         </div>
         <div className="h-content overflow-y-auto">
           <AddScheduleForm
