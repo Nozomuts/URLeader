@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 import { SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { updateSchedule } from "../db/schedules";
+import { updateSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {
-  setSchedules: Dispatch<SetStateAction<ISchedule[]>>;
+  setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
   setEdit: Dispatch<SetStateAction<string>>;
   schedule: ISchedule;
   edit: string;
@@ -19,7 +19,7 @@ type IForm = {
 };
 
 export const EditScheduleForm: FC<IProps> = ({
-  setSchedules,
+  setSchedule,
   setEdit,
   schedule,
   edit,
@@ -29,7 +29,7 @@ export const EditScheduleForm: FC<IProps> = ({
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
     updateSchedule(schedule.id, { url, memo, date: format });
-    setSchedules((prev) => [
+    setSchedule((prev) => [
       ...prev.map((el) =>
         el.id === schedule.id
           ? { url, id: schedule.id, memo, date: format }

@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 import { useState, SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { createSchedule } from "../db/schedules";
+import { createSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {
   dir: "up" | "down";
-  schedulesLength: number;
-  setSchedules: Dispatch<SetStateAction<ISchedule[]>>;
+  scheduleLength: number;
+  setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
 };
 
 type IForm = {
@@ -19,8 +19,8 @@ type IForm = {
 
 export const AddScheduleForm: FC<IProps> = ({
   dir,
-  schedulesLength,
-  setSchedules,
+  scheduleLength,
+  setSchedule,
 }) => {
   const { register, handleSubmit } = useForm<IForm>();
   const ref = useRef<HTMLFormElement>();
@@ -33,13 +33,13 @@ export const AddScheduleForm: FC<IProps> = ({
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
     createSchedule(url, dayjs().toString(), memo, format);
-    setSchedules((prev) => [
+    setSchedule((prev) => [
       ...prev,
       { url, id: dayjs().toString(), memo, date: format },
     ]);
     setOpen({ isOpen: false });
   };
-  const display = () => (dir === "down" ? schedulesLength >= 3 : true);
+  const display = () => (dir === "down" ? scheduleLength >= 3 : true);
   useOutsideClick(ref, () => {
     if (open.isOpen) {
       setOpen({ isOpen: false });
