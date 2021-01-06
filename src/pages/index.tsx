@@ -112,6 +112,7 @@ export default function index() {
           <button
             type="button"
             className="text-gray-500 focus:outline-none md:hidden"
+            aria-label="trigger"
           >
             {dropdown ? (
               <RiArrowUpSLine onClick={() => setDropdown(false)} />
