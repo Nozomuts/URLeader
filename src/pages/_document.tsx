@@ -55,6 +55,11 @@ class MyDocument extends Document {
             href="/icons/180x180.png"
           />
           <link rel="manifest" href="/manifest.json" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+            rel="stylesheet"
+          />
           <script async defer src="https://apis.google.com/js/api.js"></script>
         </Head>
         <body>
