@@ -1,4 +1,7 @@
-export default function gca() {
+import { useState } from "react";
+
+export const GoogleAuthButton = () => {
+  const [auth, setAuth] = useState(false);
   const CLIENT_ID =
     "840951746882-ksrhra0q5ikp5mt2se38aifbpmidmi2i.apps.googleusercontent.com";
   const API_KEY = "AIzaSyDyDNlcwP4TRieJ7UUktzq2RB0EuGQ8V1s";
@@ -16,7 +19,10 @@ export default function gca() {
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES,
       });
-      await gapi.auth2.getAuthInstance().signIn();
+      if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+        await gapi.auth2.getAuthInstance().signIn();
+        setAuth(true);
+      }
       const res = await gapi.client.calendar.events.list({
         calendarId: "primary",
         timeMin: new Date().toISOString(),
@@ -48,9 +54,11 @@ export default function gca() {
   }
 
   return (
-    <div>
-      <button onClick={handleClick}>click</button>
-      <button onClick={handleSignoutClick}>logout</button>
-    </div>
+    <button
+      className="button mb-4"
+      onClick={auth ? handleSignoutClick : handleClick}
+    >
+      {auth ? "Googleからログアウト" : "Googleカレンダーからデータを取得"}
+    </button>
   );
-}
+};

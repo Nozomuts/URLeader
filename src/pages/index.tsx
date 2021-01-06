@@ -11,6 +11,7 @@ import {
 } from "react-icons/ri";
 import { EditScheduleForm } from "../components/EditSchedultForm";
 import useOutsideClick from "../util/useOutsideClick";
+import { GoogleAuthButton } from "../components/GoogleAuthButton";
 
 export default function index() {
   const [filter, setFilter] = useState<{
@@ -107,40 +108,43 @@ export default function index() {
       </div>
 
       <div className="bg-white w-full px-12">
-        <h1 className="title pt-10 flex">
-          {filter.name}
-          <button
-            type="button"
-            className="text-gray-500 focus:outline-none md:hidden"
-            aria-label="trigger"
-          >
-            {dropdown ? (
-              <RiArrowUpSLine onClick={() => setDropdown(false)} />
-            ) : (
-              <RiArrowDownSLine onClick={() => setDropdown(true)} />
-            )}
-          </button>
-          <div className="relative text-left" ref={ref as any}>
-            {dropdown && (
-              <div className="absolute -left-6 top-6 mt-2 shadow-md rounded-md overflow-hidden border border-gray-200 bg-white">
-                {menus.map((menu) => (
-                  <button
-                    key={menu.name}
-                    className={`hover:bg-gray-200 p-4 text-sm duration-300 focus:outline-none w-40 text-left ${
-                      menu.name === filter.name ? "text-main" : ""
-                    }`}
-                    onClick={() => {
-                      setFilter(menu);
-                      setDropdown(false);
-                    }}
-                  >
-                    {menu.name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </h1>
+        <div className="flex justify-between pt-10">
+          <h1 className="title flex">
+            {filter.name}
+            <button
+              type="button"
+              className="text-gray-500 focus:outline-none md:hidden"
+              aria-label="trigger"
+            >
+              {dropdown ? (
+                <RiArrowUpSLine onClick={() => setDropdown(false)} />
+              ) : (
+                <RiArrowDownSLine onClick={() => setDropdown(true)} />
+              )}
+            </button>
+            <div className="relative text-left" ref={ref as any}>
+              {dropdown && (
+                <div className="absolute -left-6 top-6 mt-2 shadow-md rounded-md overflow-hidden border border-gray-200 bg-white">
+                  {menus.map((menu) => (
+                    <button
+                      key={menu.name}
+                      className={`hover:bg-gray-200 p-4 text-sm duration-300 focus:outline-none w-40 text-left ${
+                        menu.name === filter.name ? "text-main" : ""
+                      }`}
+                      onClick={() => {
+                        setFilter(menu);
+                        setDropdown(false);
+                      }}
+                    >
+                      {menu.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </h1>
+          <GoogleAuthButton />
+        </div>
 
         <div className="h-content overflow-y-auto">
           <AddScheduleForm
