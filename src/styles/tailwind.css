@@ -5,14 +5,14 @@
 @layer base {
   html,
   body {
-    @apply bg-gray-100 h-full text-gray-500;
+    @apply bg-gray-100 h-full text-sub;
   }
 }
 
 @font-face {
   font-family: "Audiowide";
   font-display: swap;
-  src: url('./Audiowide-Regular.ttf') format("truetype");
+  src: url("./Audiowide-Regular.ttf") format("truetype");
 }
 
 @layer components {
@@ -29,7 +29,7 @@
     @apply cursor-pointer hidden group-hover:inline-block hover:bg-gray-200 rounded-md;
   }
   .title {
-    @apply text-2xl md:text-3xl font-bold pb-4
+    @apply text-2xl md:text-3xl font-bold pb-4;
   }
 }
 

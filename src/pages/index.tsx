@@ -9,7 +9,7 @@ import {
   RiDeleteBinLine,
   RiEdit2Line,
 } from "react-icons/ri";
-import { EditScheduleForm } from "../components/EditSchedultForm";
+import { EditScheduleForm } from "../components/EditScheduleForm";
 import useOutsideClick from "../util/useOutsideClick";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
 

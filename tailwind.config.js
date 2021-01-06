@@ -6,10 +6,11 @@ module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
-      black: "#282c34",
+      black: "#20232a",
       gray: colors.gray,
       white: "#fff",
       main: "#61dafb",
+      sub: "#282c34",
       red: colors.red,
     },
     extend: {},
