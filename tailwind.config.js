@@ -12,6 +12,7 @@ module.exports = {
       main: "#61dafb",
       sub: "#282c34",
       red: colors.red,
+      blue: colors.blue,
     },
     extend: {},
   },

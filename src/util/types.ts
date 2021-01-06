@@ -4,3 +4,9 @@ export type ISchedule = {
   date: string;
   memo: string;
 };
+
+export type IFilter = {
+  name: string;
+  description: string;
+  func?: (date: string) => boolean;
+};

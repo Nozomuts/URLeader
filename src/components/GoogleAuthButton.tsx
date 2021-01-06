@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { SiGooglecalendar } from "react-icons/si";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
 export const GoogleAuthButton = () => {
   const [auth, setAuth] = useState(false);
@@ -58,7 +60,11 @@ export const GoogleAuthButton = () => {
       className="button mb-4"
       onClick={auth ? handleSignoutClick : handleClick}
     >
-      {auth ? "Googleからログアウト" : "Googleカレンダーからデータを取得"}
+      {auth ? (
+        <RiLogoutBoxRLine size="20" className="text-red-500" />
+      ) : (
+        <SiGooglecalendar size="20" className="text-blue-500" />
+      )}
     </button>
   );
 };

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import { AddScheduleForm } from "../components/AddScheduleForm";
 import { readSchedules, deleteSchedule } from "../db/schedules";
-import { ISchedule } from "../util/types";
+import { IFilter, ISchedule } from "../util/types";
 import {
   RiArrowDownSLine,
   RiArrowUpSLine,
@@ -12,57 +12,31 @@ import {
 import { EditScheduleForm } from "../components/EditScheduleForm";
 import useOutsideClick from "../util/useOutsideClick";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
+import { menus } from "../util";
 
 export default function index() {
-  const [filter, setFilter] = useState<{
-    name: string;
-    description: string;
-    filter?: (date: string) => boolean;
-  }>({
-    name: "すべて",
-    description: "すべての予定を表示します",
-  });
-  const [menus] = useState([
-    {
-      name: "すべて",
-      description: "すべての予定を表示します",
-    },
-    {
-      name: "今日",
-      description: "今日の予定を表示します",
-      filter: (date: string) =>
-        dayjs(date).startOf("date").valueOf() <
-        dayjs().startOf("date").add(1, "day").valueOf(),
-    },
-    {
-      name: "近日",
-      description: "5日以内の予定を表示します",
-      filter: (date: string) =>
-        dayjs(date).startOf("date").valueOf() <
-        dayjs().startOf("date").add(5, "day").valueOf(),
-    },
-  ]);
+  const [filter, setFilter] = useState<IFilter>(menus[0]);
   const [schedules, setSchedules] = useState<ISchedule[]>([]);
   const [edit, setEdit] = useState("");
   const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
-    readSchedules().then(setSchedules); // () =>
+    readSchedules().then(setSchedules);
   }, []);
 
   useEffect(() => {
     schedules.forEach(({ url, date, id }) => {
       const datetime = dayjs(date).valueOf();
       const now = dayjs().valueOf();
-      //読み込み時と出力時の差分のミリ秒を計算。
-      const setTime = datetime - now + 1000;
-      // 1分前
+      // 1分前に通知
       const setTimeBefore = datetime - now - 60000;
       setTimeout(() => {
         if ("Notification" in window) {
           new Notification("間も無く遷移します");
         }
       }, setTimeBefore);
+      // 読み込み時と出力時の差分のミリ秒を計算。
+      const setTime = datetime - now;
       setTimeout(() => {
         if (window) {
           window.open(url, "_blank");
@@ -102,9 +76,6 @@ export default function index() {
             {menu.name}
           </button>
         ))}
-        {/* <button className="text-main block pl-4 my-4 cursor-pointer rounded-md py-4 w-full hover:bg-gray-200 duration-300 focus:outline-none text-left">
-          ＋ フィルターを追加
-        </button> */}
       </div>
 
       <div className="bg-white w-full px-12">
@@ -152,12 +123,12 @@ export default function index() {
             dir="up"
             schedulesLength={
               schedules.filter(({ date }) =>
-                filter.filter ? filter.filter(date) : true
+                filter.func ? filter.func(date) : true
               ).length
             }
           />
           {schedules
-            .filter(({ date }) => (filter.filter ? filter.filter(date) : true))
+            .filter(({ date }) => (filter.func ? filter.func(date) : true))
             .map(({ id, url, date, memo }) =>
               edit === id ? (
                 <EditScheduleForm
@@ -206,7 +177,7 @@ export default function index() {
             dir="down"
             schedulesLength={
               schedules.filter(({ date }) =>
-                filter.filter ? filter.filter(date) : true
+                filter.func ? filter.func(date) : true
               ).length
             }
           />
