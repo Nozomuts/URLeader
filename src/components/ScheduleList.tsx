@@ -46,10 +46,12 @@ export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
                   href={url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-main underline hover:bg-gray-200"
+                  className="text-main underline"
                 >
                   <span className="group-hover:hidden">{memo || url}</span>
-                  <span className="hidden group-hover:inline-block">{url}</span>
+                  <span className="hidden group-hover:inline-block hover:bg-gray-200">
+                    {url}
+                  </span>
                 </a>
                 <div>{date}</div>
               </div>

@@ -4,6 +4,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import dayjs from "dayjs";
 import { ISchedule } from "../util/types";
 import { createSchedule } from "../db/schedule";
+import { Modal } from "./Modal";
 
 type IProps = {
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
@@ -11,7 +12,8 @@ type IProps = {
 
 export const GAPI: FC<IProps> = ({ setSchedule }) => {
   const [auth, setAuth] = useState(false);
-  const [event, setEvent] = useState<ISchedule[]>();
+  const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const CLIENT_ID =
@@ -67,11 +69,14 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         }
       });
       setEvent(arr);
+      setOpen(true);
     });
   };
 
   function handleSignoutClick() {
     (window as any).gapi.auth2.getAuthInstance().signOut();
+    setEvent([]);
+    setAuth(false);
   }
 
   return (
@@ -88,24 +93,31 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
       <button className="button mb-4" onClick={handleClick} aria-label="auth">
         <SiGooglecalendar size="20" className="text-blue-500" />
       </button>
-      {event?.map(({ id, memo, url, date }) => (
-        <div key={id}>
-          <ul>
-            <li>URL： {url}</li>
-            <li>時刻： {date}</li>
-            <li>メモ： {memo}</li>
-          </ul>
-          <button
-            className="button text-white bg-black"
-            onClick={() => {
-              createSchedule(url, id, memo, date);
-              setSchedule((prev) => [...prev, { url, id, memo, date }]);
-            }}
-          >
-            追加
-          </button>
-        </div>
-      ))}
+      {open && (
+        <Modal setOpen={setOpen}>
+          {event
+            ? event.map(({ memo, url, date }, i) => (
+                <div key={i}>
+                  <ul>
+                    <li>URL： {url}</li>
+                    <li>時刻： {date}</li>
+                    <li>メモ： {memo}</li>
+                  </ul>
+                  <button
+                    className="button text-white bg-black"
+                    onClick={() => {
+                      const id = dayjs().toString();
+                      createSchedule(url, id, memo, date);
+                      setSchedule((prev) => [...prev, { url, id, memo, date }]);
+                    }}
+                  >
+                    追加
+                  </button>
+                </div>
+              ))
+            : "URLの設定された予定はありませんでした"}
+        </Modal>
+      )}
     </div>
   );
 };
