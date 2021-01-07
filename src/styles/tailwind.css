@@ -34,4 +34,10 @@
   .font-audio {
     font-family: "Audiowide", cursive;
   }
+  .max-h-content {
+    height: calc(100% - 3rem);
+  }
+  .h-120 {
+    height: 40rem;
+  }
 }

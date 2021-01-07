@@ -12,7 +12,28 @@ type IProps = {
 
 export const GAPI: FC<IProps> = ({ setSchedule }) => {
   const [auth, setAuth] = useState(false);
-  const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
+  const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([
+    {
+      memo: "lkfgsnklgfs;kl",
+      url: "flskdfgjlkjsvl",
+      date: dayjs().format("YYYY/MM/DD H:mm").toString(),
+    },
+    {
+      memo: "lkfgsnklgfs;kl",
+      url: "flskdfgjlkjsvl",
+      date: dayjs().format("YYYY/MM/DD H:mm").toString(),
+    },
+    {
+      memo: "lkfgsnklgfs;kl",
+      url: "flskdfgjlkjsvl",
+      date: dayjs().format("YYYY/MM/DD H:mm").toString(),
+    },
+    {
+      memo: "lkfgsnklgfs;kl",
+      url: "flskdfgjlkjsvl",
+      date: dayjs().format("YYYY/MM/DD H:mm").toString(),
+    },
+  ]);
   const [open, setOpen] = useState(false);
 
   const CLIENT_ID =
@@ -90,18 +111,21 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
       <button className="button mb-4" onClick={handleFetch} aria-label="auth">
         <SiGooglecalendar size="20" className="text-blue-500" />
       </button>
-      {open && (
+      {!open && (
         <Modal setOpen={setOpen}>
           {event
             ? event.map(({ memo, url, date }, i) => (
-                <div key={i}>
+                <div
+                  key={i}
+                  className="border border-gray-200 rounded-md p-4 m-4"
+                >
                   <ul>
                     <li>URL： {url}</li>
                     <li>時刻： {date}</li>
                     <li>メモ： {memo}</li>
                   </ul>
                   <button
-                    className="button text-white bg-black"
+                    className="button text-white bg-black mt-4"
                     onClick={() => {
                       const id = dayjs().toString();
                       createSchedule(url, id, memo, date);
