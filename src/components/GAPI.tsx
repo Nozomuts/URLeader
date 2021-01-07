@@ -106,6 +106,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
                       const id = dayjs().toString();
                       createSchedule(url, id, memo, date);
                       setSchedule((prev) => [...prev, { url, id, memo, date }]);
+                      setEvent((prev) => prev.filter((el) => el.date !== date));
                     }}
                   >
                     追加
