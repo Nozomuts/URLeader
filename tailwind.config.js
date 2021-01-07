@@ -14,6 +14,12 @@ module.exports = {
       red: colors.red,
       blue: colors.blue,
     },
+    minWidth: {
+      80: "20rem",
+    },
+    maxHeight: {
+      "4/5": "80%",
+    },
     extend: {},
   },
   variants: {

@@ -45,7 +45,7 @@ export default function index() {
 
   return (
     <div className="flex">
-      <div className="hidden px-12 mw-80 text-left pt-10 md:block">
+      <div className="hidden px-12 min-w-80 text-left pt-10 md:block">
         {menus.map((menu) => (
           <button
             key={menu.name}
