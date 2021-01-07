@@ -60,6 +60,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
             rel="stylesheet"
           />
+          <script async defer src="https://apis.google.com/js/api.js"></script>
         </Head>
         <body>
           <Main />

@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import { ISchedule } from "../util/types";
 import { createSchedule } from "../db/schedule";
 import { Modal } from "./Modal";
-import Head from "next/head";
 
 type IProps = {
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
@@ -24,26 +23,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   ];
   const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
-  function handleLoad() {
-    const gapi = (window as any).gapi;
-    gapi.load("client:auth2", initGAPI);
-  }
-
-  const initGAPI = () => {
-    const gapi = (window as any).gapi;
-    gapi.client
-      .init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES,
-      })
-      .then(() => {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(setAuth);
-      });
-  };
-
-  const handleFetch = async () => {
+  const getData = async () => {
     const res = await (window as any).gapi.client.calendar.events.list({
       calendarId: "primary",
       timeMin: new Date().toISOString(),
@@ -71,8 +51,22 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
     setOpen(true);
   };
 
-  const handleSignin = () => {
-    (window as any).gapi.auth2.getAuthInstance().signIn();
+  const handleFetch = () => {
+    const gapi = (window as any).gapi;
+    gapi.load("client:auth2", async () => {
+      await gapi.client.init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        discoveryDocs: DISCOVERY_DOCS,
+        scope: SCOPES,
+      });
+      const isLogin = await gapi.auth2.getAuthInstance().isSignedIn.get();
+      if (!isLogin) {
+        await gapi.auth2.getAuthInstance().signIn();
+      }
+      setAuth(true);
+      getData();
+    });
   };
 
   const handleSignout = () => {
@@ -83,28 +77,15 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
 
   return (
     <div>
-      <Head>
-        <script
-          async
-          defer
-          src="https://apis.google.com/js/api.js"
-          onLoad={handleLoad}
-        ></script>
-      </Head>
-      {auth && (
-        <button
-          className="button mb-4"
-          onClick={handleSignout}
-          aria-label="logout"
-        >
-          <RiLogoutBoxRLine size="20" className="text-red-500" />
-        </button>
-      )}
       <button
-        className="button mb-4"
-        onClick={auth ? handleFetch : handleSignin}
-        aria-label="auth"
+        className={`button mb-4 ${auth ? "" : "opacity-70 cursor-not-allowed"}`}
+        onClick={handleSignout}
+        aria-label="logout"
+        disabled={!auth}
       >
+        <RiLogoutBoxRLine size="20" className="text-red-500" />
+      </button>
+      <button className="button mb-4" onClick={handleFetch} aria-label="auth">
         <SiGooglecalendar size="20" className="text-blue-500" />
       </button>
       {open && (
