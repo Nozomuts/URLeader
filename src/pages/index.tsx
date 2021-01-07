@@ -60,8 +60,11 @@ export default function index() {
       </div>
       <div className="bg-white w-full px-12">
         <div className="flex justify-between pt-10">
-          <h1 className="title flex">{filter.name}</h1>
-          <Dropdown filter={filter} setFilter={setFilter} />
+          <div className="title flex">
+            {filter.name}
+            <Dropdown filter={filter} setFilter={setFilter} />
+          </div>
+
           <GAPI setSchedule={setSchedule} />
         </div>
         <div className="h-content overflow-y-auto">

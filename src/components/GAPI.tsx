@@ -78,7 +78,9 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   return (
     <div>
       <button
-        className={`button mb-4 ${auth ? "" : "opacity-70 cursor-not-allowed"}`}
+        className={`button mb-4 ${
+          auth ? "" : "opacity-30 hover:opacity-30 cursor-not-allowed"
+        }`}
         onClick={handleSignout}
         aria-label="logout"
         disabled={!auth}
