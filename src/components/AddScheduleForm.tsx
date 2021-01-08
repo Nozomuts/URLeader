@@ -89,12 +89,12 @@ export const AddScheduleForm: FC<IProps> = ({
                 name="date"
                 min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
                 ref={register({ required: "日付を選択してください" })}
-                className="input mb-2 sm:mb-0 mr-2 h-10 w-48 cursor-pointer focus:bg-gray-100"
+                className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer focus:bg-gray-100"
               />
               <input
                 type="text"
                 name="memo"
-                className="input h-10 w-48 md:w-64"
+                className="input h-10 w-52 md:w-64"
                 placeholder="メモ"
                 ref={register}
               />

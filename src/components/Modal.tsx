@@ -15,7 +15,7 @@ export const Modal: FC<IProps> = ({ children, setOpen }) => {
 
   return (
     <div
-      className="absolute -translate-y-1/2 -translate-x-1/2 bg-white top-1/2 left-1/2 transform border-gray-200 border p-4 rounded-md shadow-md max-w-2xl w-4/5 h-120"
+      className="absolute -translate-y-1/2 -translate-x-1/2 bg-white top-1/2 left-1/2 transform border-gray-200 border p-4 md:rounded-md shadow-md max-w-2xl w-full md:w-4/5 h-full md:h-120"
       ref={ref as any}
     >
       <div className="max-h-content overflow-y-auto">{children}</div>

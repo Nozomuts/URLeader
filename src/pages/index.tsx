@@ -45,7 +45,7 @@ export default function index() {
 
   return (
     <div className="flex">
-      <div className="hidden px-12 min-w-80 text-left pt-10 md:block">
+      <div className="hidden px-6 md:px-12 min-w-80 text-left pt-10 md:block">
         {menus.map((menu) => (
           <button
             key={menu.name}
@@ -58,7 +58,7 @@ export default function index() {
           </button>
         ))}
       </div>
-      <div className="bg-white w-full px-12">
+      <div className="bg-white w-full px-6 md:px-12">
         <div className="flex justify-between pt-10">
           <div className="title flex">
             {filter.name}

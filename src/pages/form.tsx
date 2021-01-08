@@ -4,7 +4,7 @@ export default function form() {
   const [state, handleSubmit] = useForm("contact");
 
   return (
-    <div className="w-full max-w-2xl py-10 px-12 md:mt-10 mx-auto bg-white p-8 rounded-md">
+    <div className="w-full max-w-2xl px-6 py-10 md:px-12 md:mt-10 mx-auto bg-white p-8 rounded-md">
       <h1 className="title">ご意見・ご要望など</h1>
       {state.succeeded ? (
         <p>ご協力ありがとうございます!</p>
