@@ -20,7 +20,11 @@ module.exports = {
     maxHeight: {
       "4/5": "80%",
     },
-    extend: {},
+    extend: {
+      outline: {
+        blue: ["2px solid #0000ff", "-2px"],
+      },
+    },
   },
   variants: {
     extend: {

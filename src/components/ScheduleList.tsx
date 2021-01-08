@@ -41,25 +41,31 @@ export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
               key={id}
               className="p-4 rounded-md mb-4 border max-w-2xl w-full flex flex-col group"
             >
-              <div>
-                <div className="text-main overflow-ellipsis">
-                  <span className="group-hover:hidden">{memo || url}</span>
-                  <span className="hidden group-hover:inline-block">{url}</span>
-                </div>
+              <div className="overflow-ellipsis mb-2 flex items-center">
+                <span className="group-hover:hidden underline">
+                  {memo || url}
+                </span>
+                <span className="hidden group-hover:inline-block">
+                  URL: {url}
+                </span>
               </div>
               <div className="flex justify-between">
                 <div>{date}</div>
                 <div className="flex">
-                  <RiEdit2Line
+                  <button
                     className="mr-2 icon-button"
-                    size={25}
+                    aria-label="編集"
                     onClick={() => setEdit(id)}
-                  />
-                  <RiDeleteBinLine
+                  >
+                    <RiEdit2Line size={25} />
+                  </button>
+                  <button
                     className="icon-button"
-                    size={25}
+                    aria-label="削除"
                     onClick={() => removeSchedule(id)}
-                  />
+                  >
+                    <RiDeleteBinLine size={25} />
+                  </button>
                 </div>
               </div>
             </div>

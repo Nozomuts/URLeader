@@ -19,7 +19,11 @@ export const Modal: FC<IProps> = ({ children, setOpen }) => {
       ref={ref as any}
     >
       <div className="max-h-content overflow-y-auto">{children}</div>
-      <button className="button w-full" onClick={() => setOpen(false)}>
+      <button
+        className="button w-full"
+        aria-label="閉じる"
+        onClick={() => setOpen(false)}
+      >
         閉じる
       </button>
     </div>

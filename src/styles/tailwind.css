@@ -7,6 +7,12 @@
   body {
     @apply bg-gray-100 h-full text-sub;
   }
+  ,
+  a,
+  button,
+  input {
+    @apply focus:outline-none focus-visible:outline-blue;
+  }
 }
 
 @layer components {
@@ -14,13 +20,13 @@
     @apply border border-gray-200 p-2 focus:outline-none focus:border-gray-500 rounded-md;
   }
   .add-button {
-    @apply text-main block pl-4 mb-4 cursor-pointer rounded-md py-4 w-full max-w-2xl hover:bg-gray-200 duration-300 text-left;
+    @apply block mb-4 cursor-pointer rounded-md p-4 w-full max-w-2xl hover:bg-gray-200 duration-300 text-left border border-gray-200;
   }
   .button {
-    @apply px-6 py-2 text-xs font-medium leading-6 text-center duration-200 rounded shadow hover:opacity-70 w-auto;
+    @apply px-6 py-2 text-xs font-medium leading-6 text-center duration-200 rounded border border-gray-200 hover:opacity-70 w-auto;
   }
   .icon-button {
-    @apply cursor-pointer md:hidden group-hover:inline-block hover:bg-gray-200 rounded-md;
+    @apply cursor-pointer hover:bg-gray-200 rounded-md;
   }
   .title {
     @apply text-2xl md:text-3xl font-bold pb-4;
@@ -39,13 +45,5 @@
   }
   .h-120 {
     height: 40rem;
-  }
-  .outline-normal {
-    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
-    --tw-ring-offset-width: 0px;
-    --tw-ring-offset-color: #fff;
-    --tw-ring-color: rgba(59, 130, 246, 0.5);
-    --tw-ring-offset-shadow: 0 0 #0000;
-    --tw-ring-shadow: 0 0 #0000;
   }
 }

@@ -49,17 +49,18 @@ export default function index() {
         {menus.map((menu) => (
           <button
             key={menu.name}
-            className={`hover:bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 focus:outline-none block w-56 text-left ${
+            className={`hover:bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 block w-56 text-left ${
               menu.name === filter.name ? "bg-white" : ""
             }`}
             onClick={() => setFilter(menu)}
+            aria-label={menu.name}
           >
             {menu.name}
           </button>
         ))}
       </div>
       <div className="bg-white w-full px-6 md:px-12">
-        <div className="flex justify-between items-start pt-10">
+        <div className="flex justify-between items-start pt-10 max-w-2xl">
           <div className="title flex">
             {filter.name}
             <Dropdown filter={filter} setFilter={setFilter} />

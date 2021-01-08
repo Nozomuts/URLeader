@@ -13,7 +13,13 @@ export default function form() {
           <label htmlFor="email" className="font-bold mb-2">
             メールアドレス
           </label>
-          <input id="email" type="email" name="email" className="input" />
+          <input
+            id="email"
+            type="email"
+            name="email"
+            className="input"
+            aria-label="メールアドレス"
+          />
           <div className="text-red-500">
             <ValidationError
               prefix="Email"
@@ -24,7 +30,12 @@ export default function form() {
           <label htmlFor="message" className="font-bold mt-4 mb-2">
             メッセージ
           </label>
-          <textarea id="message" name="message" className="w-full h-40 input" />
+          <textarea
+            id="message"
+            name="message"
+            className="w-full h-40 input"
+            aria-label="メッセージ"
+          />
           <div className="text-red-500">
             <ValidationError
               prefix="Message"
@@ -38,6 +49,7 @@ export default function form() {
             className={`button text-white bg-black mt-6 ${
               state.submitting ? "opacity-70 cursor-not-allowed" : ""
             }`}
+            aria-label="送信"
           >
             {state.submitting ? "送信中..." : "送信"}
           </button>

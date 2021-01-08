@@ -52,6 +52,7 @@ export const AddScheduleForm: FC<IProps> = ({
         <button
           className={`add-button ${dir === "down" ? "mb-10" : ""}`}
           onClick={() => setOpen({ isOpen: true, dir })}
+          aria-label="予定追加"
         >
           ＋ 予定を追加
         </button>
@@ -82,6 +83,7 @@ export const AddScheduleForm: FC<IProps> = ({
                   message: "無効なURLです",
                 },
               })}
+              aria-label="URL"
             />
             <div>
               <input
@@ -90,6 +92,7 @@ export const AddScheduleForm: FC<IProps> = ({
                 min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
                 ref={register({ required: "日付を選択してください" })}
                 className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer focus:bg-gray-100"
+                aria-label="日付"
               />
               <input
                 type="text"
@@ -97,17 +100,23 @@ export const AddScheduleForm: FC<IProps> = ({
                 className="input h-10 w-52 md:w-64"
                 placeholder="メモ"
                 ref={register}
+                aria-label="メモ"
               />
             </div>
           </label>
           <div className="flex w-48 justify-between">
-            <button className="button text-white bg-black" type="submit">
+            <button
+              className="button text-white bg-black"
+              type="submit"
+              aria-label="追加"
+            >
               追加
             </button>
             <button
               className="button"
               type="button"
               onClick={() => setOpen({ isOpen: false })}
+              aria-label="キャンセル"
             >
               キャンセル
             </button>

@@ -83,18 +83,22 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
 
   return (
     <div>
-      <p className="text-xs">Googleカレンダー連携</p>
+      <p className="text-xs font-bold">Googleカレンダー連携</p>
       <button
         className={`button mb-4 ${
           auth ? "" : "opacity-30 hover:opacity-30 cursor-not-allowed"
         }`}
         onClick={handleSignout}
-        aria-label="logout"
+        aria-label="Googleからログアウト"
         disabled={!auth}
       >
         <RiLogoutBoxRLine size="20" className="text-red-500" />
       </button>
-      <button className="button mb-4" onClick={handleFetch} aria-label="auth">
+      <button
+        className="button mb-4"
+        onClick={handleFetch}
+        aria-label="Googleカレンダーから取得"
+      >
         <SiGooglecalendar size="20" className="text-blue-500" />
       </button>
       {open && (
@@ -118,6 +122,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
                       setSchedule((prev) => [...prev, { url, id, memo, date }]);
                       setEvent((prev) => prev.filter((el) => el.date !== date));
                     }}
+                    aria-label="追加"
                   >
                     追加
                   </button>

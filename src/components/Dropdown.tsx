@@ -23,7 +23,7 @@ export const Dropdown: FC<IProps> = ({ filter, setFilter }) => {
       <button
         type="button"
         className="text-gray-500 focus:outline-none md:hidden"
-        aria-label="trigger"
+        aria-label="ドロップダウンを開閉"
       >
         {dropdown ? (
           <RiArrowUpSLine onClick={() => setDropdown(false)} />
@@ -44,6 +44,7 @@ export const Dropdown: FC<IProps> = ({ filter, setFilter }) => {
                   setFilter(menu);
                   setDropdown(false);
                 }}
+                aria-label={menu.name}
               >
                 {menu.name}
               </button>

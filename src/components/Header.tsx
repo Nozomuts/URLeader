@@ -14,7 +14,7 @@ export const Header = () => {
     <>
       <div className="bg-black flex flex-col justify-evenly md:justify-between md:flex-row items-center md:px-12 shadow-lg fixed w-full h-28">
         <Link href="/">
-          <a className="flex items-center">
+          <a className="flex items-center" aria-label="タイトル">
             <h1 className="font-audio text-4xl text-white">
               <span className="text-main">URL</span>eader
             </h1>
@@ -27,6 +27,7 @@ export const Header = () => {
                 className={`ml-8 md:ml-12 text-gray-100 underline hover:opacity-70 ${
                   pathname === url ? "text-main" : ""
                 }`}
+                aria-label={name}
               >
                 {name}
               </a>
