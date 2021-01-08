@@ -59,7 +59,7 @@ export default function index() {
         ))}
       </div>
       <div className="bg-white w-full px-6 md:px-12">
-        <div className="flex justify-between pt-10">
+        <div className="flex justify-between items-start pt-10">
           <div className="title flex">
             {filter.name}
             <Dropdown filter={filter} setFilter={setFilter} />

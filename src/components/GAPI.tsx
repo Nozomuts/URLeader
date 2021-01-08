@@ -52,6 +52,9 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   };
 
   const handleFetch = () => {
+    if (!confirm("Googleカレンダーから予定を取得しますか？")) {
+      return;
+    }
     const gapi = (window as any).gapi;
     gapi.load("client:auth2", async () => {
       await gapi.client.init({
@@ -70,6 +73,9 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   };
 
   const handleSignout = () => {
+    if (!confirm("Googleからサインアウトしますか？")) {
+      return;
+    }
     (window as any).gapi.auth2.getAuthInstance().signOut();
     setEvent([]);
     setAuth(false);
@@ -77,6 +83,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
 
   return (
     <div>
+      <p className="text-xs">Googleカレンダー連携</p>
       <button
         className={`button mb-4 ${
           auth ? "" : "opacity-30 hover:opacity-30 cursor-not-allowed"
