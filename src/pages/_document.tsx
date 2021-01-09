@@ -18,7 +18,7 @@ class MyDocument extends Document {
     return (
       <Html lang="ja-JP" dir="ltr">
         <Head>
-          <meta name="application-name" content="URLeader" />
+          {/* windows */}
           <meta
             name="msapplication-square70x70logo"
             content="/icons/70x70.png"
@@ -36,13 +36,7 @@ class MyDocument extends Document {
             content="/icons/310x310.png"
           />
           <meta name="msapplication-TileColor" content="#282c34" />
-          <meta name="theme-color" content="#282c34" />
-          <meta
-            name="description"
-            content="URLと時間を登録して、予定を管理するアプリ"
-          />
-          <link rel="icon" sizes="192x192" href="/icons/192x192.png" />
-          <link rel="icon" href="/icons/favicon.ico" />
+          {/* safari */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
@@ -54,6 +48,15 @@ class MyDocument extends Document {
             sizes="180x180"
             href="/icons/180x180.png"
           />
+          {/* 一般 */}
+          <meta name="application-name" content="URLeader" />
+          <meta name="theme-color" content="#282c34" />
+          <meta
+            name="description"
+            content="URLと時間を登録して、予定を管理するアプリ"
+          />
+          <link rel="icon" sizes="192x192" href="/icons/192x192.png" />
+          <link rel="icon" href="/icons/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link

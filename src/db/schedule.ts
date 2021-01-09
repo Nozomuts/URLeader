@@ -27,6 +27,7 @@ export const deleteSchedule = (id: string): void => {
   scheduleTable.delete(id);
 };
 
+/** データを変更 */
 export const updateSchedule = (
   id: string,
   schedule: Partial<ISchedule>

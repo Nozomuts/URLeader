@@ -11,12 +11,11 @@ import { is_sp } from "../util";
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if ("Notification" in window) {
+      // 通知の許可を求める
       const permission = Notification.permission;
-
       if (permission === "denied" || permission === "granted") {
         return;
       }
-
       Notification.requestPermission().then(() => new Notification("テスト"));
     }
   }, []);
