@@ -52,7 +52,7 @@ export const AddScheduleForm: FC<IProps> = ({
     <>
       {!open.isOpen && display() && (
         <button
-          className={`add-button ${dir === "down" ? "mb-10" : ""}`}
+          className={`add-button ${dir === "down" ? "mb-20" : ""}`}
           onClick={() => setOpen({ isOpen: true, dir })}
           aria-label="予定追加"
         >
@@ -62,7 +62,7 @@ export const AddScheduleForm: FC<IProps> = ({
       {open.isOpen && open.dir === dir && (
         <form
           className={`flex flex-col mb-4 max-w-2xl ${
-            dir === "down" ? "mb-10" : ""
+            dir === "down" ? "mb-20" : ""
           }`}
           ref={ref as any}
           onSubmit={handleSubmit(submit)}

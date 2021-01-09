@@ -68,7 +68,7 @@ export default function index() {
 
           <GAPI setSchedule={setSchedule} />
         </div>
-        <div className="h-content overflow-y-auto">
+        <div className="h-content overflow-y-auto max-w-2xl">
           <AddScheduleForm
             setSchedule={setSchedule}
             dir="up"

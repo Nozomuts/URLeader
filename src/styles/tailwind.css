@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply bg-gray-100 h-full text-sub;
+    @apply bg-gray-100 h-full text-sub overflow-hidden;
   }
   ,
   a,
@@ -44,17 +44,17 @@
     font-family: "Audiowide", cursive;
   }
   .modal-content-sp {
-    height: calc(100% - 5rem);
+    max-height: calc(100% - 5rem);
   }
   .max-w-xss {
     max-width: 15rem;
   }
   @variants responsive {
     .h-120 {
-      height: 40rem;
+      max-height: 40rem;
     }
     .modal-content-md {
-      height: 33rem;
+      max-height: 33rem;
     }
   }
 }

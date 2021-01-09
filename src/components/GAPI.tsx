@@ -53,14 +53,14 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
     setOpen(true);
   };
 
-  const handleFetch = () => {
+  const handleFetch = async () => {
     if (!confirm("Googleカレンダーから予定を取得しますか？")) {
       return;
     }
     try {
       setIsFetch(true);
       const gapi = (window as any).gapi;
-      gapi.load("client:auth2", async () => {
+      await gapi.load("client:auth2", async () => {
         await gapi.client.init({
           apiKey: API_KEY,
           clientId: CLIENT_ID,
@@ -75,19 +75,25 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         getData();
         toast("予定を取得しました");
       });
+    } catch {
+      toast("エラーが発生しました");
     } finally {
       setIsFetch(false);
     }
   };
 
-  const handleSignout = () => {
+  const handleSignout = async () => {
     if (!confirm("Googleからサインアウトしますか？")) {
       return;
     }
-    (window as any).gapi.auth2.getAuthInstance().signOut();
-    setEvent([]);
-    setAuth(false);
-    toast("サインアウトしました");
+    try {
+      await (window as any).gapi.auth2.getAuthInstance().signOut();
+      setEvent([]);
+      setAuth(false);
+      toast("サインアウトしました");
+    } catch {
+      toast("エラーが発生しました");
+    }
   };
 
   return (
@@ -140,7 +146,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
                   </button>
                 </div>
               ))
-            : "URLの設定された予定はありません"}
+            : "URLの設定された予定はありませんでした"}
         </Modal>
       )}
     </div>
