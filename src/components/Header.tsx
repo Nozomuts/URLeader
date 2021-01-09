@@ -24,7 +24,7 @@ export const Header = () => {
           {linkList.map(({ name, url }) => (
             <Link href={url} key={name}>
               <a
-                className={`mr-4 md:ml-12 text-gray-100 text-xs md:text-sm underline hover:opacity-70 ${
+                className={`mr-4 md:mr-0 md:ml-12 text-gray-100 text-xs md:text-sm underline hover:opacity-70 ${
                   pathname === url ? "text-main" : ""
                 }`}
                 aria-label={name}

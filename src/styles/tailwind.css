@@ -44,7 +44,7 @@
     font-family: "Audiowide", cursive;
   }
   .modal-content-sp {
-    max-height: calc(100% - 5rem);
+    height: calc(100% - 5rem);
   }
   .max-w-xss {
     max-width: 15rem;
