@@ -9,17 +9,17 @@ const useOutsideClick = (
   ref: MutableRefObject<any>,
   callback: () => void
 ): void => {
-  const handleClick = (e: any) => {
+  const handler = (e: any) => {
     if (ref.current && !ref.current.contains(e.target)) {
       callback();
     }
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClick);
+    document.addEventListener("click", handler);
 
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handler);
     };
   });
 };

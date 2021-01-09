@@ -2,7 +2,10 @@ const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   pwa: {
-    dest: "public",
+    dest: "public", // swの出力ディレクトリ
+    /** キャッシュ設定(workbox)
+     * CacheFirstとStaleWhileRevalidateで表示スピードがほぼ変わらなかったため、
+     * StaleWhileRevalidateを採用 */
     runtimeCaching: [
       {
         urlPattern: "/",
