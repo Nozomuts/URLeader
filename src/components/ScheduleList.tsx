@@ -43,13 +43,13 @@ export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
               key={id}
               className="p-4 rounded-md mb-4 border max-w-2xl w-full flex flex-col"
             >
-              <div className="overflow-ellipsis mb-2 flex items-center group relative z-10">
+              <div className="overflow-ellipsis mb-2 flex items-center group relative z-10 mr-auto">
                 <div className="hidden absolute bottom-6 group-hover:inline-block">
                   <div className="bg-black text-white text-xs rounded py-2 px-2 flex items-center max-w-xss lg:max-w-3xl">
                     <span>URL: </span>
                     <a
                       href={url}
-                      className="underline hover:text-main overflow-ellipsis w-auto overflow-x-hidden"
+                      className="underline hover:text-main overflow-ellipsis w-auto overflow-x-hidden whitespace-nowrap"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

@@ -6,7 +6,7 @@ export const Header = () => {
 
   const linkList = [
     { name: "TOP", url: "/" },
-    { name: "使い方", url: "/info" },
+    { name: "プライバシーポリシー", url: "/policy" },
     { name: "お問い合わせ", url: "/form" },
   ];
 

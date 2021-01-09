@@ -82,7 +82,7 @@ export const EditScheduleForm: FC<IProps> = ({
             defaultValue={dayjs(schedule.date)
               .format("YYYY-MM-DDTHH:mm")
               .toString()}
-            className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer focus:bg-gray-100"
+            className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer bg-white focus:bg-gray-100"
             aria-label="日付"
           />
           <input

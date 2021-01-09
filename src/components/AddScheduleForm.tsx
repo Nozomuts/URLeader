@@ -74,7 +74,7 @@ export const AddScheduleForm: FC<IProps> = ({
             <input
               type="url"
               id="label"
-              className="px-2 pt-2  pb-4 focus:outline-none h-10 rounded-md"
+              className="px-2 pt-2 pb-4 focus:outline-none h-10 rounded-md"
               placeholder="URLを入力"
               name="url"
               ref={register({
@@ -93,7 +93,7 @@ export const AddScheduleForm: FC<IProps> = ({
                 name="date"
                 min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
                 ref={register({ required: "日付を選択してください" })}
-                className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer focus:bg-gray-100"
+                className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer bg-white focus:bg-gray-100"
                 aria-label="日付"
               />
               <input
