@@ -14,6 +14,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   const [auth, setAuth] = useState(false);
   const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
   const [open, setOpen] = useState(false);
+  const [isFetch, setIsFetch] = useState(false);
 
   const CLIENT_ID =
     "840951746882-ksrhra0q5ikp5mt2se38aifbpmidmi2i.apps.googleusercontent.com";
@@ -55,21 +56,26 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
     if (!confirm("Googleカレンダーから予定を取得しますか？")) {
       return;
     }
-    const gapi = (window as any).gapi;
-    gapi.load("client:auth2", async () => {
-      await gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES,
+    try {
+      setIsFetch(true);
+      const gapi = (window as any).gapi;
+      gapi.load("client:auth2", async () => {
+        await gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES,
+        });
+        const isLogin = await gapi.auth2.getAuthInstance().isSignedIn.get();
+        if (!isLogin) {
+          await gapi.auth2.getAuthInstance().signIn();
+        }
+        setAuth(true);
+        getData();
       });
-      const isLogin = await gapi.auth2.getAuthInstance().isSignedIn.get();
-      if (!isLogin) {
-        await gapi.auth2.getAuthInstance().signIn();
-      }
-      setAuth(true);
-      getData();
-    });
+    } finally {
+      setIsFetch(false);
+    }
   };
 
   const handleSignout = () => {
@@ -95,9 +101,12 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         <RiLogoutBoxRLine size="20" className="text-red-500" />
       </button>
       <button
-        className="button mb-4"
+        className={`button mb-4 ${
+          isFetch ? "opacity-30 hover:opacity-30 cursor-not-allowed" : ""
+        }`}
         onClick={handleFetch}
         aria-label="Googleカレンダーから取得"
+        disabled={isFetch}
       >
         <SiGooglecalendar size="20" className="text-blue-500" />
       </button>

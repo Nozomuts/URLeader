@@ -31,6 +31,9 @@
   .title {
     @apply text-2xl md:text-3xl font-bold pb-4;
   }
+  .modal-content {
+    @apply modal-content-sp md:modal-content-md;
+  }
 }
 
 @layer utilities {
@@ -40,10 +43,15 @@
   .font-audio {
     font-family: "Audiowide", cursive;
   }
-  .max-h-content {
-    height: calc(100% - 3rem);
+  .modal-content-sp {
+    height: calc(100% - 5rem);
   }
   .h-120 {
     height: 40rem;
+  }
+  @variants responsive {
+    .modal-content-md {
+      height: 33rem;
+    }
   }
 }
