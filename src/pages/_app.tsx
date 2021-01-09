@@ -30,7 +30,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ToastContainer
         toastStyle={{
-          borderRadius: "0.375rem",
           backgroundColor: "#282c34",
           color: "#fff",
         }}

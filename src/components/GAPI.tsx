@@ -32,7 +32,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
       timeMin: new Date().toISOString(),
       showDeleted: false,
       singleEvents: true,
-      maxResults: 10,
+      maxResults: 30,
       orderBy: "startTime",
     });
     const arr: ISchedule[] = [];
@@ -124,29 +124,31 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
       </button>
       {open && (
         <Modal setOpen={setOpen}>
-          {event.length > 0
-            ? event.map(({ memo, url, date }, i) => (
-                <div key={i} className="bg-white rounded-md p-4 my-4">
-                  <ul>
-                    <li>URL： {url}</li>
-                    <li>時刻： {date}</li>
-                    <li>メモ： {memo}</li>
-                  </ul>
-                  <button
-                    className="button text-white bg-black mt-4"
-                    onClick={() => {
-                      const id = dayjs().toString();
-                      createSchedule(url, id, memo, date);
-                      setSchedule((prev) => [...prev, { url, id, memo, date }]);
-                      setEvent((prev) => prev.filter((el) => el.date !== date));
-                    }}
-                    aria-label="追加"
-                  >
-                    追加
-                  </button>
-                </div>
-              ))
-            : "URLの設定された予定はありませんでした"}
+          {event.length > 0 ? (
+            event.map(({ memo, url, date }, i) => (
+              <div key={i} className="bg-white rounded-md p-4 my-4">
+                <ul>
+                  <li>URL： {url}</li>
+                  <li>時刻： {date}</li>
+                  <li>メモ： {memo}</li>
+                </ul>
+                <button
+                  className="button text-white bg-black mt-4"
+                  onClick={() => {
+                    const id = dayjs().toString();
+                    createSchedule(url, id, memo, date);
+                    setSchedule((prev) => [...prev, { url, id, memo, date }]);
+                    setEvent((prev) => prev.filter((el) => el.date !== date));
+                  }}
+                  aria-label="追加"
+                >
+                  追加
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className="py-4">URLの設定された予定はありませんでした</div>
+          )}
         </Modal>
       )}
     </div>
