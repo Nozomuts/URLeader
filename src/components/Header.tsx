@@ -20,11 +20,11 @@ export const Header = () => {
             </h1>
           </a>
         </Link>
-        <div className="text-left">
+        <div>
           {linkList.map(({ name, url }) => (
             <Link href={url} key={name}>
               <a
-                className={`mr-4 md:mr-0 md:ml-12 text-gray-100 text-xs md:text-sm underline hover:opacity-70 ${
+                className={`ml-8 first:ml-0 md:ml-12 text-gray-100 text-xs md:text-base underline hover:opacity-70 ${
                   pathname === url ? "text-main" : ""
                 }`}
                 aria-label={name}

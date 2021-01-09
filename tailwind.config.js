@@ -30,6 +30,7 @@ module.exports = {
     extend: {
       outline: ["focus-visible"],
       display: ["group-hover"],
+      margin: ["first"],
     },
   },
   plugins: [],

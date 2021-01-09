@@ -7,14 +7,12 @@ export const menus = [
   {
     name: "今日",
     func: (date: string) =>
-      dayjs(date).startOf("date").valueOf() <
-      dayjs().startOf("date").add(1, "day").valueOf(),
+      dayjs(date).startOf("date").valueOf() < dayjs().endOf("date").valueOf(),
   },
   {
-    name: "1週間",
+    name: "今週",
     func: (date: string) =>
-      dayjs(date).startOf("date").valueOf() <
-      dayjs().startOf("date").add(7, "day").valueOf(),
+      dayjs(date).startOf("date").valueOf() < dayjs().endOf("week").valueOf(),
   },
 ] as const;
 

@@ -17,16 +17,16 @@ export const Modal: FC<IProps> = ({ children, setOpen }) => {
 
   return (
     <div
-      className="absolute -translate-y-1/2 -translate-x-1/2 bg-white top-1/2 left-1/2 transform border-gray-200 border p-4 md:rounded-md shadow-md max-w-2xl w-full h-full md:w-4/5 md:h-120 z-20"
+      className="absolute -translate-y-1/2 -translate-x-1/2 bg-white top-1/2 left-1/2 transform border-gray-200 border md:rounded-md shadow-md max-w-2xl w-full h-full md:h-auto md:w-4/5 md:h-120 z-20"
       ref={ref as any}
     >
-      <div className="flex justify-between items-center h-12 pb-4">
+      <div className="flex justify-between items-center h-12 p-4 border-b">
         <h1 className="font-bold">取得リスト</h1>
         <button className="" aria-label="閉じる" onClick={() => setOpen(false)}>
           <RiCloseLine size={20} />
         </button>
       </div>
-      <div className="modal-content overflow-y-auto">{children}</div>
+      <div className="modal-content overflow-y-auto px-4">{children}</div>
     </div>
   );
 };

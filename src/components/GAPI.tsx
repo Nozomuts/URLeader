@@ -126,10 +126,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         <Modal setOpen={setOpen}>
           {event.length > 0
             ? event.map(({ memo, url, date }, i) => (
-                <div
-                  key={i}
-                  className="border border-gray-200 rounded-md p-4 m-4"
-                >
+                <div key={i} className="bg-white rounded-md p-4 my-4">
                   <ul>
                     <li>URL： {url}</li>
                     <li>時刻： {date}</li>
