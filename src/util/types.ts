@@ -7,6 +7,5 @@ export type ISchedule = {
 
 export type IFilter = {
   name: string;
-  description: string;
   func?: (date: string) => boolean;
 };

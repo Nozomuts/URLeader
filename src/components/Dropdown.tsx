@@ -33,7 +33,7 @@ export const Dropdown: FC<IProps> = ({ filter, setFilter }) => {
       </button>
       <div className="relative text-left" ref={ref as any}>
         {dropdown && (
-          <div className="absolute -left-24 top-6 mt-2 shadow-md rounded-md overflow-hidden border z-10 border-gray-200 bg-white">
+          <div className="absolute -left-24 top-6 mt-2 shadow-md rounded-md overflow-hidden border z-20 border-gray-200 bg-white">
             {menus.map((menu) => (
               <button
                 key={menu.name}

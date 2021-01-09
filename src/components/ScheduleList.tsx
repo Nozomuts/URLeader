@@ -3,6 +3,7 @@ import { SetStateAction } from "react";
 import { FC } from "react";
 import { useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import { toast } from "react-toastify";
 import { deleteSchedule } from "../db/schedule";
 import { IFilter, ISchedule } from "../util/types";
 import { EditScheduleForm } from "./EditScheduleForm";
@@ -20,6 +21,7 @@ export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
     if (confirm("本当に削除しますか？")) {
       deleteSchedule(id);
       setSchedule((prev) => prev.filter((el) => el.id !== id));
+      toast("削除しました");
     }
   };
 

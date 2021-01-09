@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { ISchedule } from "../util/types";
 import { createSchedule } from "../db/schedule";
 import { Modal } from "./Modal";
+import { toast } from "react-toastify";
 
 type IProps = {
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
@@ -72,6 +73,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         }
         setAuth(true);
         getData();
+        toast("予定を取得しました");
       });
     } finally {
       setIsFetch(false);
@@ -85,6 +87,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
     (window as any).gapi.auth2.getAuthInstance().signOut();
     setEvent([]);
     setAuth(false);
+    toast("サインアウトしました");
   };
 
   return (

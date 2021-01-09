@@ -4,6 +4,8 @@ import { AppProps } from "next/app";
 import { Header } from "../components/Header";
 import { FormspreeProvider } from "@formspree/react";
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -26,6 +28,17 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>URLeader</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <ToastContainer
+        toastStyle={{
+          borderRadius: "0.375rem",
+          backgroundColor: "#282c34",
+          color: "#fff",
+        }}
+        progressStyle={{
+          background: "#61dafb",
+        }}
+        limit={3}
+      />
     </FormspreeProvider>
   );
 }

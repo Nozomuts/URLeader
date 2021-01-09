@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { updateSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
@@ -37,6 +38,7 @@ export const EditScheduleForm: FC<IProps> = ({
       ),
     ]);
     setEdit("");
+    toast("変更しました");
   };
   useOutsideClick(ref, () => {
     if (edit) {

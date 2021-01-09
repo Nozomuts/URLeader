@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useState, SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { createSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
@@ -38,6 +39,7 @@ export const AddScheduleForm: FC<IProps> = ({
       { url, id: dayjs().toString(), memo, date: format },
     ]);
     setOpen({ isOpen: false });
+    toast("追加しました");
   };
   const display = () => (dir === "down" ? scheduleLength >= 3 : true);
   useOutsideClick(ref, () => {
