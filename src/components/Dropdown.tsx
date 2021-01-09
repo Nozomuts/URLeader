@@ -12,6 +12,7 @@ type IProps = {
 export const Dropdown: FC<IProps> = ({ filter, setFilter }) => {
   const [dropdown, setDropdown] = useState(false);
   const ref = useRef<HTMLDivElement>();
+
   useOutsideClick(ref, () => {
     if (dropdown) {
       setDropdown(false);

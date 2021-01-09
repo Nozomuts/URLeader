@@ -31,6 +31,7 @@ export const AddScheduleForm: FC<IProps> = ({
   }>({
     isOpen: false,
   });
+
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
     createSchedule(url, dayjs().toString(), memo, format);
@@ -41,12 +42,14 @@ export const AddScheduleForm: FC<IProps> = ({
     setOpen({ isOpen: false });
     toast("追加しました");
   };
-  const display = () => (dir === "down" ? scheduleLength >= 3 : true);
+
   useOutsideClick(ref, () => {
     if (open.isOpen) {
       setOpen({ isOpen: false });
     }
   });
+
+  const display = () => (dir === "down" ? scheduleLength >= 3 : true);
 
   return (
     <>

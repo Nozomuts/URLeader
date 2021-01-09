@@ -10,6 +10,7 @@ type IProps = {
 
 export const Modal: FC<IProps> = ({ children, setOpen }) => {
   const ref = useRef<HTMLDivElement>();
+
   useOutsideClick(ref, () => {
     setOpen(false);
   });

@@ -27,6 +27,7 @@ export const EditScheduleForm: FC<IProps> = ({
 }) => {
   const ref = useRef<HTMLFormElement>();
   const { register, handleSubmit } = useForm<IForm>();
+
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
     updateSchedule(schedule.id, { url, memo, date: format });
@@ -40,6 +41,7 @@ export const EditScheduleForm: FC<IProps> = ({
     setEdit("");
     toast("変更しました");
   };
+
   useOutsideClick(ref, () => {
     if (edit) {
       setEdit("");

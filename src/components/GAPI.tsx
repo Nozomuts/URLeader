@@ -25,6 +25,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   ];
   const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
+  /** Googleからデータ取得 */
   const getData = async () => {
     const res = await (window as any).gapi.client.calendar.events.list({
       calendarId: "primary",
@@ -68,6 +69,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
           scope: SCOPES,
         });
         const isLogin = await gapi.auth2.getAuthInstance().isSignedIn.get();
+        // Loginしてなかったら、ログインを求める
         if (!isLogin) {
           await gapi.auth2.getAuthInstance().signIn();
         }
@@ -82,6 +84,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
     }
   };
 
+  /** サインアウト */
   const handleSignout = async () => {
     if (!confirm("Googleからサインアウトしますか？")) {
       return;
