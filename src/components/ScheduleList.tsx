@@ -39,15 +39,34 @@ export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
           ) : (
             <div
               key={id}
-              className="p-4 rounded-md mb-4 border max-w-2xl w-full flex flex-col group"
+              className="p-4 rounded-md mb-4 border max-w-2xl w-full flex flex-col"
             >
-              <div className="overflow-ellipsis mb-2 flex items-center">
-                <span className="group-hover:hidden underline">
-                  {memo || url}
-                </span>
-                <span className="hidden group-hover:inline-block">
-                  URL: {url}
-                </span>
+              <div className="overflow-ellipsis mb-2 flex items-center group relative z-10">
+                <div className="hidden absolute bottom-6 group-hover:inline-block">
+                  <div className="bg-black text-white text-xs rounded py-2 px-2 flex items-center max-w-xss lg:max-w-3xl">
+                    <span>URL: </span>
+                    <a
+                      href={url}
+                      className="underline hover:text-main overflow-ellipsis w-auto overflow-x-hidden"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {url}
+                    </a>
+                    <svg
+                      className="absolute text-black h-2 left-0 ml-3 top-full"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 255 255"
+                    >
+                      <polygon
+                        className="fill-current"
+                        points="0,0 127.5,127.5 255,0"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <span className="underline">{memo || url}</span>
               </div>
               <div className="flex justify-between">
                 <div>{date}</div>

@@ -49,6 +49,9 @@
   .h-120 {
     height: 40rem;
   }
+  .max-w-xss {
+    max-width: 15rem;
+  }
   @variants responsive {
     .modal-content-md {
       height: 33rem;
