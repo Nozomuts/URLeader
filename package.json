@@ -11,10 +11,9 @@
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src electron-src",
     "test": "jest",
     "clean": "rimraf dist main out .next",
-    "dev-electron": "npm run tsc-electron && electron .",
-    "tsc-electron": "tsc -p electron-src",
-    "pack-app": "npm run tsc-electron && electron-builder --dir",
-    "dist": "npm run tsc-electron && electron-builder"
+    "dev-electron": "ntsc -p electron-src && electron .",
+    "pack-app": "tsc -p electron-src && electron-builder --dir",
+    "dist": "next build && next export && tsc -p electron-src && electron-builder"
   },
   "dependencies": {
     "@formspree/react": "^2.2.3",
