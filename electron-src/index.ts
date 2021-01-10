@@ -1,9 +1,7 @@
 // Native
 import { join } from "path";
-import { format } from "url";
-
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent, shell } from "electron";
+import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
 
@@ -16,6 +14,7 @@ app.on("ready", async () => {
     height: 800,
     webPreferences: {
       nodeIntegration: false,
+      nativeWindowOpen: true,
       preload: join(__dirname, "preload.js"),
     },
   });
@@ -23,16 +22,13 @@ app.on("ready", async () => {
   // 外部ウィンドウで開く
   mainWindow.webContents.on("new-window", (event, url) => {
     event.preventDefault();
-    shell.openExternal(url);
+    const win = new BrowserWindow({ show: false });
+    win.once("ready-to-show", () => win.show());
+    win.loadURL(url);
+    event.newGuest = win;
   });
 
-  const url = isDev
-    ? "http://localhost:8000/"
-    : format({
-        pathname: join(__dirname, "../out/index.html"),
-        protocol: "file:",
-        slashes: true,
-      });
+  const url = isDev ? "http://localhost:8000/" : "https://urleader.vercel.app/";
 
   mainWindow.loadURL(url);
 });

@@ -12,11 +12,9 @@
     "test": "jest",
     "clean": "rimraf dist main out .next",
     "dev-electron": "npm run tsc-electron && electron .",
-    "build-electron": "npm run export && npm run tsc-electron",
-    "export": "next build && next export",
     "tsc-electron": "tsc -p electron-src",
-    "pack-app": "npm run build-electron && electron-builder --dir",
-    "dist": "npm run build-electron && electron-builder"
+    "pack-app": "npm run tsc-electron && electron-builder --dir",
+    "dist": "npm run tsc-electron && electron-builder"
   },
   "dependencies": {
     "@formspree/react": "^2.2.3",
@@ -69,10 +67,6 @@
     }
   },
   "build": {
-    "files": [
-      "main",
-      "out"
-    ],
     "mac": {
       "icon": "./public/icons/icon.icns",
       "target": [
