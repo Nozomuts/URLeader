@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply bg-gray-100 h-full text-sub overflow-hidden;
+    @apply bg-gray-100 h-full text-sub;
   }
   ,
   a,
@@ -38,7 +38,7 @@
 
 @layer utilities {
   .h-content {
-    height: calc(100vh - 12.8rem);
+    height: calc(100vh - 14rem);
   }
   .font-audio {
     font-family: "Audiowide", cursive;
