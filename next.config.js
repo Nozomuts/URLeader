@@ -9,6 +9,7 @@ module.exports = withPWA({
       "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
     ],
     SCOPES: "https://www.googleapis.com/auth/calendar.readonly",
+    PROJECT_ID: "1580105528896388832",
   },
   pwa: {
     dest: "public", // swの出力ディレクトリ
