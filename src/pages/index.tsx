@@ -7,6 +7,7 @@ import { GAPI } from "../components/GAPI";
 import { menus } from "../util";
 import { Dropdown } from "../components/Dropdown";
 import { ScheduleList } from "../components/ScheduleList";
+import { SideMenu } from "../components/SideMenu";
 
 export default function index() {
   const [filter, setFilter] = useState<IFilter>(menus[0]);
@@ -14,8 +15,6 @@ export default function index() {
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
 
   useEffect(() => {
-    // indexedDBから読み込む
-    readSchedule().then(setSchedule);
     if ("Notification" in window) {
       // 通知の許可を求める
       const permission = Notification.permission;
@@ -24,6 +23,8 @@ export default function index() {
       }
       Notification.requestPermission().then(() => new Notification("テスト"));
     }
+    // indexedDBから読み込む
+    readSchedule().then(setSchedule);
   }, []);
 
   useEffect(() => {
@@ -68,20 +69,7 @@ export default function index() {
 
   return (
     <div className="flex">
-      <div className="hidden px-6 md:px-12 min-w-80 text-left pt-10 md:block">
-        {menus.map((menu) => (
-          <button
-            key={menu.name}
-            className={`hover:bg-white cursor-pointer rounded-md pl-6 py-4 mb-4 duration-300 block w-56 text-left ${
-              menu.name === filter.name ? "bg-white" : ""
-            }`}
-            onClick={() => setFilter(menu)}
-            aria-label={menu.name}
-          >
-            {menu.name}
-          </button>
-        ))}
-      </div>
+      <SideMenu filter={filter} setFilter={setFilter} />
       <div className="bg-white w-full px-6 md:px-12">
         <div className="flex justify-between items-start pt-10 max-w-2xl">
           <div className="title flex">

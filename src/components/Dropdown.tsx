@@ -1,15 +1,10 @@
-import { useRef, useState, Dispatch, SetStateAction, FC } from "react";
+import { useRef, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import { menus } from "../util";
-import { IFilter } from "../util/types";
+import { IPropsFilter } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
-type IProps = {
-  filter: IFilter;
-  setFilter: Dispatch<SetStateAction<IFilter>>;
-};
-
-export const Dropdown: FC<IProps> = ({ filter, setFilter }) => {
+export const Dropdown: IPropsFilter = ({ filter, setFilter }) => {
   const [dropdown, setDropdown] = useState(false);
   const ref = useRef<HTMLDivElement>();
 
