@@ -16,6 +16,14 @@ export default function index() {
   useEffect(() => {
     // indexedDBから読み込む
     readSchedule().then(setSchedule);
+    if ("Notification" in window) {
+      // 通知の許可を求める
+      const permission = Notification.permission;
+      if (permission === "denied" || permission === "granted") {
+        return;
+      }
+      Notification.requestPermission().then(() => new Notification("テスト"));
+    }
   }, []);
 
   useEffect(() => {
