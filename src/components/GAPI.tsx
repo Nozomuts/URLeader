@@ -17,14 +17,6 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
   const [open, setOpen] = useState(false);
   const [isFetch, setIsFetch] = useState(false);
 
-  const CLIENT_ID =
-    "840951746882-ksrhra0q5ikp5mt2se38aifbpmidmi2i.apps.googleusercontent.com";
-  const API_KEY = "AIzaSyDyDNlcwP4TRieJ7UUktzq2RB0EuGQ8V1s";
-  const DISCOVERY_DOCS = [
-    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-  ];
-  const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
-
   /** Googleからデータ取得 */
   const getData = async () => {
     const res = await (window as any).gapi.client.calendar.events.list({
@@ -35,12 +27,11 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
       maxResults: 30,
       orderBy: "startTime",
     });
-    const arr: ISchedule[] = [];
+    const arr: Omit<ISchedule, "id">[] = [];
     const events = res.result.items;
     events.forEach((event: any) => {
       if ("conferenceData" in event || "hangoutLink" in event) {
         arr.push({
-          id: dayjs().toString(),
           memo: event.summary || "",
           url:
             event.hangoutLink || event.conferenceData.entryPoints[0].uri || "",
@@ -63,10 +54,10 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
       const gapi = (window as any).gapi;
       await gapi.load("client:auth2", async () => {
         await gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES,
+          apiKey: process.env.API_KEY,
+          clientId: process.env.CLIENT_ID,
+          discoveryDocs: process.env.DISCOVERY_DOCS,
+          scope: process.env.SCOPES,
         });
         const isLogin = await gapi.auth2.getAuthInstance().isSignedIn.get();
         // Loginしてなかったら、ログインを求める
@@ -91,7 +82,6 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
     }
     try {
       await (window as any).gapi.auth2.getAuthInstance().signOut();
-      setEvent([]);
       setAuth(false);
       toast("サインアウトしました");
     } catch {
