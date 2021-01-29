@@ -26,7 +26,11 @@ export const EditScheduleForm: FC<IProps> = ({
   edit,
 }) => {
   const ref = useRef<HTMLFormElement>();
-  const { register, handleSubmit } = useForm<IForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty },
+  } = useForm<IForm>();
 
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
@@ -43,8 +47,12 @@ export const EditScheduleForm: FC<IProps> = ({
   };
 
   useOutsideClick(ref, () => {
-    if (edit && confirm("変更内容が破棄されますが、本当に閉じますか？")) {
+    if (edit && !isDirty) {
       setEdit("");
+    } else if (edit && isDirty) {
+      if (confirm("変更内容が破棄されますが、本当に閉じますか？")) {
+        setEdit("");
+      }
     }
   });
 
@@ -109,7 +117,15 @@ export const EditScheduleForm: FC<IProps> = ({
         <button
           className="button"
           type="button"
-          onClick={() => setEdit("")}
+          onClick={() => {
+            if (edit && !isDirty) {
+              setEdit("");
+            } else if (edit && isDirty) {
+              if (confirm("変更内容が破棄されますが、本当に閉じますか？")) {
+                setEdit("");
+              }
+            }
+          }}
           aria-label="キャンセル"
         >
           キャンセル
