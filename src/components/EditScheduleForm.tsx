@@ -43,7 +43,7 @@ export const EditScheduleForm: FC<IProps> = ({
   };
 
   useOutsideClick(ref, () => {
-    if (edit) {
+    if (edit && confirm("変更内容が破棄されますが、本当に閉じますか？")) {
       setEdit("");
     }
   });

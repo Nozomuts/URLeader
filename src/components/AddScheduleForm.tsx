@@ -23,7 +23,11 @@ export const AddScheduleForm: FC<IProps> = ({
   scheduleLength,
   setSchedule,
 }) => {
-  const { register, handleSubmit } = useForm<IForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty },
+  } = useForm<IForm>();
   const ref = useRef<HTMLFormElement>();
   const [open, setOpen] = useState<{
     isOpen: boolean;
@@ -44,8 +48,12 @@ export const AddScheduleForm: FC<IProps> = ({
   };
 
   useOutsideClick(ref, () => {
-    if (open.isOpen) {
+    if (open.isOpen && !isDirty) {
       setOpen({ isOpen: false });
+    } else if (open.isOpen && isDirty) {
+      if (confirm("入力内容が消えてしまいますが、本当に閉じますか？")) {
+        setOpen({ isOpen: false });
+      }
     }
   });
 
@@ -89,6 +97,7 @@ export const AddScheduleForm: FC<IProps> = ({
                 },
               })}
               aria-label="URL"
+              autoComplete="https://"
             />
             <div>
               <input
@@ -98,6 +107,10 @@ export const AddScheduleForm: FC<IProps> = ({
                 ref={register({ required: "日付を選択してください" })}
                 className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer bg-white focus:bg-gray-100"
                 aria-label="日付"
+                defaultValue={dayjs()
+                  .add(1, "day")
+                  .format("YYYY-MM-DDTHH:mm")
+                  .toString()}
               />
               <input
                 type="text"
@@ -120,7 +133,17 @@ export const AddScheduleForm: FC<IProps> = ({
             <button
               className="button"
               type="button"
-              onClick={() => setOpen({ isOpen: false })}
+              onClick={() => {
+                if (open.isOpen && !isDirty) {
+                  setOpen({ isOpen: false });
+                } else if (open.isOpen && isDirty) {
+                  if (
+                    confirm("入力内容が消えてしまいますが、本当に閉じますか？")
+                  ) {
+                    setOpen({ isOpen: false });
+                  }
+                }
+              }}
               aria-label="キャンセル"
             >
               キャンセル
