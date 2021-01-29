@@ -1,7 +1,7 @@
 export default function info() {
   return (
     <div className="w-full max-w-2xl py-10 px-6 md:px-12 md:mt-10 mx-auto bg-white rounded-md overflow-y-auto">
-      <h1 className="title">プライバシーポリシー</h1>
+      <h1 className="title pb-4">プライバシーポリシー</h1>
       <h2 className="text-xl font-bold mb-2">1) 個人情報の利用目的</h2>
       <p className="mb-4">
         当サイトでは、お問い合わせの際、メールアドレス等の個人情報を入力いただく場合がございます。
