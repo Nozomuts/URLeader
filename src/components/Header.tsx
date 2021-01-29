@@ -12,10 +12,10 @@ export const Header = () => {
 
   return (
     <>
-      <div className="bg-black flex flex-col justify-evenly md:justify-between md:flex-row items-center md:px-12 shadow-lg fixed w-full h-28">
+      <div className="bg-black flex flex-col justify-evenly md:justify-between md:flex-row items-center md:px-12 shadow-lg fixed w-full h-28 md:h-16">
         <Link href="/">
           <a className="flex items-center" aria-label="タイトル">
-            <h1 className="font-audio text-4xl text-white">
+            <h1 className="font-audio text-3xl text-white">
               <span className="text-main">URL</span>eader
             </h1>
           </a>
@@ -35,7 +35,7 @@ export const Header = () => {
           ))}
         </div>
       </div>
-      <div className="pt-28"></div>
+      <div className="pt-28 md:pt-16"></div>
     </>
   );
 };
