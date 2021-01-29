@@ -71,7 +71,7 @@ export default function index() {
     <div className="flex">
       <SideMenu filter={filter} setFilter={setFilter} />
       <div className="bg-white w-full px-6 md:px-12">
-        <div className="flex justify-between items-start pt-10 max-w-2xl">
+        <div className="flex justify-between items-start py-5 md:py-10 max-w-2xl">
           <div className="title flex">
             {filter.name}
             <Dropdown filter={filter} setFilter={setFilter} />

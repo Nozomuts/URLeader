@@ -91,9 +91,8 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
 
   return (
     <div>
-      <p className="text-xs font-bold">Googleカレンダー連携</p>
       <button
-        className={`button mb-4 ${
+        className={`button ${
           auth ? "" : "opacity-30 hover:opacity-30 cursor-not-allowed"
         }`}
         onClick={handleSignout}
@@ -103,7 +102,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         <RiLogoutBoxRLine size="20" className="text-red-500" />
       </button>
       <button
-        className={`button mb-4 ${
+        className={`button ${
           isFetch ? "opacity-30 hover:opacity-30 cursor-not-allowed" : ""
         }`}
         onClick={handleFetch}
