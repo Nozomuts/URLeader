@@ -41,7 +41,10 @@ export default function index() {
         ...prev,
         setTimeout(() => {
           if ("Notification" in window) {
-            new Notification("間も無く遷移します");
+            const notif = new Notification("間も無く遷移します");
+            notif.addEventListener("show", () => {
+              new Audio("./push.wav").play();
+            });
           }
         }, setTimeBefore),
       ]);
