@@ -108,7 +108,7 @@ export const AddScheduleForm: FC<IProps> = ({
                 className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer bg-white focus:bg-gray-100"
                 aria-label="日付"
                 defaultValue={dayjs()
-                  .add(1, "day")
+                  .add(1, "h")
                   .format("YYYY-MM-DDTHH:mm")
                   .toString()}
               />
