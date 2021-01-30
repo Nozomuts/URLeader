@@ -12,7 +12,9 @@ export const Modal: FC<IProps> = ({ children, setOpen }) => {
   const ref = useRef<HTMLDivElement>();
 
   useOutsideClick(ref, () => {
-    setOpen(false);
+    if (confirm("モーダルを閉じますか？")) {
+      setOpen(false);
+    }
   });
 
   return (
