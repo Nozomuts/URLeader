@@ -3,16 +3,13 @@ import { Header } from "../components/Header";
 import { FormspreeProvider } from "@formspree/react";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
-import { ReactQueryDevtools } from "react-query/devtools";
 import "react-toastify/dist/ReactToastify.css";
 import { is_sp } from "../util";
-import { QueryClient, QueryClientProvider } from "react-query";
-
-const queryClient = new QueryClient();
+import { RecoilRoot } from "recoil";
 
 export const Wrapper: FC = ({ children }) => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <RecoilRoot>
       <FormspreeProvider project={process.env.PROJECT_ID || ""}>
         <ToastContainer
           toastStyle={{
@@ -36,7 +33,6 @@ export const Wrapper: FC = ({ children }) => {
           />
         </Head>
       </FormspreeProvider>
-      <ReactQueryDevtools initialIsOpen />
-    </QueryClientProvider>
+    </RecoilRoot>
   );
 };
