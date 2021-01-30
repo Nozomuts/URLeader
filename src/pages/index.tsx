@@ -31,21 +31,13 @@ export default function index() {
           <GAPI setSchedule={setSchedule} />
         </div>
         <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
-          <AddScheduleForm
-            setSchedule={setSchedule}
-            dir="up"
-            scheduleLength={scheduleLength}
-          />
+          <AddScheduleForm setSchedule={setSchedule} />
           <ScheduleList
             filter={filter}
             schedule={schedule}
             setSchedule={setSchedule}
           />
-          <AddScheduleForm
-            setSchedule={setSchedule}
-            dir="down"
-            scheduleLength={scheduleLength}
-          />
+          {scheduleLength > 3 && <AddScheduleForm setSchedule={setSchedule} />}
         </div>
       </div>
     </div>

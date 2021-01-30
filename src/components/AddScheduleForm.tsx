@@ -7,8 +7,6 @@ import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {
-  dir: "up" | "down";
-  scheduleLength: number;
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
 };
 
@@ -18,11 +16,7 @@ type IForm = {
   memo: string;
 };
 
-export const AddScheduleForm: FC<IProps> = ({
-  dir,
-  scheduleLength,
-  setSchedule,
-}) => {
+export const AddScheduleForm: FC<IProps> = ({ setSchedule }) => {
   const {
     register,
     handleSubmit,
@@ -57,24 +51,20 @@ export const AddScheduleForm: FC<IProps> = ({
     }
   });
 
-  const display = () => (dir === "down" ? scheduleLength >= 3 : true);
-
   return (
     <>
-      {!open.isOpen && display() && (
+      {!open.isOpen && (
         <button
-          className={`add-button ${dir === "down" ? "mb-20" : ""}`}
-          onClick={() => setOpen({ isOpen: true, dir })}
+          className="add-button"
+          onClick={() => setOpen({ isOpen: true })}
           aria-label="予定追加"
         >
           ＋ 予定を追加
         </button>
       )}
-      {open.isOpen && open.dir === dir && (
+      {open.isOpen && (
         <form
-          className={`flex flex-col mb-4 max-w-2xl ${
-            dir === "down" ? "mb-20" : ""
-          }`}
+          className="flex flex-col mb-4 max-w-2xl"
           ref={ref as any}
           onSubmit={handleSubmit(submit)}
         >
