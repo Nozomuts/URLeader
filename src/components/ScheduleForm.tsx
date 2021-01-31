@@ -44,7 +44,7 @@ export const ScheduleForm: FC<IProps> = ({
           className="px-2  focus:outline-none h-10 rounded-md"
           placeholder="URLを入力"
           name="url"
-          defaultValue={schedule?.url}
+          defaultValue={schedule ? schedule.url : "https://"}
           ref={register(urlValidate)}
           aria-label="URL"
         />
@@ -54,9 +54,11 @@ export const ScheduleForm: FC<IProps> = ({
             name="date"
             min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
             ref={register({ required: "日付を選択してください" })}
-            defaultValue={dayjs(schedule?.date)
-              .format("YYYY-MM-DDTHH:mm")
-              .toString()}
+            defaultValue={
+              schedule
+                ? dayjs(schedule.date).format("YYYY-MM-DDTHH:mm").toString()
+                : dayjs().add(1, "h").format("YYYY-MM-DDTHH:mm").toString()
+            }
             className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer bg-white focus:bg-gray-100"
             aria-label="日付"
           />
