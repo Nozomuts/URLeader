@@ -5,12 +5,12 @@ import { IPropsFilter } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
 export const Dropdown: IPropsFilter = ({ filter, setFilter }) => {
-  const [dropdown, setDropdown] = useState(false);
+  const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>();
 
   useOutsideClick(ref, () => {
-    if (dropdown) {
-      setDropdown(false);
+    if (open) {
+      setOpen(false);
     }
   });
 
@@ -21,14 +21,14 @@ export const Dropdown: IPropsFilter = ({ filter, setFilter }) => {
         className="text-gray-500 focus:outline-none md:hidden"
         aria-label="ドロップダウンを開閉"
       >
-        {dropdown ? (
-          <RiArrowUpSLine onClick={() => setDropdown(false)} />
+        {open ? (
+          <RiArrowUpSLine onClick={() => setOpen(false)} />
         ) : (
-          <RiArrowDownSLine onClick={() => setDropdown(true)} />
+          <RiArrowDownSLine onClick={() => setOpen(true)} />
         )}
       </button>
       <div className="relative text-left" ref={ref as any}>
-        {dropdown && (
+        {open && (
           <div className="absolute -left-24 top-6 mt-2 shadow-md rounded-md overflow-hidden border z-20 border-gray-200 bg-white">
             {menus.map((menu) => (
               <button
@@ -38,7 +38,7 @@ export const Dropdown: IPropsFilter = ({ filter, setFilter }) => {
                 }`}
                 onClick={() => {
                   setFilter(menu);
-                  setDropdown(false);
+                  setOpen(false);
                 }}
                 aria-label={menu.name}
               >
