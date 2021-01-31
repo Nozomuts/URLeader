@@ -1,11 +1,9 @@
 import dayjs from "dayjs";
-import { SetStateAction, Dispatch, FC, useRef } from "react";
+import { SetStateAction, Dispatch, FC } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { updateSchedule } from "../db/schedule";
-import { confirmClose } from "../util";
 import { ISchedule } from "../util/types";
-import useOutsideClick from "../util/useOutsideClick";
 import { ScheduleForm } from "./ScheduleForm";
 
 type IProps = {
@@ -27,7 +25,6 @@ export const EditScheduleForm: FC<IProps> = ({
   schedule,
   open,
 }) => {
-  const ref = useRef<HTMLFormElement>();
   const {
     register,
     handleSubmit,
@@ -48,10 +45,6 @@ export const EditScheduleForm: FC<IProps> = ({
     toast("変更しました");
   };
 
-  useOutsideClick(ref, () => {
-    confirmClose(open, isDirty, setOpen);
-  });
-
   return (
     <ScheduleForm
       onSubmit={handleSubmit(submit)}
@@ -60,7 +53,6 @@ export const EditScheduleForm: FC<IProps> = ({
       open={open}
       setOpen={setOpen}
       isDirty={isDirty}
-      ref={ref}
     />
   );
 };

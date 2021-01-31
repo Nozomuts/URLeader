@@ -1,17 +1,11 @@
 import dayjs from "dayjs";
-import {
-  Dispatch,
-  FC,
-  FormEvent,
-  MutableRefObject,
-  SetStateAction,
-} from "react";
+import { Dispatch, FC, FormEvent, SetStateAction, useRef } from "react";
 import { confirmClose, urlValidate } from "../util";
 import { ISchedule } from "../util/types";
+import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  ref: MutableRefObject<HTMLFormElement | undefined>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   isDirty: boolean;
@@ -21,13 +15,17 @@ type IProps = {
 
 export const ScheduleForm: FC<IProps> = ({
   onSubmit,
-  ref,
   open,
   setOpen,
   isDirty,
   schedule,
   register,
 }) => {
+  const ref = useRef<HTMLFormElement>();
+  useOutsideClick(ref, () => {
+    confirmClose(open, isDirty, setOpen);
+  });
+
   return (
     <form
       className="flex flex-col mb-4 max-w-2xl"
