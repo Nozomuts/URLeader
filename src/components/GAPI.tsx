@@ -1,93 +1,20 @@
-import { useState, FC, Dispatch, SetStateAction } from "react";
+import { FC, Dispatch, SetStateAction, useState } from "react";
 import { SiGooglecalendar } from "react-icons/si";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import dayjs from "dayjs";
 import { ISchedule } from "../util/types";
 import { createSchedule } from "../db/schedule";
 import { Modal } from "./Modal";
-import { toast } from "react-toastify";
+import useGAPI from "../util/useGAPI";
 
 type IProps = {
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
 };
 
 export const GAPI: FC<IProps> = ({ setSchedule }) => {
-  const [auth, setAuth] = useState(false);
-  const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
   const [open, setOpen] = useState(false);
-  const [isFetch, setIsFetch] = useState(false);
-
-  /** Googleからデータ取得 */
-  const getData = async () => {
-    const res = await (window as any).gapi.client.calendar.events.list({
-      calendarId: "primary",
-      timeMin: new Date().toISOString(),
-      showDeleted: false,
-      singleEvents: true,
-      maxResults: 30,
-      orderBy: "startTime",
-    });
-    const arr: Omit<ISchedule, "id">[] = [];
-    const events = res.result.items;
-    events.forEach((event: any) => {
-      if ("conferenceData" in event || "hangoutLink" in event) {
-        arr.push({
-          memo: event.summary || "",
-          url:
-            event.hangoutLink || event.conferenceData.entryPoints[0].uri || "",
-          date:
-            dayjs(event.start.dateTime).format("YYYY/MM/DD H:mm").toString() ||
-            "",
-        });
-      }
-    });
-    setEvent(arr);
-    setOpen(true);
-  };
-
-  const handleFetch = async () => {
-    if (!confirm("Googleカレンダーから予定を取得しますか？")) {
-      return;
-    }
-    try {
-      setIsFetch(true);
-      const gapi = (window as any).gapi;
-      await gapi.load("client:auth2", async () => {
-        await gapi.client.init({
-          apiKey: process.env.API_KEY,
-          clientId: process.env.CLIENT_ID,
-          discoveryDocs: process.env.DISCOVERY_DOCS,
-          scope: process.env.SCOPES,
-        });
-        const isLogin = await gapi.auth2.getAuthInstance().isSignedIn.get();
-        // Loginしてなかったら、ログインを求める
-        if (!isLogin) {
-          await gapi.auth2.getAuthInstance().signIn();
-        }
-        setAuth(true);
-        getData();
-        toast("予定を取得しました");
-      });
-    } catch {
-      toast("エラーが発生しました");
-    } finally {
-      setIsFetch(false);
-    }
-  };
-
-  /** サインアウト */
-  const handleSignout = async () => {
-    if (!confirm("Googleからサインアウトしますか？")) {
-      return;
-    }
-    try {
-      await (window as any).gapi.auth2.getAuthInstance().signOut();
-      setAuth(false);
-      toast("サインアウトしました");
-    } catch {
-      toast("エラーが発生しました");
-    }
-  };
+  const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
+  const { auth, isFetch, signout, fetch } = useGAPI(setOpen, setEvent);
 
   return (
     <div>
@@ -95,7 +22,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         className={`button ${
           auth ? "" : "opacity-30 hover:opacity-30 cursor-not-allowed"
         }`}
-        onClick={handleSignout}
+        onClick={signout}
         aria-label="Googleからログアウト"
         disabled={!auth}
       >
@@ -105,7 +32,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
         className={`button ${
           isFetch ? "opacity-30 hover:opacity-30 cursor-not-allowed" : ""
         }`}
-        onClick={handleFetch}
+        onClick={fetch}
         aria-label="Googleカレンダーから取得"
         disabled={isFetch}
       >
