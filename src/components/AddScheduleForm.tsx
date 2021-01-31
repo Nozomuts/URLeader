@@ -3,6 +3,7 @@ import { useState, SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { createSchedule } from "../db/schedule";
+import { confirmClose, urlValidate } from "../util";
 import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
@@ -23,12 +24,7 @@ export const AddScheduleForm: FC<IProps> = ({ setSchedule }) => {
     formState: { isDirty },
   } = useForm<IForm>();
   const ref = useRef<HTMLFormElement>();
-  const [open, setOpen] = useState<{
-    isOpen: boolean;
-    dir?: "up" | "down";
-  }>({
-    isOpen: false,
-  });
+  const [open, setOpen] = useState(false);
 
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
@@ -37,32 +33,26 @@ export const AddScheduleForm: FC<IProps> = ({ setSchedule }) => {
       ...prev,
       { url, id: dayjs().toString(), memo, date: format },
     ]);
-    setOpen({ isOpen: false });
+    setOpen(false);
     toast("追加しました");
   };
 
   useOutsideClick(ref, () => {
-    if (open.isOpen && !isDirty) {
-      setOpen({ isOpen: false });
-    } else if (open.isOpen && isDirty) {
-      if (confirm("入力内容が消えてしまいますが、本当に閉じますか？")) {
-        setOpen({ isOpen: false });
-      }
-    }
+    confirmClose(open, isDirty, setOpen);
   });
 
   return (
     <>
-      {!open.isOpen && (
+      {!open && (
         <button
           className="add-button"
-          onClick={() => setOpen({ isOpen: true })}
+          onClick={() => setOpen(true)}
           aria-label="予定追加"
         >
           ＋ 予定を追加
         </button>
       )}
-      {open.isOpen && (
+      {open && (
         <form
           className="flex flex-col mb-4 max-w-2xl"
           ref={ref as any}
@@ -78,14 +68,7 @@ export const AddScheduleForm: FC<IProps> = ({ setSchedule }) => {
               className="px-2 pt-2 pb-4 focus:outline-none h-10 rounded-md"
               placeholder="URLを入力"
               name="url"
-              ref={register({
-                required: "入力してください",
-                pattern: {
-                  // eslint-disable-next-line no-useless-escape
-                  value: /https?:\/\/[\w!\?/\+\-_~=;\.,\*&@#\$%\(\)'\[\]]+/,
-                  message: "無効なURLです",
-                },
-              })}
+              ref={register(urlValidate)}
               aria-label="URL"
               autoComplete="https://"
             />
@@ -124,15 +107,7 @@ export const AddScheduleForm: FC<IProps> = ({ setSchedule }) => {
               className="button"
               type="button"
               onClick={() => {
-                if (open.isOpen && !isDirty) {
-                  setOpen({ isOpen: false });
-                } else if (open.isOpen && isDirty) {
-                  if (
-                    confirm("入力内容が消えてしまいますが、本当に閉じますか？")
-                  ) {
-                    setOpen({ isOpen: false });
-                  }
-                }
+                confirmClose(open, isDirty, setOpen);
               }}
               aria-label="キャンセル"
             >

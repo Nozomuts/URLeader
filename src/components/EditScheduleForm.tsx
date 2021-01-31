@@ -3,14 +3,15 @@ import { SetStateAction, Dispatch, FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { updateSchedule } from "../db/schedule";
+import { confirmClose, urlValidate } from "../util";
 import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
-  setEdit: Dispatch<SetStateAction<string>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   schedule: ISchedule;
-  edit: string;
+  open: boolean;
 };
 
 type IForm = {
@@ -21,9 +22,9 @@ type IForm = {
 
 export const EditScheduleForm: FC<IProps> = ({
   setSchedule,
-  setEdit,
+  setOpen,
   schedule,
-  edit,
+  open,
 }) => {
   const ref = useRef<HTMLFormElement>();
   const {
@@ -42,18 +43,12 @@ export const EditScheduleForm: FC<IProps> = ({
           : el
       ),
     ]);
-    setEdit("");
+    setOpen(false);
     toast("変更しました");
   };
 
   useOutsideClick(ref, () => {
-    if (edit && !isDirty) {
-      setEdit("");
-    } else if (edit && isDirty) {
-      if (confirm("変更内容が破棄されますが、本当に閉じますか？")) {
-        setEdit("");
-      }
-    }
+    confirmClose(open, isDirty, setOpen);
   });
 
   return (
@@ -73,14 +68,7 @@ export const EditScheduleForm: FC<IProps> = ({
           placeholder="URLを入力"
           name="url"
           defaultValue={schedule.url}
-          ref={register({
-            required: "入力してください",
-            pattern: {
-              // eslint-disable-next-line no-useless-escape
-              value: /https?:\/\/[\w!\?/\+\-_~=;\.,\*&@#\$%\(\)'\[\]]+/,
-              message: "無効なURLです",
-            },
-          })}
+          ref={register(urlValidate)}
           aria-label="URL"
         />
         <div>
@@ -118,13 +106,7 @@ export const EditScheduleForm: FC<IProps> = ({
           className="button"
           type="button"
           onClick={() => {
-            if (edit && !isDirty) {
-              setEdit("");
-            } else if (edit && isDirty) {
-              if (confirm("変更内容が破棄されますが、本当に閉じますか？")) {
-                setEdit("");
-              }
-            }
+            confirmClose(open, isDirty, setOpen);
           }}
           aria-label="キャンセル"
         >
