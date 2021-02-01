@@ -1,12 +1,15 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import { GrRevert } from "react-icons/gr";
 import { toast } from "react-toastify";
+import { deleteHistory } from "../db/histories";
 import { deleteSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import { EditScheduleForm } from "./EditScheduleForm";
 
 type IProps = {
   setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
+  name: string;
 } & ISchedule;
 
 export const ScheduleItem: FC<IProps> = ({
@@ -15,11 +18,16 @@ export const ScheduleItem: FC<IProps> = ({
   date,
   memo,
   setSchedule,
+  name,
 }) => {
   const [open, setOpen] = useState(false);
   const removeSchedule = (id: string) => {
     if (confirm("本当に削除しますか？")) {
-      deleteSchedule(id);
+      if (name === "履歴") {
+        deleteHistory(id);
+      } else {
+        deleteSchedule(id);
+      }
       setSchedule((prev) => prev.filter((el) => el.id !== id));
       toast("削除しました");
     }
@@ -32,6 +40,7 @@ export const ScheduleItem: FC<IProps> = ({
       setOpen={setOpen}
       setSchedule={setSchedule}
       open={open}
+      name={name}
     />
   ) : (
     <div
@@ -73,7 +82,11 @@ export const ScheduleItem: FC<IProps> = ({
             aria-label="編集"
             onClick={() => setOpen(true)}
           >
-            <RiEdit2Line size={25} />
+            {name === "履歴" ? (
+              <GrRevert size={25} />
+            ) : (
+              <RiEdit2Line size={25} />
+            )}
           </button>
           <button
             className="icon-button"

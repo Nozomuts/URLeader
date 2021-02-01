@@ -32,11 +32,13 @@ export default function Index() {
         </div>
         <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
           {filter.name === "履歴" ? (
-            <ScheduleList
-              filter={filter}
-              schedule={histories}
-              setSchedule={setHistories}
-            />
+            <div className="pt-4">
+              <ScheduleList
+                filter={filter}
+                schedule={histories}
+                setSchedule={setHistories}
+              />
+            </div>
           ) : (
             <>
               <AddScheduleForm setSchedule={setSchedule} />

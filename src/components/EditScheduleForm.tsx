@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
+import { useRouter } from "next/dist/client/router";
 import { SetStateAction, Dispatch, FC } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { updateSchedule } from "../db/schedule";
+import { createSchedule, updateSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import { ScheduleForm } from "./ScheduleForm";
 
@@ -11,6 +12,7 @@ type IProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
   schedule: ISchedule;
   open: boolean;
+  name: string;
 };
 
 type IForm = {
@@ -24,6 +26,7 @@ export const EditScheduleForm: FC<IProps> = ({
   setOpen,
   schedule,
   open,
+  name,
 }) => {
   const {
     register,
@@ -31,18 +34,26 @@ export const EditScheduleForm: FC<IProps> = ({
     formState: { isDirty },
   } = useForm<IForm>();
 
+  const { push } = useRouter();
+
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
-    updateSchedule(schedule.id, { url, memo, date: format });
-    setSchedule((prev) => [
-      ...prev.map((el) =>
-        el.id === schedule.id
-          ? { url, id: schedule.id, memo, date: format }
-          : el
-      ),
-    ]);
+    if (name === "履歴") {
+      createSchedule(schedule.id, url, memo, format);
+      toast("追加しました");
+      push("/");
+    } else {
+      setSchedule((prev) => [
+        ...prev.map((el) =>
+          el.id === schedule.id
+            ? { url, id: schedule.id, memo, date: format }
+            : el
+        ),
+      ]);
+      updateSchedule(schedule.id, { url, memo, date: format });
+      toast("変更しました");
+    }
     setOpen(false);
-    toast("変更しました");
   };
 
   return (
