@@ -8,7 +8,7 @@ import { ScheduleList } from "../components/ScheduleList";
 import { SideMenu } from "../components/SideMenu";
 import useTimerNotif from "../util/useTimerNotif";
 
-export default function index() {
+export default function Index() {
   const [filter, setFilter] = useState<IFilter>(menus[0]);
   const [schedule, setSchedule] = useState<ISchedule[]>([]);
   useTimerNotif(schedule, setSchedule);

@@ -1,4 +1,4 @@
-export default function info() {
+export default function Policy() {
   return (
     <div className="py-10">
       <div className="w-full max-w-2xl py-10 px-6 md:px-12 mx-auto bg-white rounded-md overflow-y-auto">
