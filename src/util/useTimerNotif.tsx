@@ -10,6 +10,8 @@ const useTimerNotif = (
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
 
   useEffect(() => {
+    // indexedDBから読み込む
+    readSchedule().then(setSchedule);
     if ("Notification" in window) {
       // 通知の許可を求める
       const permission = Notification.permission;
@@ -18,8 +20,6 @@ const useTimerNotif = (
       }
       Notification.requestPermission().then(() => new Notification("テスト"));
     }
-    // indexedDBから読み込む
-    readSchedule().then(setSchedule);
   }, [setSchedule]);
 
   useEffect(() => {
