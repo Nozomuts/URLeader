@@ -7,6 +7,13 @@ export type ISchedule = {
   memo: string;
 };
 
+export type IHistory = {
+  id: string;
+  url: string;
+  date: string;
+  memo: string;
+};
+
 export type IFilter = {
   name: string;
   func?: (date: string) => boolean;
