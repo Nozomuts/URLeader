@@ -13,6 +13,7 @@ type IProps = {
 export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
   return (
     <>
+      {filter.name === "履歴" && <h1>履歴がありません</h1>}
       {schedule
         .filter(({ date }) => (filter.func ? filter.func(date) : true))
         .map((props) => (

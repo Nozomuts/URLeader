@@ -11,7 +11,7 @@ import useTimerNotif from "../util/useTimerNotif";
 export default function Index() {
   const [filter, setFilter] = useState<IFilter>(menus[0]);
   const [schedule, setSchedule] = useState<ISchedule[]>([]);
-  useTimerNotif(schedule, setSchedule);
+  const { histories, setHistories } = useTimerNotif(schedule, setSchedule);
 
   /** 条件を満たす予定の数 */
   const scheduleLength = schedule.filter(({ date }) =>
@@ -31,13 +31,25 @@ export default function Index() {
           <GAPI setSchedule={setSchedule} />
         </div>
         <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
-          <AddScheduleForm setSchedule={setSchedule} />
-          <ScheduleList
-            filter={filter}
-            schedule={schedule}
-            setSchedule={setSchedule}
-          />
-          {scheduleLength > 3 && <AddScheduleForm setSchedule={setSchedule} />}
+          {filter.name === "履歴" ? (
+            <ScheduleList
+              filter={filter}
+              schedule={histories}
+              setSchedule={setHistories}
+            />
+          ) : (
+            <>
+              <AddScheduleForm setSchedule={setSchedule} />
+              <ScheduleList
+                filter={filter}
+                schedule={schedule}
+                setSchedule={setSchedule}
+              />
+              {scheduleLength > 3 && (
+                <AddScheduleForm setSchedule={setSchedule} />
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

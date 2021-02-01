@@ -15,6 +15,9 @@ export const menus = [
     func: (date: string) =>
       dayjs(date).startOf("date").valueOf() < dayjs().endOf("week").valueOf(),
   },
+  {
+    name: "履歴",
+  },
 ] as const;
 
 let is_sp_cache: boolean | null = null;
