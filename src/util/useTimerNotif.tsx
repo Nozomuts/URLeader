@@ -1,20 +1,17 @@
 import dayjs from "dayjs";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { deleteSchedule, readSchedule } from "../db/schedule";
-import { readHistories, createHistory } from "../db/histories";
-import { IHistory, ISchedule } from "./types";
+import { useEffect, useState } from "react";
+import useHistories from "./useHistories";
+import useSchedule from "./useSchedule";
 
-const useTimerNotif = (
-  schedule: ISchedule[],
-  setSchedule: Dispatch<SetStateAction<ISchedule[]>>
-) => {
+const useTimerNotif = () => {
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
-  const [histories, setHistories] = useState<IHistory[]>([]);
+  const { schedule, readSchedule, deleteSchedule } = useSchedule();
+  const { readHistories, createHistory } = useHistories();
 
   useEffect(() => {
     // indexedDBから読み込む
-    readSchedule().then(setSchedule);
-    readHistories().then(setHistories);
+    readSchedule();
+    readHistories();
     if ("Notification" in window) {
       // 通知の許可を求める
       const permission = Notification.permission;
@@ -23,7 +20,7 @@ const useTimerNotif = (
       }
       Notification.requestPermission().then(() => new Notification("テスト"));
     }
-  }, [setSchedule]);
+  }, [readHistories, readSchedule]);
 
   useEffect(() => {
     // scheduleが変更されたら初期化
@@ -54,17 +51,13 @@ const useTimerNotif = (
           if (window) {
             window.open(url, "_blank");
             deleteSchedule(id);
-            createHistory(url, id, memo, date);
-            setHistories((prev) => [...prev, { url, id, memo, date }]);
-            setSchedule((prev) => prev.filter((el) => el.id !== id));
+            createHistory(url, memo, date);
           }
         }, setTime),
       ]);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedule]);
-
-  return { histories, setHistories };
 };
 
 export default useTimerNotif;

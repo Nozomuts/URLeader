@@ -1,11 +1,16 @@
 import dayjs from "dayjs";
+import { useRecoilValue } from "recoil";
 import { useRecoilState } from "recoil";
 import { scheduleTable } from "../db";
-import { scheduleState } from "./recoil";
+import { filterState, scheduleState } from "./recoil";
 import { ISchedule } from "./types";
 
 const useSchedule = () => {
   const [schedule, setSchedule] = useRecoilState(scheduleState);
+  const { func } = useRecoilValue(filterState);
+  const scheduleLength = schedule.filter(({ date }) =>
+    func ? func(date) : true
+  ).length;
 
   const createSchedule = (url: string, memo: string, date: string) => {
     const id = dayjs().toString();
@@ -38,6 +43,7 @@ const useSchedule = () => {
     readSchedule,
     updateSchedule,
     deleteSchedule,
+    scheduleLength,
   };
 };
 
