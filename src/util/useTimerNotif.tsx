@@ -20,7 +20,8 @@ const useTimerNotif = () => {
       }
       Notification.requestPermission().then(() => new Notification("テスト"));
     }
-  }, [readHistories, readSchedule]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     // scheduleが変更されたら初期化
