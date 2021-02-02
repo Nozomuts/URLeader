@@ -2,10 +2,10 @@ import React, { FC, useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { GrRevert } from "react-icons/gr";
 import { toast } from "react-toastify";
-import { deleteHistory } from "../db/histories";
 import { ISchedule } from "../util/types";
 import { EditScheduleForm } from "./EditScheduleForm";
 import useSchedule from "../util/useSchedule";
+import useHistories from "../util/useHistories";
 
 type IProps = {
   name: string;
@@ -14,6 +14,7 @@ type IProps = {
 export const ScheduleItem: FC<IProps> = ({ id, url, date, memo, name }) => {
   const [open, setOpen] = useState(false);
   const { deleteSchedule } = useSchedule();
+  const { deleteHistory } = useHistories();
   const removeSchedule = (id: string) => {
     if (confirm("本当に削除しますか？")) {
       if (name === "履歴") {
