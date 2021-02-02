@@ -3,7 +3,6 @@ import { useRouter } from "next/dist/client/router";
 import { SetStateAction, Dispatch, FC } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { createSchedule, updateSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import { ScheduleForm } from "./ScheduleForm";
 

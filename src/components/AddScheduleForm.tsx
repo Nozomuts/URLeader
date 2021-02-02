@@ -1,14 +1,9 @@
 import dayjs from "dayjs";
-import { useState, SetStateAction, Dispatch, FC } from "react";
+import { useState, FC } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { createSchedule } from "../db/schedule";
-import { ISchedule } from "../util/types";
+import useSchedule from "../util/useSchedule";
 import { ScheduleForm } from "./ScheduleForm";
-
-type IProps = {
-  setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
-};
 
 type IForm = {
   url: string;
@@ -16,21 +11,18 @@ type IForm = {
   memo: string;
 };
 
-export const AddScheduleForm: FC<IProps> = ({ setSchedule }) => {
+export const AddScheduleForm: FC = () => {
   const {
     register,
     handleSubmit,
     formState: { isDirty },
   } = useForm<IForm>();
   const [open, setOpen] = useState(false);
+  const { createSchedule } = useSchedule();
 
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
-    createSchedule(url, dayjs().toString(), memo, format);
-    setSchedule((prev) => [
-      ...prev,
-      { url, id: dayjs().toString(), memo, date: format },
-    ]);
+    createSchedule(url, memo, format);
     setOpen(false);
     toast("追加しました");
   };

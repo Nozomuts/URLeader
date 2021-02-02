@@ -1,7 +1,11 @@
+import { FC } from "react";
+import { useRecoilState } from "recoil";
 import { menus } from "../util";
-import { IPropsFilter } from "../util/types";
+import { filterState } from "../util/recoil";
 
-export const SideMenu: IPropsFilter = ({ filter, setFilter }) => {
+export const SideMenu: FC = () => {
+  const [filter, setFilter] = useRecoilState(filterState);
+
   return (
     <div className="hidden px-6 md:px-12 min-w-80 text-left pt-10 md:block">
       {menus.map((menu) => (

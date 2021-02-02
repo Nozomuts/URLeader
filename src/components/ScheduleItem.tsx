@@ -1,26 +1,19 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { FC, useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { GrRevert } from "react-icons/gr";
 import { toast } from "react-toastify";
 import { deleteHistory } from "../db/histories";
-import { deleteSchedule } from "../db/schedule";
 import { ISchedule } from "../util/types";
 import { EditScheduleForm } from "./EditScheduleForm";
+import useSchedule from "../util/useSchedule";
 
 type IProps = {
-  setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
   name: string;
 } & ISchedule;
 
-export const ScheduleItem: FC<IProps> = ({
-  id,
-  url,
-  date,
-  memo,
-  setSchedule,
-  name,
-}) => {
+export const ScheduleItem: FC<IProps> = ({ id, url, date, memo, name }) => {
   const [open, setOpen] = useState(false);
+  const { deleteSchedule } = useSchedule();
   const removeSchedule = (id: string) => {
     if (confirm("本当に削除しますか？")) {
       if (name === "履歴") {
@@ -28,7 +21,6 @@ export const ScheduleItem: FC<IProps> = ({
       } else {
         deleteSchedule(id);
       }
-      setSchedule((prev) => prev.filter((el) => el.id !== id));
       toast("削除しました");
     }
   };
@@ -38,7 +30,6 @@ export const ScheduleItem: FC<IProps> = ({
       key={id}
       schedule={{ id, url, date, memo }}
       setOpen={setOpen}
-      setSchedule={setSchedule}
       open={open}
       name={name}
     />

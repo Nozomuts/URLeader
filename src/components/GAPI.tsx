@@ -1,20 +1,16 @@
-import { FC, Dispatch, SetStateAction, useState } from "react";
+import { FC, useState } from "react";
 import { SiGooglecalendar } from "react-icons/si";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import dayjs from "dayjs";
 import { ISchedule } from "../util/types";
-import { createSchedule } from "../db/schedule";
 import { Modal } from "./Modal";
 import useGAPI from "../util/useGAPI";
+import useSchedule from "../util/useSchedule";
 
-type IProps = {
-  setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
-};
-
-export const GAPI: FC<IProps> = ({ setSchedule }) => {
+export const GAPI: FC = () => {
   const [open, setOpen] = useState(false);
   const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
   const { auth, isFetch, signout, fetch } = useGAPI(setOpen, setEvent);
+  const { createSchedule } = useSchedule();
 
   return (
     <div>
@@ -51,9 +47,7 @@ export const GAPI: FC<IProps> = ({ setSchedule }) => {
                 <button
                   className="button text-white bg-black mt-4"
                   onClick={() => {
-                    const id = dayjs().toString();
-                    createSchedule(url, id, memo, date);
-                    setSchedule((prev) => [...prev, { url, id, memo, date }]);
+                    createSchedule(url, memo, date);
                     setEvent((prev) => prev.filter((el) => el.date !== date));
                   }}
                   aria-label="追加"

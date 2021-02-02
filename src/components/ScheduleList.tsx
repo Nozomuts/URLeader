@@ -1,16 +1,12 @@
-import { Dispatch } from "react";
-import { SetStateAction } from "react";
 import { FC } from "react";
-import { IFilter, ISchedule } from "../util/types";
+import { useRecoilValue } from "recoil";
+import { filterState } from "../util/recoil";
+import useSchedule from "../util/useSchedule";
 import { ScheduleItem } from "./ScheduleItem";
 
-type IProps = {
-  schedule: ISchedule[];
-  setSchedule: Dispatch<SetStateAction<ISchedule[]>>;
-  filter: IFilter;
-};
-
-export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
+export const ScheduleList: FC = () => {
+  const filter = useRecoilValue(filterState);
+  const { schedule } = useSchedule();
   return (
     <>
       {filter.name === "履歴" && schedule.length === 0 && (
@@ -19,12 +15,7 @@ export const ScheduleList: FC<IProps> = ({ schedule, setSchedule, filter }) => {
       {schedule
         .filter(({ date }) => (filter.func ? filter.func(date) : true))
         .map((props) => (
-          <ScheduleItem
-            key={props.id}
-            {...props}
-            setSchedule={setSchedule}
-            name={filter.name}
-          />
+          <ScheduleItem key={props.id} {...props} name={filter.name} />
         ))}
     </>
   );

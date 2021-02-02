@@ -1,12 +1,14 @@
-import { useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+import { useRecoilState } from "recoil";
 import { menus } from "../util";
-import { IPropsFilter } from "../util/types";
+import { filterState } from "../util/recoil";
 import useOutsideClick from "../util/useOutsideClick";
 
-export const Dropdown: IPropsFilter = ({ filter, setFilter }) => {
+export const Dropdown: FC = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>();
+  const [filter, setFilter] = useRecoilState(filterState);
 
   useOutsideClick(ref, () => {
     if (open) {
