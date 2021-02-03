@@ -1,5 +1,5 @@
 import { AddScheduleForm } from "../components/AddScheduleForm";
-import { GAPI } from "../components/GAPI";
+// import { GAPI } from "../components/GAPI";
 import { Dropdown } from "../components/Dropdown";
 import { ScheduleList } from "../components/ScheduleList";
 import { SideMenu } from "../components/SideMenu";
@@ -23,7 +23,7 @@ export default function Index() {
             <Dropdown />
           </div>
           {/* デスクトップ版は対応できてないのでビルドするときはコメントアウトする */}
-          <GAPI />
+          {/* <GAPI /> */}
         </div>
         <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
           {name === "履歴" ? (
