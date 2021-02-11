@@ -1,11 +1,11 @@
 import Dexie from "dexie";
-import { IHistory, ISchedule } from "../util/types";
+import { IRecord, ISchedule } from "../util/types";
 
 const database = new Dexie("u-reserve"); // データベース名 データベース接続
-database.version(1).stores({ schedule: "&id", histories: "&id" }); // データベースのバージョン、テーブル名とインデックスとなるデータ名
+database.version(1).stores({ schedule: "&id", records: "&id" }); // データベースのバージョン、テーブル名とインデックスとなるデータ名
 
-export const historiesTable: Dexie.Table<IHistory, string> = database.table(
-  "histories"
+export const recordsTable: Dexie.Table<IRecord, string> = database.table(
+  "records"
 ); // データの型、キーとなるデータの型 テーブル作成
 
 export const scheduleTable: Dexie.Table<ISchedule, string> = database.table(
