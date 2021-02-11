@@ -1,4 +1,9 @@
-import { ISchedule } from "../../util/types";
+export type ISchedule = {
+  id: string;
+  url: string;
+  date: string;
+  memo: string;
+};
 
 export const ActionTypes = {
   CREATE_SCHEDULE: "CREATE_SCHEDULE",

@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import { useState, FC } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { actions } from "../redux/actions";
+import { createSchedule } from "../redux/schedule/actions";
 import { ScheduleForm } from "./ScheduleForm";
 
 type IForm = {
@@ -18,10 +19,11 @@ export const AddScheduleForm: FC = () => {
     formState: { isDirty },
   } = useForm<IForm>();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const submit = ({ date, url, memo }: IForm) => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
-    actions.createSchedule({ url, memo, date: format });
+    dispatch(createSchedule({ url, memo, date: format }));
     setOpen(false);
     toast("追加しました");
   };

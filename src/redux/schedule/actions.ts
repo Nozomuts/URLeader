@@ -1,5 +1,4 @@
-import { ActionTypes } from "./types";
-import { ISchedule } from "./../../util/types";
+import { ActionTypes, ISchedule } from "./types";
 import { Dispatch } from "redux";
 import { scheduleTable } from "../../db";
 import dayjs from "dayjs";

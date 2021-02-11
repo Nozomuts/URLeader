@@ -1,7 +1,6 @@
-import { ActionTypes } from "./types";
+import { ActionTypes, IRecord } from "./types";
 import { recordsTable } from "../../db";
 import { Dispatch } from "redux";
-import { IRecord } from "../../util/types";
 
 export const createRecord = ({ ...record }: IRecord) => async (
   dispatch: Dispatch

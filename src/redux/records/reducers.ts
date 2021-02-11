@@ -1,5 +1,4 @@
-import { ActionTypes, IRecordAction } from "./types";
-import { IRecord } from "../../util/types";
+import { ActionTypes, IRecord, IRecordAction } from "./types";
 
 const initialState: IRecord[] = [];
 

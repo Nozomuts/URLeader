@@ -1,4 +1,9 @@
-import { IRecord } from "../../util/types";
+export type IRecord = {
+  id: string;
+  url: string;
+  date: string;
+  memo: string;
+};
 
 export const ActionTypes = {
   CREATE_RECORD: "CREATE_RECORD",

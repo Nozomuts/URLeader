@@ -1,5 +1,4 @@
-import { ActionTypes, IScheduleAction } from "./types";
-import { ISchedule } from "../../util/types";
+import { ActionTypes, ISchedule, IScheduleAction } from "./types";
 
 const initialState: ISchedule[] = [];
 
