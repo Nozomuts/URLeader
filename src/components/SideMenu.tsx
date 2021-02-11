@@ -1,7 +1,5 @@
 import { FC } from "react";
-import { useRecoilState } from "recoil";
 import { menus } from "../util";
-import { filterState } from "../util/recoil";
 
 export const SideMenu: FC = () => {
   const [filter, setFilter] = useRecoilState(filterState);

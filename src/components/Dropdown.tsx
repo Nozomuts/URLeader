@@ -1,8 +1,6 @@
 import { FC, useRef, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
-import { useRecoilState } from "recoil";
 import { menus } from "../util";
-import { filterState } from "../util/recoil";
 import useOutsideClick from "../util/useOutsideClick";
 
 export const Dropdown: FC = () => {

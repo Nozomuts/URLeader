@@ -1,19 +1,18 @@
-import { FC } from "react";
-import { useRecoilValue } from "recoil";
-import { filterState } from "../util/recoil";
-import useHistories from "../util/useHistories";
-import useSchedule from "../util/useSchedule";
+import { FC, useContext } from "react";
+import { Context } from "../redux";
 import { ScheduleItem } from "./ScheduleItem";
 
 export const ScheduleList: FC = () => {
   const filter = useRecoilValue(filterState);
-  const { histories } = useHistories();
-  const { schedule } = useSchedule();
-  const list = filter.name === "履歴" ? histories : schedule;
+  const {
+    state: { schedule, records },
+  } = useContext(Context);
+
+  const list = filter.name === "履歴" ? records : schedule;
 
   return (
     <>
-      {filter.name === "履歴" && histories.length === 0 && (
+      {filter.name === "履歴" && records.length === 0 && (
         <h1>履歴がありません</h1>
       )}
       {list

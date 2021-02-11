@@ -1,11 +1,10 @@
 import dayjs from "dayjs";
-import { SetStateAction, Dispatch, FC } from "react";
+import { SetStateAction, Dispatch, FC, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useResetRecoilState } from "recoil";
-import { filterState } from "../util/recoil";
+import { Context } from "../redux";
+import { operations } from "../redux/operations";
 import { ISchedule } from "../util/types";
-import useSchedule from "../util/useSchedule";
 import { ScheduleForm } from "./ScheduleForm";
 
 type IProps = {
@@ -32,17 +31,21 @@ export const EditScheduleForm: FC<IProps> = ({
     handleSubmit,
     formState: { isDirty },
   } = useForm<IForm>();
-  const { updateSchedule, createSchedule } = useSchedule();
+  const { dispatch } = useContext(Context);
   const resetFilter = useResetRecoilState(filterState);
 
   const submit = ({ date, url, memo }: IForm) => {
-    const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
+    const formatDate = dayjs(date.valueOf())
+      .format("YYYY/MM/DD H:mm")
+      .toString();
     if (name === "履歴") {
-      createSchedule(url, memo, format);
+      dispatch(operations.createSchedule({ url, memo, date: formatDate }));
       resetFilter();
       toast("追加しました");
     } else {
-      updateSchedule(schedule.id, { url, memo, date: format });
+      dispatch(
+        operations.updateSchedule(schedule.id, { url, memo, date: formatDate })
+      );
       toast("変更しました");
     }
     setOpen(false);

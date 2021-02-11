@@ -1,23 +1,23 @@
-import { createContext, FC, useReducer } from "react";
-import { reducer } from "./reducer";
-import { IAction, IReducer, IState, IStore } from "./types";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
+import { recordsReducer } from "./records/reducers";
+import { scheduleReducer } from "./schedule/reducers";
 
-export const initialState: IState = {
-  schedule: [],
-  records: [],
-};
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__: any;
+  }
+}
 
-const defaultStore: IStore = {
-  state: initialState,
-  // eslint-disable-next-line
-  dispatch: (_: IAction): void => {},
-};
+const rootReducer = combineReducers({
+  schedule: scheduleReducer,
+  records: recordsReducer,
+});
 
-const Store = createContext<IStore>(defaultStore);
-
-export const Provider: FC = ({ children }) => {
-  const [state, dispatch] = useReducer<IReducer>(reducer, initialState);
-  return (
-    <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
-  );
-};
+export const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunk,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);

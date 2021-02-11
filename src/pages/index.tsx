@@ -4,9 +4,6 @@ import { Dropdown } from "../components/Dropdown";
 import { ScheduleList } from "../components/ScheduleList";
 import { SideMenu } from "../components/SideMenu";
 import useTimerNotif from "../util/useTimerNotif";
-import { useRecoilValue } from "recoil";
-import { filterState } from "../util/recoil";
-import useSchedule from "../util/useSchedule";
 
 export default function Index() {
   useTimerNotif();

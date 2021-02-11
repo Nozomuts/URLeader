@@ -5,11 +5,11 @@ import Head from "next/head";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { is_sp } from "../util";
-import { RecoilRoot } from "recoil";
+import { Provider } from "../redux";
 
 export const Wrapper: FC = ({ children }) => {
   return (
-    <RecoilRoot>
+    <Provider>
       <FormspreeProvider project={process.env.PROJECT_ID || ""}>
         <ToastContainer
           toastStyle={{
@@ -33,6 +33,6 @@ export const Wrapper: FC = ({ children }) => {
           />
         </Head>
       </FormspreeProvider>
-    </RecoilRoot>
+    </Provider>
   );
 };
