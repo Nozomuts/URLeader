@@ -7,7 +7,7 @@ export type ISchedule = {
   memo: string;
 };
 
-export type IHistory = {
+export type IRecord = {
   id: string;
   url: string;
   date: string;
