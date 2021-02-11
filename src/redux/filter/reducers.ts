@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { ActionTypes, IFilter, IFilterAction } from "./types";
 
-const memos = [
+export const filters = [
   {
     name: "すべて",
   },
@@ -20,9 +20,9 @@ const memos = [
   },
 ] as const;
 
-const initialState: IFilter = memos[0];
+const initialState: IFilter = filters[0];
 
-export const recordsReducer = (
+export const filterReducer = (
   state: IFilter = initialState,
   action: IFilterAction
 ) => {

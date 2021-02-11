@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { Dispatch, SetStateAction, useState } from "react";
 import { toast } from "react-toastify";
-import { ISchedule } from "./types";
+import { ISchedule } from "../redux/schedule/types";
 
 const useGAPI = (
   setOpen: Dispatch<SetStateAction<boolean>>,

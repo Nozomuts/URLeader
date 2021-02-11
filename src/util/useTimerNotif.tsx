@@ -1,12 +1,8 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import useHistories from "./useHistories";
-import useSchedule from "./useSchedule";
 
 const useTimerNotif = () => {
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
-  const { schedule, readSchedule, deleteSchedule } = useSchedule();
-  const { readHistories, createHistory } = useHistories();
 
   useEffect(() => {
     // indexedDBから読み込む

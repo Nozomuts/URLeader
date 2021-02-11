@@ -1,12 +1,14 @@
 import { FC, useRef, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
-import { menus } from "../util";
+import { useDispatch } from "react-redux";
+import { filters } from "../redux/filter/reducers";
+import { setFilter } from "../redux/filter/actions";
 import useOutsideClick from "../util/useOutsideClick";
 
 export const Dropdown: FC = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>();
-  const [filter, setFilter] = useRecoilState(filterState);
+  const dispatch = useDispatch();
 
   useOutsideClick(ref, () => {
     if (open) {
@@ -30,19 +32,19 @@ export const Dropdown: FC = () => {
       <div className="relative text-left" ref={ref as any}>
         {open && (
           <div className="absolute -left-24 top-6 mt-2 shadow-md rounded-md overflow-hidden border z-20 border-gray-200 bg-white">
-            {menus.map((menu) => (
+            {filters.map((filter) => (
               <button
-                key={menu.name}
+                key={filter.name}
                 className={`hover:bg-gray-200 p-4 text-sm duration-300 focus:outline-none w-40 text-left ${
-                  menu.name === filter.name ? "text-main" : ""
+                  filter.name === filter.name ? "text-main" : ""
                 }`}
                 onClick={() => {
-                  setFilter(menu);
+                  dispatch(setFilter(filter));
                   setOpen(false);
                 }}
-                aria-label={menu.name}
+                aria-label={filter.name}
               >
-                {menu.name}
+                {filter.name}
               </button>
             ))}
           </div>

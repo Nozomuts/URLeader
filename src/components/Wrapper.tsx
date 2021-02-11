@@ -5,11 +5,12 @@ import Head from "next/head";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { is_sp } from "../util";
-import { Provider } from "../redux";
+import { Provider } from "react-redux";
+import { store } from "../redux";
 
 export const Wrapper: FC = ({ children }) => {
   return (
-    <Provider>
+    <Provider store={store}>
       <FormspreeProvider project={process.env.PROJECT_ID || ""}>
         <ToastContainer
           toastStyle={{

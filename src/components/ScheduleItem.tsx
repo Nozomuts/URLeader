@@ -1,11 +1,12 @@
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { GrRevert } from "react-icons/gr";
 import { toast } from "react-toastify";
-import { ISchedule } from "../util/types";
 import { EditScheduleForm } from "./EditScheduleForm";
-import { Context } from "../redux";
-import { operations } from "../redux/operations";
+import { ISchedule } from "../redux/schedule/types";
+import { useDispatch } from "react-redux";
+import { deleteRecord } from "../redux/records/actions";
+import { deleteSchedule } from "../redux/schedule/actions";
 
 type IProps = {
   name: string;
@@ -13,13 +14,14 @@ type IProps = {
 
 export const ScheduleItem: FC<IProps> = ({ id, url, date, memo, name }) => {
   const [open, setOpen] = useState(false);
-  const { dispatch } = useContext(Context);
+  const dispatch = useDispatch();
+
   const removeSchedule = (id: string) => {
     if (confirm("本当に削除しますか？")) {
       if (name === "履歴") {
-        dispatch(operations.deleteRecord(id));
+        dispatch(deleteRecord(id));
       } else {
-        dispatch(operations.deleteSchedule(id));
+        dispatch(deleteSchedule(id));
       }
       toast("削除しました");
     }

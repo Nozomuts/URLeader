@@ -1,12 +1,12 @@
-import { FC, useContext } from "react";
-import { Context } from "../redux";
+import { FC } from "react";
+import { useSelector } from "react-redux";
+import { IStore } from "../redux";
 import { ScheduleItem } from "./ScheduleItem";
 
 export const ScheduleList: FC = () => {
-  const filter = useRecoilValue(filterState);
-  const {
-    state: { schedule, records },
-  } = useContext(Context);
+  const filter = useSelector((state: IStore) => state.filter);
+  const records = useSelector((state: IStore) => state.records);
+  const schedule = useSelector((state: IStore) => state.schedule);
 
   const list = filter.name === "履歴" ? records : schedule;
 

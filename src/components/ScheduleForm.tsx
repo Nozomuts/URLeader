@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { Dispatch, FC, FormEvent, SetStateAction, useRef } from "react";
+import { ISchedule } from "../redux/schedule/types";
 import { confirmClose, urlValidate } from "../util";
-import { ISchedule } from "../util/types";
 import useOutsideClick from "../util/useOutsideClick";
 
 type IProps = {

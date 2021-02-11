@@ -1,17 +1,17 @@
-import { FC, useContext, useState } from "react";
+import { FC, useState } from "react";
 import { SiGooglecalendar } from "react-icons/si";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import { ISchedule } from "../util/types";
 import { Modal } from "./Modal";
 import useGAPI from "../util/useGAPI";
-import { Context } from "../redux";
-import { actions } from "../redux/actions";
+import { ISchedule } from "../redux/schedule/types";
+import { useDispatch } from "react-redux";
+import { createSchedule } from "../redux/schedule/actions";
 
 export const GAPI: FC = () => {
   const [open, setOpen] = useState(false);
   const [event, setEvent] = useState<Omit<ISchedule, "id">[]>([]);
   const { auth, isFetch, signout, fetch } = useGAPI(setOpen, setEvent);
-  const { dispatch } = useContext(Context);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -48,7 +48,7 @@ export const GAPI: FC = () => {
                 <button
                   className="button text-white bg-black mt-4"
                   onClick={() => {
-                    dispatch(actions.createSchedule({ url, memo, date }));
+                    dispatch(createSchedule({ url, memo, date }));
                     setEvent((prev) => prev.filter((el) => el.date !== date));
                   }}
                   aria-label="追加"
