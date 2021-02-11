@@ -41,7 +41,7 @@ export const EditScheduleForm: FC<IProps> = ({
       .toString();
     if (name === "履歴") {
       dispatch(createSchedule({ url, memo, date: formatDate }));
-      setFilter(filters[0]);
+      dispatch(setFilter(filters[0]));
       toast("追加しました");
     } else {
       dispatch(updateSchedule(schedule.id, { url, memo, date: formatDate }));

@@ -1,13 +1,19 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { IStore } from "../redux";
+import { createRecord, readRecords } from "../redux/records/actions";
+import { deleteSchedule, readSchedule } from "../redux/schedule/actions";
 
 const useTimerNotif = () => {
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
+  const dispatch = useDispatch();
+  const schedule = useSelector((state: IStore) => state.schedule);
 
   useEffect(() => {
     // indexedDBから読み込む
-    readSchedule();
-    readHistories();
+    dispatch(readSchedule());
+    dispatch(readRecords());
     if ("Notification" in window) {
       // 通知の許可を求める
       const permission = Notification.permission;
@@ -47,8 +53,8 @@ const useTimerNotif = () => {
         setTimeout(() => {
           if (window) {
             window.open(url, "_blank");
-            deleteSchedule(id);
-            createHistory(url, memo, date);
+            dispatch(deleteSchedule(id));
+            dispatch(createRecord({ id, url, memo, date }));
           }
         }, setTime),
       ]);

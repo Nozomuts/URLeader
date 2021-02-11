@@ -1,5 +1,6 @@
 import Dexie from "dexie";
-import { IRecord, ISchedule } from "../util/types";
+import { IRecord } from "../redux/records/types";
+import { ISchedule } from "../redux/schedule/types";
 
 const database = new Dexie("u-reserve"); // データベース名 データベース接続
 database.version(1).stores({ schedule: "&id", records: "&id" }); // データベースのバージョン、テーブル名とインデックスとなるデータ名

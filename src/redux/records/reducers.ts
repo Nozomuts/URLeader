@@ -21,7 +21,7 @@ export const recordsReducer = (
         }),
       ];
     case ActionTypes.DELETE_RECORD:
-      return [...state.filter((record) => record.id === action.payload)];
+      return [...state.filter((record) => record.id !== action.payload)];
     default:
       return state;
   }

@@ -21,7 +21,7 @@ export const scheduleReducer = (
         }),
       ];
     case ActionTypes.DELETE_SCHEDULE:
-      return [...state.filter((schedule) => schedule.id === action.payload)];
+      return [...state.filter((schedule) => schedule.id !== action.payload)];
     default:
       return state;
   }
