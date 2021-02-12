@@ -1,6 +1,7 @@
 export type IFilter = {
   name: string;
   func?: (date: string) => boolean;
+  description: string;
 };
 
 export const ActionTypes = {
