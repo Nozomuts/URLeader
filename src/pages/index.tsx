@@ -5,7 +5,7 @@ import { Dropdown } from "../components/Dropdown";
 import { ScheduleList } from "../components/ScheduleList";
 import { SideMenu } from "../components/SideMenu";
 import { IStore } from "../redux";
-import useIndexPage from "../util/useApp";
+import useIndexPage from "../util/useIndexPage";
 
 export default function Index() {
   const filter = useSelector((state: IStore) => state.filter);

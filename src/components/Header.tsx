@@ -1,15 +1,22 @@
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { GiSpeakerOff, GiSpeaker } from "react-icons/gi";
+import { useState } from "react";
 
 export const Header = () => {
   const { pathname } = useRouter();
+  const [hasSound, setHasSound] = useState(localStorage.getItem("has_sound"));
 
   const linkList = [
     { name: "TOP", url: "/" },
     { name: "プライバシーポリシー", url: "/policy" },
     { name: "お問い合わせ", url: "/form" },
   ];
+
+  const toggleHasSound = (hasSound: string) => {
+    localStorage.setItem("has_sound", hasSound);
+    setHasSound(hasSound);
+  };
 
   return (
     <>
@@ -21,14 +28,22 @@ export const Header = () => {
             </h1>
           </a>
         </Link>
-        {localStorage.getItem("has_sound") === "on" ? (
-          <GiSpeakerOff
-            onClick={() => localStorage.setItem("has_sound", "off")}
-          />
-        ) : (
-          <GiSpeaker onClick={() => localStorage.setItem("has_sound", "on")} />
-        )}
-        <div>
+        <div className="flex items-center">
+          <button>
+            {process.browser && hasSound === "on" ? (
+              <GiSpeaker
+                color="white"
+                size="25"
+                onClick={() => toggleHasSound("off")}
+              />
+            ) : (
+              <GiSpeakerOff
+                color="white"
+                size="25"
+                onClick={() => toggleHasSound("on")}
+              />
+            )}
+          </button>
           {linkList.map(({ name, url }) => (
             <Link href={url} key={name}>
               <a

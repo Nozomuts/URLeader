@@ -10,7 +10,8 @@ const useIndexPage = () => {
   const dispatch = useDispatch();
   const schedule = useSelector((state: IStore) => state.schedule);
 
-  const hasSound = localStorage.getItem("hasSound") || "off";
+  const hasSound =
+    (process.browser && localStorage.getItem("has_sound")) || "off";
 
   useEffect(() => {
     // indexedDBから読み込む
