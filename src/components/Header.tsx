@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
+import { GiSpeakerOff, GiSpeaker } from "react-icons/gi";
 
 export const Header = () => {
   const { pathname } = useRouter();
@@ -20,6 +21,13 @@ export const Header = () => {
             </h1>
           </a>
         </Link>
+        {localStorage.getItem("has_sound") === "on" ? (
+          <GiSpeakerOff
+            onClick={() => localStorage.setItem("has_sound", "off")}
+          />
+        ) : (
+          <GiSpeaker onClick={() => localStorage.setItem("has_sound", "on")} />
+        )}
         <div>
           {linkList.map(({ name, url }) => (
             <Link href={url} key={name}>

@@ -1,14 +1,16 @@
 import { FC, useRef, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filters } from "../redux/filter/reducers";
 import { setFilter } from "../redux/filter/actions";
 import useOutsideClick from "../util/useOutsideClick";
+import { IStore } from "../redux";
 
 export const Dropdown: FC = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>();
   const dispatch = useDispatch();
+  const { name } = useSelector((state: IStore) => state.filter);
 
   useOutsideClick(ref, () => {
     if (open) {
@@ -36,7 +38,7 @@ export const Dropdown: FC = () => {
               <button
                 key={filter.name}
                 className={`hover:bg-gray-200 p-4 text-sm duration-300 focus:outline-none w-40 text-left ${
-                  filter.name === filter.name ? "text-main" : ""
+                  filter.name === name ? "text-main" : ""
                 }`}
                 onClick={() => {
                   dispatch(setFilter(filter));

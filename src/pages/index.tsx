@@ -5,12 +5,12 @@ import { Dropdown } from "../components/Dropdown";
 import { ScheduleList } from "../components/ScheduleList";
 import { SideMenu } from "../components/SideMenu";
 import { IStore } from "../redux";
-import useTimerNotif from "../util/useTimerNotif";
+import useIndexPage from "../util/useApp";
 
 export default function Index() {
-  useTimerNotif();
   const filter = useSelector((state: IStore) => state.filter);
   const schedule = useSelector((state: IStore) => state.schedule);
+  useIndexPage();
 
   const scheduleLength = schedule.filter((schedule) =>
     filter.func ? filter.func(schedule.date) : true
@@ -20,19 +20,18 @@ export default function Index() {
     <div className="flex">
       <SideMenu />
       <div className="bg-white w-full px-6 md:px-12">
-        <div className="flex justify-between items-start py-5 md:py-10 max-w-2xl">
-          <div className="title flex">
+        <div className="items-start py-5 md:py-10 max-w-2xl">
+          <div className="title flex mb-4">
             {filter.name}
             <Dropdown />
           </div>
-          {/* デスクトップ版は対応できてないのでビルドするときはコメントアウトする */}
+          {filter.description}
+          {/* Googleの審査通っていないのでコメントアウト */}
           {/* <GAPI /> */}
         </div>
         <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
           {filter.name === "履歴" ? (
-            <div className="pt-4">
-              <ScheduleList />
-            </div>
+            <ScheduleList />
           ) : (
             <>
               <AddScheduleForm />

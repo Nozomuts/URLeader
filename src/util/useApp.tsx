@@ -5,10 +5,12 @@ import { IStore } from "../redux";
 import { createRecord, readRecords } from "../redux/records/actions";
 import { deleteSchedule, readSchedule } from "../redux/schedule/actions";
 
-const useTimerNotif = () => {
+const useIndexPage = () => {
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
   const dispatch = useDispatch();
   const schedule = useSelector((state: IStore) => state.schedule);
+
+  const hasSound = localStorage.getItem("hasSound") || "off";
 
   useEffect(() => {
     // indexedDBから読み込む
@@ -29,19 +31,21 @@ const useTimerNotif = () => {
     // scheduleが変更されたら初期化
     timer.forEach((el) => clearTimeout(el));
     const now = dayjs().valueOf();
-    const ONE_MIN = 60000;
+    const FIVE_MIN = 5000;
     schedule.forEach(({ url, date, id, memo }) => {
       const datetime = dayjs(date).valueOf();
-      // 1分前に通知
-      const setTimeBefore = datetime - now - ONE_MIN;
+      // 5秒前に通知
+      const setTimeBefore = datetime - now - FIVE_MIN;
       setTimer((prev) => [
         ...prev,
         setTimeout(() => {
           if ("Notification" in window) {
             const notif = new Notification("間も無く遷移します");
-            notif.addEventListener("show", () => {
-              new Audio("./push.wav").play();
-            });
+            if (hasSound === "on") {
+              notif.addEventListener("show", () => {
+                new Audio("./push.wav").play();
+              });
+            }
           }
         }, setTimeBefore),
       ]);
@@ -63,4 +67,4 @@ const useTimerNotif = () => {
   }, [schedule]);
 };
 
-export default useTimerNotif;
+export default useIndexPage;

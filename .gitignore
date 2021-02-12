@@ -43,3 +43,4 @@ src/.next
 src/public
 main
 dist
+.env
