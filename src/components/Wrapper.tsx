@@ -6,9 +6,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { is_sp } from "../util";
 import { Provider } from "react-redux";
-import { store } from "../redux";
 
-export const Wrapper: FC = ({ children }) => {
+type IProps = {
+  store: any;
+};
+
+export const Wrapper: FC<IProps> = ({ children, store }) => {
   return (
     <Provider store={store}>
       <FormspreeProvider project={process.env.PROJECT_ID || ""}>
