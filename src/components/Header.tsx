@@ -2,13 +2,15 @@ import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { GiSpeakerOff, GiSpeaker } from "react-icons/gi";
 import { useEffect, useState } from "react";
+import useApp from "../util/useApp";
 
 export const Header = () => {
   const { pathname } = useRouter();
-  const [hasSound, setHasSound] = useState<string | null>();
+  const [hasSound, setHasSound] = useState<string | undefined>();
+  useApp(hasSound);
 
   useEffect(() => {
-    setHasSound(localStorage.getItem("has_sound"));
+    setHasSound(localStorage.getItem("has_sound") as string | undefined);
   }, []);
 
   const linkList = [

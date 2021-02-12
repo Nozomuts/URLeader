@@ -5,12 +5,10 @@ import { Dropdown } from "../components/Dropdown";
 import { List } from "../components/List";
 import { SideMenu } from "../components/SideMenu";
 import { IStore } from "../redux";
-import useIndexPage from "../util/useIndexPage";
 
 export default function Index() {
   const filter = useSelector((state: IStore) => state.filter);
   const schedule = useSelector((state: IStore) => state.schedule);
-  useIndexPage();
 
   const scheduleLength = schedule.filter((schedule) =>
     filter.func ? filter.func(schedule.date) : true

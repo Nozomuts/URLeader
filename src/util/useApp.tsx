@@ -5,13 +5,10 @@ import { IStore } from "../redux";
 import { createRecord, readRecords } from "../redux/records/actions";
 import { deleteSchedule, readSchedule } from "../redux/schedule/actions";
 
-const useIndexPage = () => {
+const useApp = (hasSound?: string) => {
   const [timer, setTimer] = useState<NodeJS.Timeout[]>([]);
   const dispatch = useDispatch();
   const schedule = useSelector((state: IStore) => state.schedule);
-
-  const hasSound =
-    (process.browser && localStorage.getItem("has_sound")) || "off";
 
   useEffect(() => {
     // indexedDBから読み込む
@@ -68,4 +65,4 @@ const useIndexPage = () => {
   }, [schedule]);
 };
 
-export default useIndexPage;
+export default useApp;
