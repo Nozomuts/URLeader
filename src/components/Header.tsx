@@ -29,19 +29,13 @@ export const Header = () => {
           </a>
         </Link>
         <div className="flex items-center">
-          <button>
+          <button
+            onClick={() => toggleHasSound(hasSound === "on" ? "off" : "on")}
+          >
             {process.browser && hasSound === "on" ? (
-              <GiSpeaker
-                color="white"
-                size="25"
-                onClick={() => toggleHasSound("off")}
-              />
+              <GiSpeaker color="white" size="25" />
             ) : (
-              <GiSpeakerOff
-                color="white"
-                size="25"
-                onClick={() => toggleHasSound("on")}
-              />
+              <GiSpeakerOff color="white" size="25" />
             )}
           </button>
           {linkList.map(({ name, url }) => (

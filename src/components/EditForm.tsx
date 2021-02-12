@@ -5,13 +5,14 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { setFilter } from "../redux/filter/actions";
 import { filters } from "../redux/filter/reducers";
+import { IRecord } from "../redux/records/types";
 import { createSchedule, updateSchedule } from "../redux/schedule/actions";
 import { ISchedule } from "../redux/schedule/types";
-import { ScheduleForm } from "./ScheduleForm";
+import { Form } from "./Form";
 
 type IProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
-  schedule: ISchedule;
+  data: ISchedule | IRecord;
   open: boolean;
   name: string;
 };
@@ -22,12 +23,7 @@ type IForm = {
   memo: string;
 };
 
-export const EditScheduleForm: FC<IProps> = ({
-  setOpen,
-  schedule,
-  open,
-  name,
-}) => {
+export const EditForm: FC<IProps> = ({ setOpen, data, open, name }) => {
   const {
     register,
     handleSubmit,
@@ -44,17 +40,17 @@ export const EditScheduleForm: FC<IProps> = ({
       dispatch(setFilter(filters[0]));
       toast("追加しました");
     } else {
-      dispatch(updateSchedule(schedule.id, { url, memo, date: formatDate }));
+      dispatch(updateSchedule(data.id, { url, memo, date: formatDate }));
       toast("変更しました");
     }
     setOpen(false);
   };
 
   return (
-    <ScheduleForm
+    <Form
       onSubmit={handleSubmit(submit)}
       register={register}
-      schedule={schedule}
+      data={data}
       open={open}
       setOpen={setOpen}
       isDirty={isDirty}

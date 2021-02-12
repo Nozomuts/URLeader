@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { createSchedule } from "../redux/schedule/actions";
-import { ScheduleForm } from "./ScheduleForm";
+import { Form } from "./Form";
 
 type IForm = {
   url: string;
@@ -12,7 +12,7 @@ type IForm = {
   memo: string;
 };
 
-export const AddScheduleForm: FC = () => {
+export const AddForm: FC = () => {
   const {
     register,
     handleSubmit,
@@ -40,7 +40,7 @@ export const AddScheduleForm: FC = () => {
         </button>
       )}
       {open && (
-        <ScheduleForm
+        <Form
           onSubmit={handleSubmit(submit)}
           register={register}
           open={open}

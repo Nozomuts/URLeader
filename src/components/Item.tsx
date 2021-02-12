@@ -2,21 +2,22 @@ import React, { FC, useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { GrRevert } from "react-icons/gr";
 import { toast } from "react-toastify";
-import { EditScheduleForm } from "./EditScheduleForm";
+import { EditForm } from "./EditForm";
 import { ISchedule } from "../redux/schedule/types";
 import { useDispatch } from "react-redux";
 import { deleteRecord } from "../redux/records/actions";
 import { deleteSchedule } from "../redux/schedule/actions";
+import { IRecord } from "../redux/records/types";
 
 type IProps = {
   name: string;
-} & ISchedule;
+} & (ISchedule | IRecord);
 
-export const ScheduleItem: FC<IProps> = ({ id, url, date, memo, name }) => {
+export const Item: FC<IProps> = ({ id, url, date, memo, name }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const removeSchedule = (id: string) => {
+  const deleteData = (id: string) => {
     if (confirm("本当に削除しますか？")) {
       if (name === "履歴") {
         dispatch(deleteRecord(id));
@@ -28,9 +29,9 @@ export const ScheduleItem: FC<IProps> = ({ id, url, date, memo, name }) => {
   };
 
   return open ? (
-    <EditScheduleForm
+    <EditForm
       key={id}
-      schedule={{ id, url, date, memo }}
+      data={{ id, url, date, memo }}
       setOpen={setOpen}
       open={open}
       name={name}
@@ -84,7 +85,7 @@ export const ScheduleItem: FC<IProps> = ({ id, url, date, memo, name }) => {
           <button
             className="icon-button"
             aria-label="削除"
-            onClick={() => removeSchedule(id)}
+            onClick={() => deleteData(id)}
           >
             <RiDeleteBinLine size={25} />
           </button>

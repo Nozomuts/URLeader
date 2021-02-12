@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { AddScheduleForm } from "../components/AddScheduleForm";
+import { AddForm } from "../components/AddForm";
 // import { GAPI } from "../components/GAPI";
 import { Dropdown } from "../components/Dropdown";
-import { ScheduleList } from "../components/ScheduleList";
+import { List } from "../components/List";
 import { SideMenu } from "../components/SideMenu";
 import { IStore } from "../redux";
 import useIndexPage from "../util/useIndexPage";
@@ -31,12 +31,12 @@ export default function Index() {
         </div>
         <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
           {filter.name === "履歴" ? (
-            <ScheduleList />
+            <List />
           ) : (
             <>
-              <AddScheduleForm />
-              <ScheduleList />
-              {scheduleLength > 3 && <AddScheduleForm />}
+              <AddForm />
+              <List />
+              {scheduleLength > 3 && <AddForm />}
             </>
           )}
         </div>

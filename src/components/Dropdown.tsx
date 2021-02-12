@@ -24,12 +24,9 @@ export const Dropdown: FC = () => {
         type="button"
         className="text-gray-500 focus:outline-none md:hidden"
         aria-label="ドロップダウンを開閉"
+        onClick={() => setOpen((prev) => !prev)}
       >
-        {open ? (
-          <RiArrowUpSLine onClick={() => setOpen(false)} />
-        ) : (
-          <RiArrowDownSLine onClick={() => setOpen(true)} />
-        )}
+        {open ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
       </button>
       <div className="relative text-left" ref={ref as any}>
         {open && (

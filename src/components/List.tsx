@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { IStore } from "../redux";
-import { ScheduleItem } from "./ScheduleItem";
+import { Item } from "./Item";
 
-export const ScheduleList: FC = () => {
+export const List: FC = () => {
   const filter = useSelector((state: IStore) => state.filter);
   const records = useSelector((state: IStore) => state.records);
   const schedule = useSelector((state: IStore) => state.schedule);
@@ -18,7 +18,7 @@ export const ScheduleList: FC = () => {
       {list
         .filter(({ date }) => (filter.func ? filter.func(date) : true))
         .map((props) => (
-          <ScheduleItem key={props.id} {...props} name={filter.name} />
+          <Item key={props.id} {...props} name={filter.name} />
         ))}
     </>
   );

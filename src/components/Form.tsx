@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { Dispatch, FC, FormEvent, SetStateAction, useRef } from "react";
+import { IRecord } from "../redux/records/types";
 import { ISchedule } from "../redux/schedule/types";
 import { confirmClose, urlValidate } from "../util";
 import useOutsideClick from "../util/useOutsideClick";
@@ -9,16 +10,16 @@ type IProps = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   isDirty: boolean;
-  schedule?: ISchedule;
+  data?: ISchedule | IRecord;
   register: any;
 };
 
-export const ScheduleForm: FC<IProps> = ({
+export const Form: FC<IProps> = ({
   onSubmit,
   open,
   setOpen,
   isDirty,
-  schedule,
+  data,
   register,
 }) => {
   const ref = useRef<HTMLFormElement>();
@@ -42,7 +43,7 @@ export const ScheduleForm: FC<IProps> = ({
           className="px-2  focus:outline-none h-10 rounded-md"
           placeholder="URLを入力"
           name="url"
-          defaultValue={schedule ? schedule.url : "https://"}
+          defaultValue={data ? data.url : "https://"}
           ref={register(urlValidate)}
           aria-label="URL"
         />
@@ -53,8 +54,8 @@ export const ScheduleForm: FC<IProps> = ({
             min={dayjs().format("YYYY-MM-DDTHH:mm").toString()}
             ref={register({ required: "日付を選択してください" })}
             defaultValue={
-              schedule
-                ? dayjs(schedule.date).format("YYYY-MM-DDTHH:mm").toString()
+              data
+                ? dayjs(data.date).format("YYYY-MM-DDTHH:mm").toString()
                 : dayjs().add(1, "h").format("YYYY-MM-DDTHH:mm").toString()
             }
             className="input mb-2 sm:mb-0 mr-2 h-10 w-52 cursor-pointer bg-white focus:bg-gray-100"
@@ -63,7 +64,7 @@ export const ScheduleForm: FC<IProps> = ({
           <input
             type="text"
             name="memo"
-            defaultValue={schedule?.memo}
+            defaultValue={data?.memo}
             className="input h-10 w-52 md:w-64"
             placeholder="メモ"
             ref={register}
