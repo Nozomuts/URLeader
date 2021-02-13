@@ -12,9 +12,9 @@ export const createRecord = ({ ...record }: IRecord) => async (
       type: ActionTypes.CREATE_RECORD,
       payload: record,
     });
-    toast("追加しました");
+    toast("履歴に追加しました");
   } catch {
-    toast.error("追加に失敗しました");
+    toast.error("履歴の追加に失敗しました");
   }
 };
 
@@ -26,23 +26,7 @@ export const readRecords = () => async (dispatch: Dispatch) => {
       payload: records,
     });
   } catch {
-    toast.error("データの読み込みに失敗しました");
-  }
-};
-
-export const updateRecord = (
-  id: string,
-  { ...record }: Partial<Omit<IRecord, "id">>
-) => async (dispatch: Dispatch) => {
-  try {
-    await recordsTable.update(id, record);
-    dispatch({
-      type: ActionTypes.UPDATE_RECORD,
-      payload: { id, ...record },
-    });
-    toast("変更しました");
-  } catch {
-    toast.error("変更に失敗しました");
+    toast.error("履歴の読み込みに失敗しました");
   }
 };
 
@@ -53,8 +37,8 @@ export const deleteRecord = (id: string) => async (dispatch: Dispatch) => {
       type: ActionTypes.DELETE_RECORD,
       payload: id,
     });
-    toast("削除しました");
+    toast("履歴を削除しました");
   } catch {
-    toast.error("削除に失敗しました");
+    toast.error("履歴の削除に失敗しました");
   }
 };

@@ -37,6 +37,7 @@ export const Header = () => {
         <div className="flex items-center">
           <button
             onClick={() => toggleHasSound(hasSound === "on" ? "off" : "on")}
+            className="hidden md:block"
           >
             {process.browser && hasSound === "on" ? (
               <GiSpeaker color="white" size="25" />

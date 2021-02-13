@@ -14,9 +14,9 @@ export const createSchedule = ({
       type: ActionTypes.CREATE_SCHEDULE,
       payload: { id, ...schedule },
     });
-    toast("追加しました");
+    toast("予定に追加しました");
   } catch {
-    toast.error("追加に失敗しました");
+    toast.error("予定の追加に失敗しました");
   }
 };
 
@@ -28,7 +28,7 @@ export const readSchedule = () => async (dispatch: Dispatch) => {
       payload: schedule,
     });
   } catch {
-    toast.error("データの読み込みに失敗しました");
+    toast.error("予定の読み込みに失敗しました");
   }
 };
 
@@ -42,9 +42,9 @@ export const updateSchedule = (
       type: ActionTypes.UPDATE_SCHEDULE,
       payload: { id, ...schedule },
     });
-    toast("変更しました");
+    toast("予定を変更しました");
   } catch {
-    toast.error("変更に失敗しました");
+    toast.error("予定の変更に失敗しました");
   }
 };
 
@@ -55,8 +55,8 @@ export const deleteSchedule = (id: string) => async (dispatch: Dispatch) => {
       type: ActionTypes.DELETE_SCHEDULE,
       payload: id,
     });
-    toast("削除しました");
+    toast("予定を削除しました");
   } catch {
-    toast.error("削除に失敗しました");
+    toast.error("予定の削除に失敗しました");
   }
 };
