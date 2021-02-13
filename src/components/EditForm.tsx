@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import { SetStateAction, Dispatch, FC } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import { setFilter } from "../redux/filter/actions";
 import { filters } from "../redux/filter/reducers";
 import { IRecord } from "../redux/records/types";
@@ -38,10 +37,8 @@ export const EditForm: FC<IProps> = ({ setOpen, data, open, name }) => {
     if (name === "履歴") {
       dispatch(createSchedule({ url, memo, date: formatDate }));
       dispatch(setFilter(filters[0]));
-      toast("追加しました");
     } else {
       dispatch(updateSchedule(data.id, { url, memo, date: formatDate }));
-      toast("変更しました");
     }
     setOpen(false);
   };

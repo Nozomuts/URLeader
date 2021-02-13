@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { GrRevert } from "react-icons/gr";
-import { toast } from "react-toastify";
 import { EditForm } from "./EditForm";
 import { ISchedule } from "../redux/schedule/types";
 import { useDispatch } from "react-redux";
@@ -24,7 +23,6 @@ export const Item: FC<IProps> = ({ id, url, date, memo, name }) => {
       } else {
         dispatch(deleteSchedule(id));
       }
-      toast("削除しました");
     }
   };
 

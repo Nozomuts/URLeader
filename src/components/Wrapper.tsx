@@ -6,9 +6,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { is_sp } from "../util";
 import { Provider } from "react-redux";
+import { CombinedState, Store } from "redux";
+import { IStore } from "../redux";
+import { IFilterAction } from "../redux/filter/types";
+import { IScheduleAction } from "../redux/schedule/types";
+import { IRecordAction } from "../redux/records/types";
 
 type IProps = {
-  store: any;
+  store: Store<
+    CombinedState<IStore>,
+    IFilterAction | IScheduleAction | IRecordAction
+  >;
 };
 
 export const Wrapper: FC<IProps> = ({ children, store }) => {

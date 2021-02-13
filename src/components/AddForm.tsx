@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import { useState, FC } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import { createSchedule } from "../redux/schedule/actions";
 import { Form } from "./Form";
 
@@ -25,7 +24,6 @@ export const AddForm: FC = () => {
     const format = dayjs(date.valueOf()).format("YYYY/MM/DD H:mm").toString();
     dispatch(createSchedule({ url, memo, date: format }));
     setOpen(false);
-    toast("追加しました");
   };
 
   return (
