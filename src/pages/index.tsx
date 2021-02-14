@@ -17,7 +17,7 @@ export default function Index() {
   return (
     <div className="flex">
       <SideMenu />
-      <div className="bg-white w-full px-6 md:px-12">
+      <div className="bg-white w-full px-6 md:px-12 h-screen">
         <div className="items-start py-5 md:py-10 max-w-2xl">
           <div className="title flex mb-4">
             {filter.name}

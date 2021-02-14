@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply bg-gray-100 h-full text-sub;
+    @apply bg-gray-100 h-full text-sub overflow-hidden;
   }
   ,
   a,
@@ -51,7 +51,7 @@
   }
   @variants responsive {
     .h-content-md {
-      height: calc(100vh - 11.5rem);
+      height: calc(100vh - 20rem);
     }
     .h-120 {
       max-height: 40rem;
