@@ -62,7 +62,7 @@ const useApp = (hasSound?: string) => {
       ]);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedule]);
+  }, [schedule, hasSound]);
 };
 
 export default useApp;

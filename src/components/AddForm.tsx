@@ -26,26 +26,21 @@ export const AddForm: FC = () => {
     setOpen(false);
   };
 
-  return (
-    <>
-      {!open && (
-        <button
-          className="add-button"
-          onClick={() => setOpen(true)}
-          aria-label="予定追加"
-        >
-          ＋ 予定を追加
-        </button>
-      )}
-      {open && (
-        <Form
-          onSubmit={handleSubmit(submit)}
-          register={register}
-          open={open}
-          setOpen={setOpen}
-          isDirty={isDirty}
-        />
-      )}
-    </>
+  return open ? (
+    <Form
+      onSubmit={handleSubmit(submit)}
+      register={register}
+      open={open}
+      setOpen={setOpen}
+      isDirty={isDirty}
+    />
+  ) : (
+    <button
+      className="add-button"
+      onClick={() => setOpen(true)}
+      aria-label="予定追加"
+    >
+      ＋ 予定を追加
+    </button>
   );
 };
