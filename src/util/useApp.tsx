@@ -29,37 +29,44 @@ const useApp = (hasSound?: string) => {
     // scheduleが変更されたら初期化
     timer.forEach((el) => clearTimeout(el));
     const now = dayjs().valueOf();
-    const FIVE_MIN = 5000;
+    const FIVE_SEC = 5000;
+    const FIVE_MIN = 300000;
     schedule.forEach(({ url, date, id, memo }) => {
       const datetime = dayjs(date).valueOf();
       // 5秒前に通知
-      const setTimeBefore = datetime - now - FIVE_MIN;
-      setTimer((prev) => [
-        ...prev,
-        setTimeout(() => {
-          if ("Notification" in window) {
-            const notif = new Notification("間も無く遷移します");
-            if (hasSound === "on") {
-              notif.addEventListener("show", () => {
-                new Audio("./push.wav").play();
-              });
+      const setTimeBefore = datetime - now - FIVE_SEC;
+      // 5分以上たっている場合は通知、遷移を行わない
+      if (setTimeBefore < -FIVE_MIN) {
+        setTimer((prev) => [
+          ...prev,
+          setTimeout(() => {
+            if ("Notification" in window) {
+              const notif = new Notification("間も無く遷移します");
+              if (hasSound === "on") {
+                notif.addEventListener("show", () => {
+                  new Audio("./push.wav").play();
+                });
+              }
             }
-          }
-        }, setTimeBefore),
-      ]);
+          }, setTimeBefore),
+        ]);
 
-      /** 予定時間と現在時刻の差 */
-      const setTime = datetime - now;
-      setTimer((prev) => [
-        ...prev,
-        setTimeout(() => {
-          if (window) {
-            window.open(url, "_blank");
-            dispatch(deleteSchedule(id));
-            dispatch(createRecord({ id, url, memo, date }));
-          }
-        }, setTime),
-      ]);
+        /** 予定時間と現在時刻の差 */
+        const setTime = datetime - now;
+        setTimer((prev) => [
+          ...prev,
+          setTimeout(() => {
+            if (window) {
+              window.open(url, "_blank");
+              dispatch(deleteSchedule(id));
+              dispatch(createRecord({ id, url, memo, date }));
+            }
+          }, setTime),
+        ]);
+      } else {
+        dispatch(deleteSchedule(id));
+        dispatch(createRecord({ id, url, memo, date }));
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedule, hasSound]);
