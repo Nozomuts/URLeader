@@ -20,7 +20,8 @@ export const filters = [
   },
   {
     name: "履歴",
-    description: "過去に登録した予定の日時を変更して復元できます",
+    description:
+      "過去に登録した予定の日時を変更して復元できます。10件を超えた場合は古いものから削除されます。",
   },
 ] as const;
 

@@ -10,16 +10,23 @@ const useApp = (hasSound?: string) => {
   const dispatch = useDispatch();
   const schedule = useSelector((state: IStore) => state.schedule);
 
+  // 定数
+  const FIVE_SEC = 5000;
+  const FIVE_MIN = 300000;
+
   useEffect(() => {
     // indexedDBから読み込む
     dispatch(readSchedule());
     dispatch(readRecords());
+
     if ("Notification" in window) {
-      // 通知の許可を求める
       const permission = Notification.permission;
+
+      // 通知が許可されていたら早期リターン
       if (permission === "denied" || permission === "granted") {
         return;
       }
+      // 通知の許可を求める
       Notification.requestPermission().then(() => new Notification("テスト"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,14 +36,11 @@ const useApp = (hasSound?: string) => {
     // scheduleが変更されたら初期化
     timer.forEach((el) => clearTimeout(el));
     const now = dayjs().valueOf();
-    const FIVE_SEC = 5000;
-    const FIVE_MIN = 300000;
     schedule.forEach(({ url, date, id, memo }) => {
       const datetime = dayjs(date).valueOf();
       // 5秒前に通知
       const setTimeBefore = datetime - now - FIVE_SEC;
       // 5分以上たっている場合は通知、遷移を行わない
-      console.log(setTimeBefore);
       if (setTimeBefore > -FIVE_MIN) {
         setTimer((prev) => [
           ...prev,

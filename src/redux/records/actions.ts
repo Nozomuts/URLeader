@@ -1,12 +1,23 @@
+import { IStore } from "./../index";
 import { ActionTypes, IRecord } from "./types";
 import { recordsTable } from "../../db";
 import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 
 export const createRecord = ({ ...record }: IRecord) => async (
-  dispatch: Dispatch
+  dispatch: Dispatch,
+  getState: () => IStore
 ) => {
   try {
+    // 履歴が10件以上のとき、古い履歴を削除
+    if (getState().records.length >= 10) {
+      const id = getState().records[0].id;
+      await recordsTable.delete(id);
+      dispatch({
+        type: ActionTypes.DELETE_RECORD,
+        payload: id,
+      });
+    }
     await recordsTable.put({ ...record });
     dispatch({
       type: ActionTypes.CREATE_RECORD,
@@ -18,8 +29,19 @@ export const createRecord = ({ ...record }: IRecord) => async (
   }
 };
 
-export const readRecords = () => async (dispatch: Dispatch) => {
+export const readRecords = () => async (
+  dispatch: Dispatch,
+  getState: () => IStore
+) => {
   try {
+    while (getState().records.length > 10) {
+      const id = getState().records[0].id;
+      await recordsTable.delete(id);
+      dispatch({
+        type: ActionTypes.DELETE_RECORD,
+        payload: id,
+      });
+    }
     const records = await recordsTable.toArray();
     dispatch({
       type: ActionTypes.READ_RECORDS,
