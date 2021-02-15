@@ -64,3 +64,15 @@ export const deleteRecord = (id: string) => async (dispatch: Dispatch) => {
     toast.error("履歴の削除に失敗しました");
   }
 };
+
+export const deleteAllRecord = () => async (dispatch: Dispatch) => {
+  try {
+    await recordsTable.clear();
+    dispatch({
+      type: ActionTypes.DELETE_ALL_RECORD,
+    });
+    toast("履歴を全て削除しました");
+  } catch {
+    toast.error("履歴の削除に失敗しました");
+  }
+};

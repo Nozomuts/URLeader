@@ -13,6 +13,8 @@ export const recordsReducer = (
       return action.payload;
     case ActionTypes.DELETE_RECORD:
       return [...state.filter((record) => record.id !== action.payload)];
+    case ActionTypes.DELETE_ALL_RECORD:
+      return [];
     default:
       return state;
   }

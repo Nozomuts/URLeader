@@ -1,12 +1,14 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddForm } from "../components/AddForm";
 // import { GAPI } from "../components/GAPI";
 import { Dropdown } from "../components/Dropdown";
 import { List } from "../components/List";
 import { SideMenu } from "../components/SideMenu";
 import { IStore } from "../redux";
+import { deleteAllRecord } from "../redux/records/actions";
 
 export default function Index() {
+  const dispatch = useDispatch();
   const filter = useSelector((state: IStore) => state.filter);
   const schedule = useSelector((state: IStore) => state.schedule);
 
@@ -19,9 +21,23 @@ export default function Index() {
       <SideMenu />
       <div className="bg-white w-full px-6 md:px-12 h-screen">
         <div className="items-start py-5 md:py-10 max-w-2xl">
-          <div className="title flex mb-4">
-            {filter.name}
-            <Dropdown />
+          <div className="title flex justify-between items-center mb-4">
+            <div className="flex items-center">
+              {filter.name}
+              <Dropdown />
+            </div>
+            {filter.name === "履歴" && (
+              <button
+                className="button text-white bg-black text-right"
+                onClick={() => {
+                  if (confirm("本当に全ての履歴を削除しますか？")) {
+                    dispatch(deleteAllRecord());
+                  }
+                }}
+              >
+                全削除
+              </button>
+            )}
           </div>
           {filter.description}
           {/* Googleの審査通っていないのでコメントアウト */}
