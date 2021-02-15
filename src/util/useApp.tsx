@@ -36,7 +36,8 @@ const useApp = (hasSound?: string) => {
       // 5秒前に通知
       const setTimeBefore = datetime - now - FIVE_SEC;
       // 5分以上たっている場合は通知、遷移を行わない
-      if (setTimeBefore < -FIVE_MIN) {
+      console.log(setTimeBefore);
+      if (setTimeBefore > -FIVE_MIN) {
         setTimer((prev) => [
           ...prev,
           setTimeout(() => {
