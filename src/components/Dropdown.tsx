@@ -3,7 +3,7 @@ import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { filters } from "../redux/filter/reducers";
 import { setFilter } from "../redux/filter/actions";
-import useOutsideClick from "../util/useOutsideClick";
+import useOutsideClick from "../hooks/useOutsideClick";
 import { IStore } from "../redux";
 
 export const Dropdown: FC = () => {

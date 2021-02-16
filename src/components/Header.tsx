@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { GiSpeakerOff, GiSpeaker } from "react-icons/gi";
 import { useEffect, useState } from "react";
-import useApp from "../util/useApp";
+import useApp from "../hooks/useApp";
 
 export const Header = () => {
   const { pathname } = useRouter();

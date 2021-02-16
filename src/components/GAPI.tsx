@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { SiGooglecalendar } from "react-icons/si";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { Modal } from "./Modal";
-import useGAPI from "../util/useGAPI";
+import useGAPI from "../hooks/useGAPI";
 import { ISchedule } from "../redux/schedule/types";
 import { useDispatch } from "react-redux";
 import { createSchedule } from "../redux/schedule/actions";

@@ -3,7 +3,7 @@ import { Dispatch, FC, FormEvent, RefObject, SetStateAction } from "react";
 import { IRecord } from "../redux/records/types";
 import { ISchedule } from "../redux/schedule/types";
 import { confirmClose, urlValidate } from "../util";
-import useOutsideClick from "../util/useOutsideClick";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 type IProps = {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;

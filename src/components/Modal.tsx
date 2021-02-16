@@ -2,7 +2,7 @@ import { Dispatch, RefObject } from "react";
 import { SetStateAction } from "react";
 import { FC } from "react";
 import { RiCloseLine } from "react-icons/ri";
-import useOutsideClick from "../util/useOutsideClick";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 type IProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
