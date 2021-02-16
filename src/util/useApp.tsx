@@ -13,6 +13,7 @@ const useApp = (hasSound?: string) => {
   // 定数
   const FIVE_SEC = 5000;
   const FIVE_MIN = 300000;
+  const NOW = dayjs().valueOf();
 
   useEffect(() => {
     // indexedDBから読み込む
@@ -35,12 +36,11 @@ const useApp = (hasSound?: string) => {
   useEffect(() => {
     // scheduleが変更されたら初期化
     timer.forEach((el) => clearTimeout(el));
-    const now = dayjs().valueOf();
     schedule.forEach(({ url, date, id, memo }) => {
       const datetime = dayjs(date).valueOf();
       // 5秒前に通知
-      const setTimeBefore = datetime - now - FIVE_SEC;
-      // 5分以上たっている場合は通知、遷移を行わない
+      const setTimeBefore = datetime - NOW - FIVE_SEC;
+      // 5分以上たっている場合は通知および遷移を行わない
       if (setTimeBefore > -FIVE_MIN) {
         setTimer((prev) => [
           ...prev,
@@ -57,7 +57,7 @@ const useApp = (hasSound?: string) => {
         ]);
 
         /** 予定時間と現在時刻の差 */
-        const setTime = datetime - now;
+        const setTime = datetime - NOW;
         setTimer((prev) => [
           ...prev,
           setTimeout(() => {

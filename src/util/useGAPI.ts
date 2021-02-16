@@ -62,7 +62,7 @@ const useGAPI = (
         toast("予定を取得しました");
       });
     } catch {
-      toast("エラーが発生しました");
+      toast.error("エラーが発生しました");
     } finally {
       setIsFetch(false);
     }
@@ -78,7 +78,7 @@ const useGAPI = (
       setAuth(false);
       toast("サインアウトしました");
     } catch {
-      toast("エラーが発生しました");
+      toast.error("エラーが発生しました");
     }
   };
 
