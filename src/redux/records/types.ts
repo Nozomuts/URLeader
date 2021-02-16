@@ -2,7 +2,7 @@ export type IRecord = {
   id: string;
   url: string;
   date: string;
-  memo: string;
+  memo?: string;
 };
 
 export const ActionTypes = {
