@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Dispatch, FC, FormEvent, SetStateAction, useRef } from "react";
+import { Dispatch, FC, FormEvent, RefObject, SetStateAction } from "react";
 import { IRecord } from "../redux/records/types";
 import { ISchedule } from "../redux/schedule/types";
 import { confirmClose, urlValidate } from "../util";
@@ -22,8 +22,7 @@ export const Form: FC<IProps> = ({
   data,
   register,
 }) => {
-  const ref = useRef<HTMLFormElement>();
-  useOutsideClick(ref, () => {
+  const ref = useOutsideClick(() => {
     confirmClose(open, isDirty, setOpen);
   });
 
@@ -31,7 +30,7 @@ export const Form: FC<IProps> = ({
     <form
       className="flex flex-col mb-4 max-w-2xl"
       onSubmit={onSubmit}
-      ref={ref as any}
+      ref={ref as RefObject<HTMLFormElement>}
     >
       <label
         htmlFor="label"

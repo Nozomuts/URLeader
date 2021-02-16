@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, RefObject, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { filters } from "../redux/filter/reducers";
@@ -8,11 +8,10 @@ import { IStore } from "../redux";
 
 export const Dropdown: FC = () => {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>();
   const dispatch = useDispatch();
   const { name } = useSelector((state: IStore) => state.filter);
 
-  useOutsideClick(ref, () => {
+  const ref = useOutsideClick(() => {
     if (open) {
       setOpen(false);
     }
@@ -28,7 +27,10 @@ export const Dropdown: FC = () => {
       >
         {open ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
       </button>
-      <div className="relative text-left" ref={ref as any}>
+      <div
+        className="relative text-left"
+        ref={ref as RefObject<HTMLDivElement>}
+      >
         {open && (
           <div className="absolute -left-24 top-6 mt-2 shadow-md rounded-md overflow-hidden border z-20 border-gray-200 bg-white">
             {filters.map((filter) => (
