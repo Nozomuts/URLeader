@@ -135,8 +135,8 @@ describe.each(recordsData)("records reducer", (data) => {
   });
 });
 
-describe.each(filterData)("records reducer", (data) => {
-  it("check all records reducer", () => {
+describe.each(filterData)("filter reducer", (data) => {
+  it("check all filter reducer", () => {
     expect(filterReducer(data.state, data.action)).toEqual(data.expected);
   });
 });
