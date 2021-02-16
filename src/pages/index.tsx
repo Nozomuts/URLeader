@@ -20,7 +20,7 @@ export default function Index() {
     <div className="flex">
       <SideMenu />
       <div className="bg-white w-full px-6 md:px-12 h-screen">
-        <div className="items-start py-5 md:py-10 max-w-2xl">
+        <div className="items-start pt-5 md:pt-10 max-w-2xl">
           <div className="title flex justify-between items-center mb-4">
             <div className="flex items-center">
               {filter.name}
@@ -43,7 +43,7 @@ export default function Index() {
           {/* Googleの審査通っていないのでコメントアウト */}
           {/* <GAPI /> */}
         </div>
-        <div className="h-content md:h-content-md overflow-y-auto max-w-2xl">
+        <div className="h-content md:h-content-md overflow-y-auto max-w-2xl pt-5 md:pt-10">
           {filter.name === "履歴" ? (
             <List />
           ) : (
