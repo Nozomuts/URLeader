@@ -11,6 +11,7 @@ export default function Index() {
   const dispatch = useDispatch();
   const filter = useSelector((state: IStore) => state.filter);
   const schedule = useSelector((state: IStore) => state.schedule);
+  const records = useSelector((state: IStore) => state.records);
 
   const scheduleLength = schedule.filter((schedule) =>
     filter.func ? filter.func(schedule.date) : true
@@ -28,12 +29,15 @@ export default function Index() {
             </div>
             {filter.name === "履歴" && (
               <button
-                className="button text-white bg-black text-right"
+                className={`button text-white bg-black text-right ${
+                  records.length === 0 ? "opacity-70 cursor-not-allowed" : ""
+                }`}
                 onClick={() => {
                   if (confirm("本当に全ての履歴を削除しますか？")) {
                     dispatch(deleteAllRecord());
                   }
                 }}
+                disabled={records.length === 0}
               >
                 全削除
               </button>
