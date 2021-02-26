@@ -1,16 +1,6 @@
 const withPWA = require("next-pwa");
 
 module.exports = withPWA({
-  env: {
-    CLIENT_ID:
-      "840951746882-ksrhra0q5ikp5mt2se38aifbpmidmi2i.apps.googleusercontent.com",
-    API_KEY: "AIzaSyDyDNlcwP4TRieJ7UUktzq2RB0EuGQ8V1s",
-    DISCOVERY_DOCS: [
-      "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-    ],
-    SCOPES: "https://www.googleapis.com/auth/calendar.readonly",
-    PROJECT_ID: "1580105528896388832",
-  },
   pwa: {
     dest: "public", // swの出力ディレクトリ
     /** キャッシュ設定(workbox)
