@@ -38,6 +38,7 @@ export const Header = () => {
           <button
             onClick={() => toggleHasSound(hasSound === "on" ? "off" : "on")}
             className="hidden md:block"
+            aria-label="音声オン・オフ切り替えボタン"
           >
             {process.browser && hasSound === "on" ? (
               <GiSpeaker color="white" size="25" />
