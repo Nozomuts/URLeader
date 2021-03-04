@@ -22,7 +22,7 @@ type IProps = {
 export const Wrapper: FC<IProps> = ({ children, store }) => {
   return (
     <Provider store={store}>
-      <FormspreeProvider project={process.env.PROJECT_ID || ""}>
+      <FormspreeProvider project={process.env.NEXT_PUBLIC_PROJECT_ID || ""}>
         <ToastContainer
           toastStyle={{
             backgroundColor: "#282c34",
