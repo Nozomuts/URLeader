@@ -55,6 +55,10 @@ class MyDocument extends Document {
             name="description"
             content="URLと時間を登録して、予定を管理するアプリ"
           />
+          <meta
+            name="google-site-verification"
+            content="xz6HjTcUg_PqUvkBnB8PPaVBsrHFr-cHT_qp91woOmE"
+          />
           <link rel="icon" sizes="192x192" href="/icons/192x192.png" />
           <link rel="icon" href="/icons/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
